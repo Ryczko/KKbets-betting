@@ -1,0 +1,17 @@
+{
+    "typescript.tsdk": "./client/node_modules/typescript/lib",
+    "eslint.workingDirectories": [
+        "./client",
+        "./server"
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true
+}
