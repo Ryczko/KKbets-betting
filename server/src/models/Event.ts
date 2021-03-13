@@ -3,10 +3,11 @@ import mongoose from 'mongoose';
 
 interface IEvent extends mongoose.Document {
     date: Date;
-    sportId: mongoose.Schema.Types.ObjectId;
+    category: mongoose.Schema.Types.ObjectId;
     important: boolean;
-    teamHomeId: mongoose.Schema.Types.ObjectId;
-    teamAwayId: mongoose.Schema.Types.ObjectId;
+    teamHome: mongoose.Schema.Types.ObjectId;
+    teamAway: mongoose.Schema.Types.ObjectId;
+    ended: boolean;
     teamHomeScore: number;
     teamAwayScore: number;
     courseHomeWin: number;
@@ -20,21 +21,25 @@ const eventSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    sportId: {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Sport',
+        ref: 'Category',
         required: true
+    },
+    ended: {
+        type: Boolean,
+        default: false
     },
     important: {
         type: Boolean,
         default: false
     },
-    teamHomeId: {
+    teamHome: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',
         require: true
     },
-    teamAwayId: {
+    teamAway: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',
         require: true
@@ -67,10 +72,11 @@ const Event = mongoose.model<IEvent>('Event', eventSchema);
 function validateEvent(event: typeof Event): Joi.ValidationResult {
     const schema = Joi.object({
         date: Joi.date().required(),
-        sportId: Joi.string().required(),
-        important: Joi.boolean().required(),
-        teamHomeId: Joi.string().required(),
-        teamAwayId: Joi.string().required(),
+        category: Joi.string().required(),
+        important: Joi.boolean(),
+        ended: Joi.boolean(),
+        teamHome: Joi.string().required(),
+        teamAway: Joi.string().required(),
         teamHomeScore: Joi.number(),
         teamAwayScore: Joi.number(),
         courseHomeWin: Joi.number().required(),
