@@ -2,8 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import appRouter from './routes';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
+import './middleware/passport';
 
 const port = process.env.PORT || 3000;
 const env = process.env.NODE_ENV || 'development';
@@ -20,7 +22,7 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded());
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(appRouter);
 
 mongoose.connect(connection_uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => {

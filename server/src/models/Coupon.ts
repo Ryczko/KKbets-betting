@@ -1,11 +1,12 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
+import { EventsStates } from './enums';
 
 interface ICoupon extends mongoose.Document {
     owner: mongoose.Schema.Types.ObjectId;
     events: mongoose.Schema.Types.ObjectId[];
     amount: number;
-    state: string;
+    state: EventsStates;
     totalCourse: number;
     possiblyWin: number;
     date: Date;
@@ -36,8 +37,8 @@ const couponSchema = new mongoose.Schema({
         required: true
     },
     state: {
-        type: String,
-        default: 'pending'
+        type: EventsStates,
+        default: EventsStates.PENDING
     },
     possiblyWin: {
         type: Number,
@@ -51,13 +52,15 @@ const couponSchema = new mongoose.Schema({
 
 const Coupon = mongoose.model<ICoupon>('Coupon', couponSchema);
 
-function validateCoupon(coupon: typeof Coupon): Joi.ValidationResult {
+function validateCoupon(coupon: typeof Coupon | ICoupon): Joi.ValidationResult {
     const schema = Joi.object({
         owner: Joi.string().required(),
         events: Joi.array().min(1).required(),
         amount: Joi.number().required(),
         totalCourse: Joi.number().required(),
-        state: Joi.string().valid('pending', 'loss', 'win'),
+        state: Joi.string()
+            .valid(...Object.values(EventsStates))
+            .required(),
         possiblyWin: Joi.number().required(),
         date: Joi.date().required()
     });

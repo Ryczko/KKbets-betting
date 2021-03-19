@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { Category } from '../models/Category';
 import { Event, validateEvent } from '../models/Event';
 import { Team } from '../models/Team';
+import { UsersEvent } from '../models/UsersEvent';
 const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
@@ -28,12 +29,14 @@ router.get('/', async (req: Request, res: Response) => {
 
 router.post('/update', async (req: Request, res: Response) => {
     try {
-        console.log(req.body);
         const event = await Event.findById(req.body.id);
         if (!event) return res.status(404).send('Event was not found.');
         await Event.updateOne({
             $set: { teamHomeScore: req.body.teamHomeScore, teamAwayScore: req.body.teamAwayScore, ended: true }
         });
+
+        const usersEvents = await UsersEvent.find({ event: req.body.id });
+        console.log(usersEvents);
         res.send(await Event.findById(event.id));
     } catch (error) {
         res.status(500).send('Something went wrong.').end();

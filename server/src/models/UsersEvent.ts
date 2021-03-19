@@ -1,23 +1,19 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
+import { BetTypes, EventsStates, UserTypes } from './enums';
 
 interface IUsersEvent extends mongoose.Document {
-    coupon: mongoose.Schema.Types.ObjectId;
-    state: string;
+    state: EventsStates;
     event: mongoose.Schema.Types.ObjectId;
-    betType: string;
+    betType: BetTypes;
+    userType: UserTypes;
     course: number;
 }
 
 const usersEventSchema = new mongoose.Schema({
-    coupon: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Coupon',
-        required: true
-    },
     state: {
-        type: String,
-        default: 'pending'
+        type: EventsStates,
+        default: EventsStates.PENDING
     },
     event: {
         type: mongoose.Schema.Types.ObjectId,
@@ -25,7 +21,11 @@ const usersEventSchema = new mongoose.Schema({
         required: true
     },
     betType: {
-        type: String,
+        type: BetTypes,
+        require: true
+    },
+    userType: {
+        type: UserTypes,
         require: true
     },
     course: {
@@ -38,10 +38,16 @@ const UsersEvent = mongoose.model<IUsersEvent>('UsersEvent', usersEventSchema);
 
 function validateUsersEvent(usersEvent: typeof UsersEvent): Joi.ValidationResult {
     const schema = Joi.object({
-        coupon: Joi.string().required(),
-        state: Joi.string().required(),
+        state: Joi.string()
+            .valid(...Object.values(EventsStates))
+            .required(),
         event: Joi.string().required(),
-        betType: Joi.string().required(),
+        betType: Joi.string()
+            .valid(...Object.values(BetTypes))
+            .required(),
+        userType: Joi.string()
+            .valid(...Object.values(UserTypes))
+            .required(),
         course: Joi.number().required()
     });
 
