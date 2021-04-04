@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 import './middleware/passport';
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const env = process.env.NODE_ENV || 'development';
 const connection_uri = process.env.MONGODB_DEV_URI || 'mongodb://localhost/playground';
 
