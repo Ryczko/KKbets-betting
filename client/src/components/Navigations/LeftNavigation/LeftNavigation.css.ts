@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LeftNavStyle = styled.aside`
+export const StyledLeftNavigation = styled.aside`
     display: none;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {

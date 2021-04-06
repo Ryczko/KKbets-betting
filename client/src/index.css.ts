@@ -47,4 +47,13 @@ main {
     padding-bottom: 0;
   }
 }
+
+.display-above-md {
+  display: none;
+  
+   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+     display: block;
+   }
+}
+
 `;
