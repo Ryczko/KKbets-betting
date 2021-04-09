@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './index.css';
 import 'fontello/css/fontello.css';
-import { theme } from './utilis/theme';
+import { theme } from './utilities/theme';
 import { BrowserRouter } from 'react-router-dom';
 import MainViewWrapper from 'views/MainViewWrapper';
 
