@@ -7,5 +7,6 @@ export const StyledHeader = styled.header`
     position: fixed;
     width: 100%;
     z-index: 100;
-    background-color: ${({ theme }) => theme.colors.black.medium};
+    background-color: ${({ theme }) => theme.colors.black.dark};
+    border-bottom: 1px solid black;
 `;
