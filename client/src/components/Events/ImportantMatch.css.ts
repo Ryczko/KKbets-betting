@@ -30,14 +30,14 @@ export const StyledImportantMatch = styled.div`
         }
 
         .team-image-container {
-            width: 70px;
-            height: 70px;
             overflow: hidden;
             margin-bottom: 10px;
         }
 
         img {
-            width: 100%;
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
         }
     }
 
