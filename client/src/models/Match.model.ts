@@ -3,7 +3,7 @@ import { TeamType } from './Team.model';
 export interface MatchType {
     ended: boolean;
     important: boolean;
-    id: string;
+    _id: string;
     date: string;
     category: { id: string; name: string };
     courseHomeWin: number;

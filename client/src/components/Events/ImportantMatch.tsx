@@ -1,6 +1,8 @@
 import { StyledImportantMatch } from './ImportantMatch.css';
 
 import { TeamType } from 'models/Team.model';
+import { addEvent } from 'store/actions';
+import { useDispatch } from 'react-redux';
 
 interface ImportantMatchProps {
     eventId: string;
@@ -14,12 +16,23 @@ interface ImportantMatchProps {
 }
 
 function ImportantMatch(props: ImportantMatchProps): JSX.Element {
+    const dispatch = useDispatch();
+
     const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
         const target = e.target as HTMLTextAreaElement;
-        if (target && target.parentElement) {
+        if (target && target.parentElement && target.dataset.bet && target.dataset.course) {
             const activeElement = target.parentElement.querySelector('.active');
             if (activeElement) activeElement.classList.remove('active');
             target.classList.add('active');
+            dispatch(
+                addEvent(
+                    props.eventId,
+                    target.dataset.bet,
+                    'Winner',
+                    +target.dataset.course,
+                    `${props.teamHome.shortName}-${props.teamAway.shortName}`
+                )
+            );
         }
     };
 
@@ -48,31 +61,13 @@ function ImportantMatch(props: ImportantMatchProps): JSX.Element {
                 <div className="hint">2</div>
             </div>
             <div className="buttons">
-                <button
-                    className="course"
-                    data-bet="1"
-                    data-betid="1"
-                    data-course={props.courseHomeWin}
-                    onClick={handleButtonClick}
-                >
+                <button className="course" data-bet="1" data-course={props.courseHomeWin} onClick={handleButtonClick}>
                     {props.courseHomeWin}
                 </button>
-                <button
-                    className="course"
-                    data-bet="0"
-                    data-betid="2"
-                    data-course={props.courseDraw}
-                    onClick={handleButtonClick}
-                >
+                <button className="course" data-bet="X" data-course={props.courseDraw} onClick={handleButtonClick}>
                     {props.courseDraw}
                 </button>
-                <button
-                    className="course"
-                    data-bet="2"
-                    data-betid="3"
-                    data-course={props.courseAwayWin}
-                    onClick={handleButtonClick}
-                >
+                <button className="course" data-bet="2" data-course={props.courseAwayWin} onClick={handleButtonClick}>
                     {props.courseAwayWin}
                 </button>
             </div>

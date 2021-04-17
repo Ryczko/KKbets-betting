@@ -2,6 +2,9 @@ import { StyledCoupon } from './Coupon.css';
 import Button from 'shared/Button/Button';
 import CouponEvent from './CouponEvent';
 import { CouponEventType } from 'models/CouponEvent.model';
+import { connect } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { AppState } from 'store/actions';
 
 interface CouponProps {
     events: CouponEventType[];
@@ -11,15 +14,20 @@ interface CouponProps {
 }
 
 function Coupon(props: CouponProps): JSX.Element {
-    const eventsList = props.events.map((el) => (
-        <CouponEvent
-            eventId={el.eventId}
-            eventName={el.eventName}
-            betType={el.betType}
-            course={el.course}
-            userBet={el.userBet}
-        />
-    ));
+    const [eventsList, setEventsList] = useState<JSX.Element[]>([]);
+
+    useEffect(() => {
+        const eventsList = props.events.map((el) => (
+            <CouponEvent
+                eventId={el.eventId}
+                eventName={el.eventName}
+                betType={el.betType}
+                course={el.course}
+                userBet={el.userBet}
+            />
+        ));
+        setEventsList(eventsList);
+    }, [props.events]);
 
     return (
         <StyledCoupon>
@@ -57,4 +65,13 @@ function Coupon(props: CouponProps): JSX.Element {
     );
 }
 
-export default Coupon;
+const mapStateToProps = (state: AppState) => {
+    return {
+        events: state.coupon.events,
+        totalRate: state.coupon.totalRate,
+        amount: state.coupon.amount,
+        possibleWinnings: state.coupon.possibleWinnings
+    };
+};
+
+export default connect(mapStateToProps, null)(Coupon);

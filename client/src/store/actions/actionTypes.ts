@@ -1,0 +1,1 @@
+export const COUPON_ADD_EVENT = 'COUPON_ADD_EVENT';

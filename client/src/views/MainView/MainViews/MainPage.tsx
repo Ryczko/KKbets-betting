@@ -19,9 +19,9 @@ function MainPage(): JSX.Element {
         const res = await axios.get(BACKEND_URL + '/events');
         const matches: MatchType[] = res.data.filter((match: MatchType) => !match.important);
         const matchesElements: JSX.Element[] = matches.map(
-            ({ id, date, teamAway, teamHome, courseAwayWin, courseDraw, courseHomeWin }) => (
+            ({ _id, date, teamAway, teamHome, courseAwayWin, courseDraw, courseHomeWin }) => (
                 <Match
-                    eventId={id}
+                    eventId={_id}
                     date={transformDate(date)}
                     teamAway={teamAway.shortName}
                     teamHome={teamHome.shortName}
@@ -33,9 +33,9 @@ function MainPage(): JSX.Element {
         );
         const ImportantMatches: MatchType[] = res.data.filter((match: MatchType) => match.important);
         const ImportantMatchesElements: JSX.Element[] = ImportantMatches.map(
-            ({ id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
+            ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
                 <ImportantMatch
-                    eventId={id}
+                    eventId={_id}
                     league={category.name}
                     date={transformDate(date)}
                     teamAway={teamAway}
