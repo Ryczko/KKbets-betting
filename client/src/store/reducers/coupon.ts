@@ -1,5 +1,5 @@
 import { CouponEventType } from 'models/CouponEvent.model';
-import { Action } from 'store/actions/coupon';
+import { AddAction } from 'store/actions/coupon';
 import * as actionTypes from '../actions/actionTypes';
 
 export interface CouponState {
@@ -26,9 +26,10 @@ const updateRate = (events: CouponEventType[]): number => {
     return +total.toFixed(2);
 };
 
-const reducer = (state: CouponState = initialState, action: Action): CouponState => {
+const reducer = (state: CouponState = initialState, action: AddAction): CouponState => {
     switch (action.type) {
         case actionTypes.COUPON_ADD_EVENT: {
+            action = action as AddAction;
             const eventIndex = state.events.findIndex((el) => el.eventId === action.eventId);
             let newEvents: CouponEventType[] = [...state.events];
 
@@ -56,6 +57,19 @@ const reducer = (state: CouponState = initialState, action: Action): CouponState
         }
         default: {
             return state;
+        }
+        case actionTypes.COUPON_REMOVE_EVENT: {
+            const updatedEvents = state.events.filter((el) => el.eventId !== action.eventId);
+
+            const rate = updateRate(updatedEvents);
+            const win = +(rate * state.amount).toFixed(0);
+
+            return {
+                ...state,
+                events: updatedEvents,
+                totalRate: rate,
+                possibleWinnings: win
+            };
         }
     }
 };

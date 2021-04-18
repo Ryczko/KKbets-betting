@@ -1,5 +1,7 @@
 import { StyledCouponEvent } from './CouponEvent.css';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { removeEvent } from 'store/actions';
 
 interface CouponEventProps {
     eventId: string;
@@ -10,6 +12,12 @@ interface CouponEventProps {
 }
 
 function CouponEvent(props: CouponEventProps): JSX.Element {
+    const dispatch = useDispatch();
+
+    const handleRemoveEvent = () => {
+        dispatch(removeEvent(props.eventId));
+    };
+
     return (
         <StyledCouponEvent>
             <div className="left">
@@ -20,7 +28,7 @@ function CouponEvent(props: CouponEventProps): JSX.Element {
             </div>
             <div className="right">
                 <span className="bet"> {props.userBet}</span>-<span className="course">{props.course}</span>
-                <i className="icon-cancel" />
+                <i className="icon-cancel" onClick={handleRemoveEvent} />
             </div>
         </StyledCouponEvent>
     );
