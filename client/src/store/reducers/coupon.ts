@@ -48,6 +48,8 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
 
             const totalRate = updateRate(newEvents);
 
+            localStorage.setItem('coupon', JSON.stringify(newEvents));
+
             return {
                 ...state,
                 totalRate,
@@ -55,14 +57,16 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
                 events: newEvents
             };
         }
-        default: {
-            return state;
-        }
         case actionTypes.COUPON_REMOVE_EVENT: {
             const updatedEvents = state.events.filter((el) => el.eventId !== action.eventId);
 
             const rate = updateRate(updatedEvents);
             const win = +(rate * state.amount).toFixed(0);
+            if (updatedEvents.length === 0) {
+                localStorage.removeItem('coupon');
+            } else {
+                localStorage.setItem('coupon', JSON.stringify(updatedEvents));
+            }
 
             return {
                 ...state,
@@ -70,6 +74,44 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
                 totalRate: rate,
                 possibleWinnings: win
             };
+        }
+        case actionTypes.COUPON_FROM_STORAGE: {
+            const savedCouponEvents = localStorage.getItem('coupon');
+            const amount: string = localStorage.getItem('amount') || '10';
+
+            let couponEvents: CouponEventType[];
+
+            if (savedCouponEvents) {
+                couponEvents = JSON.parse(savedCouponEvents) as CouponEventType[];
+                couponEvents.forEach((el) => {
+                    const event = document.querySelector(`[data-eventid="${el.eventId}"] [data-bet="${el.userBet}"]`);
+                    if (event) event.classList.add('active');
+                });
+            } else {
+                couponEvents = [];
+            }
+
+            const totalRate = updateRate(couponEvents);
+
+            return {
+                ...state,
+                events: couponEvents,
+                amount: +amount,
+                totalRate,
+                possibleWinnings: +(+amount * totalRate).toFixed(0)
+            };
+        }
+        case actionTypes.COUPON_UPDATE_AMOUNT:
+            localStorage.setItem('amount', action.amount.toString());
+
+            return {
+                ...state,
+                amount: action.amount,
+                possibleWinnings: +(action.amount * state.totalRate).toFixed(0)
+            };
+
+        default: {
+            return state;
         }
     }
 };

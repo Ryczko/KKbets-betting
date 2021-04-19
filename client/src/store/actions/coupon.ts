@@ -7,6 +7,7 @@ export type AddAction = {
     betType: string;
     course: number;
     eventName: string;
+    amount: number;
 };
 
 export type RemoveAction = {
@@ -29,7 +30,8 @@ export const addEvent = (
         userBet,
         course,
         eventId,
-        eventName
+        eventName,
+        amount: 1
     };
 };
 
@@ -42,5 +44,18 @@ export const removeEvent = (id: string): RemoveAction => {
     return {
         type: actionsTypes.COUPON_REMOVE_EVENT,
         eventId: id
+    };
+};
+
+export const getCouponFromStorage = (): { type: string } => {
+    return {
+        type: actionsTypes.COUPON_FROM_STORAGE
+    };
+};
+
+export const updateAmount = (amount: number): { type: string; amount: number } => {
+    return {
+        type: actionsTypes.COUPON_UPDATE_AMOUNT,
+        amount
     };
 };

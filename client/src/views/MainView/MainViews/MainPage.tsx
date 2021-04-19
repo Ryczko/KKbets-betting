@@ -4,6 +4,8 @@ import ImportantMatch from 'components/Events/ImportantMatch';
 import Match from 'components/Events/Match';
 import { MatchType } from 'models/Match.model';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCouponFromStorage } from 'store/actions';
 import { BACKEND_URL } from 'utilities/connection';
 import { transformDate } from 'utilities/transformDate';
 import { StyledMainPage } from './MainPage.css';
@@ -11,6 +13,8 @@ import { StyledMainPage } from './MainPage.css';
 function MainPage(): JSX.Element {
     const [importantMatches, setImportantMatches] = useState<JSX.Element[]>([]);
     const [matches, setMatches] = useState<JSX.Element[]>([]);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         loadData();
     }, []);
@@ -48,6 +52,7 @@ function MainPage(): JSX.Element {
         );
         setImportantMatches(ImportantMatchesElements);
         setMatches(matchesElements);
+        dispatch(getCouponFromStorage());
     };
 
     return (

@@ -1,23 +1,23 @@
 import { StyledCoupon } from './Coupon.css';
 import Button from 'shared/Button/Button';
 import CouponEvent from './CouponEvent';
-import { CouponEventType } from 'models/CouponEvent.model';
-import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { AppState } from 'store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { AppState, updateAmount } from 'store/actions';
 
-interface CouponProps {
-    events: CouponEventType[];
-    amount: number;
-    totalRate: number;
-    possibleWinning: number;
-}
-
-function Coupon(props: CouponProps): JSX.Element {
+function Coupon(): JSX.Element {
     const [eventsList, setEventsList] = useState<JSX.Element[]>([]);
+    const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
+        (state) => state.coupon.possibleWinnings
+    );
+    const events = useSelector<AppState, AppState['coupon']['events']>((state) => state.coupon.events);
+    const amount = useSelector<AppState, AppState['coupon']['amount']>((state) => state.coupon.amount);
+    const totalRate = useSelector<AppState, AppState['coupon']['totalRate']>((state) => state.coupon.totalRate);
+    const dispatch = useDispatch();
+    const refSlider = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const eventsList = props.events.map((el) => (
+        const eventsList = events.map((el) => (
             <CouponEvent
                 eventId={el.eventId}
                 eventName={el.eventName}
@@ -27,7 +27,18 @@ function Coupon(props: CouponProps): JSX.Element {
             />
         ));
         setEventsList(eventsList);
-    }, [props.events]);
+    }, [events]);
+
+    const slideAmountHandler = (value: string) => {
+        dispatch(updateAmount(+value));
+    };
+
+    const typeAmountHandler = (value: string) => {
+        dispatch(updateAmount(+value));
+        if (refSlider && refSlider.current) {
+            refSlider.current.value = value;
+        }
+    };
 
     return (
         <StyledCoupon>
@@ -36,22 +47,35 @@ function Coupon(props: CouponProps): JSX.Element {
             </div>
 
             <div className="events">{eventsList}</div>
-            {props.events.length === 0 && <p style={{ marginTop: '50px' }}>Coupon is empty</p>}
-            {props.events.length !== 0 && (
+            {events.length === 0 && <p style={{ marginTop: '50px' }}>Coupon is empty</p>}
+            {events.length !== 0 && (
                 <div className="bottom">
                     <div className="amount">
-                        <input className="slider" type="range" name="" min="10" step="20" max="1000" />
-                        <input className="value-field" value={props.amount} />
+                        <input
+                            className="slider"
+                            type="range"
+                            name=""
+                            min="10"
+                            step="20"
+                            max="1000"
+                            onChange={(e) => slideAmountHandler(e.target.value)}
+                            ref={refSlider}
+                        />
+                        <input
+                            className="value-field"
+                            value={amount}
+                            onChange={(e) => typeAmountHandler(e.target.value)}
+                        />
                     </div>
 
                     <div className="info">
                         <div>
                             <span>Total rate</span>
-                            <span>{props.totalRate}</span>
+                            <span>{totalRate}</span>
                         </div>
                         <div>
                             <span>Possible winnings</span>
-                            <span>{props.possibleWinning}</span>
+                            <span>{possibleWinning}</span>
                         </div>
                     </div>
                     <form>
@@ -65,13 +89,4 @@ function Coupon(props: CouponProps): JSX.Element {
     );
 }
 
-const mapStateToProps = (state: AppState) => {
-    return {
-        events: state.coupon.events,
-        totalRate: state.coupon.totalRate,
-        amount: state.coupon.amount,
-        possibleWinnings: state.coupon.possibleWinnings
-    };
-};
-
-export default connect(mapStateToProps, null)(Coupon);
+export default Coupon;
