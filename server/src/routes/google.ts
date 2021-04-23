@@ -14,7 +14,7 @@ router.get('/redirect', (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('google', { session: false }, (err, user) => {
         const token = user.generateAuthToken();
         res.cookie('jwt', token);
-        res.redirect('../../');
+        res.redirect('http://localhost:3000');
     })(req, res, next);
 });
 

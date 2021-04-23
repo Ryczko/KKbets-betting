@@ -5,6 +5,11 @@ import events from './events';
 import google from './google';
 import coupons from './coupons';
 import { IUser } from '../models/User';
+import passport from 'passport';
+import me from './me';
+
+const isAuthenticated = passport.authenticate('jwt', { session: false });
+
 const router = express.Router();
 
 router.use('/google', google);
@@ -13,6 +18,7 @@ router.use('/teams', teams);
 router.use('/events', events);
 
 router.use('/coupons', coupons);
+router.use('/me', isAuthenticated, me);
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
