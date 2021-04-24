@@ -6,12 +6,13 @@ import { BrowserRouter } from 'react-router-dom';
 import MainViewWrapper from 'views/MainViewWrapper';
 
 import { useEffect, useState } from 'react';
-import { AuthContext } from 'context/AuthContext';
+import { AuthContext, UserType } from 'context/AuthContext';
 import axios from 'axios';
 import { BACKEND_URL } from 'utilities/connection';
 
 function App(): JSX.Element {
     const [isLogged, setIsLogged] = useState<boolean>(false);
+    const [userData, setUserData] = useState<UserType>({ points: 0 });
 
     useEffect(() => {
         checkAuth();
@@ -22,22 +23,19 @@ function App(): JSX.Element {
             .get(BACKEND_URL + '/me', { withCredentials: true })
             .then((res) => {
                 if (res.status === 200) {
-                    console.log('true');
+                    setUserData(res.data);
                     setIsLogged(true);
                 } else {
-                    console.log('false');
-
                     setIsLogged(false);
                 }
             })
             .catch((err) => {
-                console.log('false');
                 setIsLogged(false);
             });
     };
     return (
         <ThemeProvider theme={theme}>
-            <AuthContext.Provider value={{ isLogged, setIsLogged }}>
+            <AuthContext.Provider value={{ isLogged, setIsLogged, userData, setUserData }}>
                 <BrowserRouter>
                     <GlobalStyles />
                     <MainViewWrapper />

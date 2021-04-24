@@ -1,16 +1,25 @@
 import Auth from 'components/Auth/Auth';
+import Avatar from 'components/User/Avatar';
+import Wallet from 'components/User/Wallet';
 import { AuthContext } from 'context/AuthContext';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Logo from '../Logo';
 import { StyledHeader } from './TopNavigation.css';
 
 function TopNavigation(): JSX.Element {
-    const { isLogged, setIsLogged } = useContext(AuthContext);
+    const { isLogged } = useContext(AuthContext);
 
     return (
         <StyledHeader>
             <Logo />
-            {isLogged ? 'Logged' : <Auth />}
+            {isLogged ? (
+                <div className="user-data">
+                    <Wallet />
+                    <Avatar />
+                </div>
+            ) : (
+                <Auth />
+            )}
         </StyledHeader>
     );
 }

@@ -8,6 +8,18 @@ function Auth(): JSX.Element {
 
     const handleLogin = () => {
         setIsOpened((prev) => !prev);
+        if (!isOpened) {
+            document.addEventListener(
+                'click',
+                () => {
+                    setIsOpened(false);
+                },
+                {
+                    once: true,
+                    capture: true
+                }
+            );
+        }
     };
 
     return (

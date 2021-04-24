@@ -1,5 +1,3 @@
-import React, { FormEventHandler, useState } from 'react';
-import Button from 'shared/Button/Button';
 import { StyledLogin } from './Login.css';
 
 export interface LoginProps {

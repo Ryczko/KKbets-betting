@@ -9,4 +9,11 @@ export const StyledHeader = styled.header`
     z-index: 100;
     background-color: ${({ theme }) => theme.colors.black.dark};
     border-bottom: 1px solid black;
+
+    .user-data {
+        display: flex;
+        align-items: center;
+        min-width: 350px;
+        justify-content: space-between;
+    }
 `;
