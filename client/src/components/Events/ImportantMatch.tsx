@@ -28,7 +28,7 @@ function ImportantMatch(props: ImportantMatchProps): JSX.Element {
                 addEvent(
                     props.eventId,
                     target.dataset.bet,
-                    'Winner',
+                    'winner',
                     +target.dataset.course,
                     `${props.teamHome.shortName}-${props.teamAway.shortName}`
                 )
@@ -61,13 +61,23 @@ function ImportantMatch(props: ImportantMatchProps): JSX.Element {
                 <div className="hint">2</div>
             </div>
             <div className="buttons">
-                <button className="course" data-bet="1" data-course={props.courseHomeWin} onClick={handleButtonClick}>
+                <button
+                    className="course"
+                    data-bet="home"
+                    data-course={props.courseHomeWin}
+                    onClick={handleButtonClick}
+                >
                     {props.courseHomeWin}
                 </button>
-                <button className="course" data-bet="X" data-course={props.courseDraw} onClick={handleButtonClick}>
+                <button className="course" data-bet="draw" data-course={props.courseDraw} onClick={handleButtonClick}>
                     {props.courseDraw}
                 </button>
-                <button className="course" data-bet="2" data-course={props.courseAwayWin} onClick={handleButtonClick}>
+                <button
+                    className="course"
+                    data-bet="away"
+                    data-course={props.courseAwayWin}
+                    onClick={handleButtonClick}
+                >
                     {props.courseAwayWin}
                 </button>
             </div>

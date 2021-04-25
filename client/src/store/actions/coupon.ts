@@ -35,6 +35,12 @@ export const addEvent = (
     };
 };
 
+export const removeAllEvents = () => {
+    return {
+        type: actionsTypes.COUPON_REMOVE_ALL
+    };
+};
+
 export const removeEvent = (id: string): RemoveAction => {
     const eventDOM = document.querySelectorAll(`[data-eventid="${id}"] .active`);
     eventDOM.forEach((el) => {

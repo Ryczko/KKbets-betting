@@ -1,5 +1,5 @@
 enum BetTypes {
-    MAIN_RESULT = 'main result'
+    WINNER = 'winner'
 }
 
 enum UserTypes {

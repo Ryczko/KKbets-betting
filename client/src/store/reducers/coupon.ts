@@ -7,7 +7,6 @@ export interface CouponState {
     totalRate: number;
     amount: number;
     possibleWinnings: number;
-    refreshCoupons: number;
 }
 
 const initialState = {
@@ -109,7 +108,10 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
                 amount: action.amount,
                 possibleWinnings: +(action.amount * state.totalRate).toFixed(0)
             };
-
+        case actionTypes.COUPON_REMOVE_ALL:
+            localStorage.removeItem('coupon');
+            localStorage.removeItem('amount');
+            return initialState;
         default: {
             return state;
         }

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
 
-interface IEvent extends mongoose.Document {
+export interface IEvent extends mongoose.Document {
     date: Date;
     category: mongoose.Schema.Types.ObjectId;
     important: boolean;

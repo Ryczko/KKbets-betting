@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { urlencoded } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import appRouter from './routes';
@@ -16,12 +16,18 @@ const app = express();
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept , Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, Access-Control-Allow-Headers, X-Requested-With, Content-Type, Accept , Authorization'
+    );
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS');
     next();
 });
-
-app.use(express.urlencoded());
+app.use(
+    urlencoded({
+        extended: true
+    })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(appRouter);

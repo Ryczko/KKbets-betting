@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { BetTypes, EventsStates, UserTypes } from './enums';
 
 interface IUsersEvent extends mongoose.Document {
+    coupon: mongoose.Schema.Types.ObjectId;
     state: EventsStates;
     event: mongoose.Schema.Types.ObjectId;
     betType: BetTypes;
@@ -11,13 +12,18 @@ interface IUsersEvent extends mongoose.Document {
 }
 
 const usersEventSchema = new mongoose.Schema({
+    coupon: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Coupon',
+        required: true
+    },
     state: {
         type: EventsStates,
         default: EventsStates.PENDING
     },
     event: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'EventId',
+        ref: 'Event',
         required: true
     },
     betType: {
@@ -38,6 +44,7 @@ const UsersEvent = mongoose.model<IUsersEvent>('UsersEvent', usersEventSchema);
 
 function validateUsersEvent(usersEvent: typeof UsersEvent): Joi.ValidationResult {
     const schema = Joi.object({
+        coupon: Joi.string().required(),
         state: Joi.string()
             .valid(...Object.values(EventsStates))
             .required(),

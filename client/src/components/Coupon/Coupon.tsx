@@ -2,8 +2,11 @@ import { StyledCoupon } from './Coupon.css';
 import Button from 'shared/Button/Button';
 import CouponEvent from './CouponEvent';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { AppState, updateAmount } from 'store/actions';
+import axios from 'axios';
+import { BACKEND_URL } from 'utilities/connection';
+import { removeAllEvents } from 'store/actions/coupon';
 
 function Coupon(): JSX.Element {
     const [eventsList, setEventsList] = useState<JSX.Element[]>([]);
@@ -37,6 +40,24 @@ function Coupon(): JSX.Element {
         dispatch(updateAmount(+value));
         if (refSlider && refSlider.current) {
             refSlider.current.value = value;
+        }
+    };
+
+    const betCouponHandler = async (e: FormEvent<EventTarget>) => {
+        e.preventDefault();
+
+        const data = {
+            events: events.map((event) => event.eventId),
+            betTypes: events.map((event) => event.betType),
+            usersBets: events.map((event) => event.userBet),
+            amount
+        };
+
+        try {
+            await axios.post(BACKEND_URL + '/coupons', data, { withCredentials: true });
+            dispatch(removeAllEvents());
+        } catch (err) {
+            console.log(err);
         }
     };
 
@@ -78,7 +99,7 @@ function Coupon(): JSX.Element {
                             <span>{possibleWinning}</span>
                         </div>
                     </div>
-                    <form>
+                    <form onSubmit={(e) => betCouponHandler(e)}>
                         <Button style={{ width: '80%', padding: '10px 0' }} fill>
                             Place a bet
                         </Button>

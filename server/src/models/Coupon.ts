@@ -4,7 +4,6 @@ import { EventsStates } from './enums';
 
 interface ICoupon extends mongoose.Document {
     owner: mongoose.Schema.Types.ObjectId;
-    events: mongoose.Schema.Types.ObjectId[];
     amount: number;
     state: EventsStates;
     totalCourse: number;
@@ -17,16 +16,6 @@ const couponSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    },
-    events: {
-        type: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'UsersEvent'
-            }
-        ],
-        required: true,
-        validate: [(events) => events.length <= 0, 'You have to add at least one event to coupon']
     },
     amount: {
         type: Number,
@@ -55,7 +44,6 @@ const Coupon = mongoose.model<ICoupon>('Coupon', couponSchema);
 function validateCoupon(coupon: typeof Coupon | ICoupon): Joi.ValidationResult {
     const schema = Joi.object({
         owner: Joi.string().required(),
-        events: Joi.array().min(1).required(),
         amount: Joi.number().required(),
         totalCourse: Joi.number().required(),
         state: Joi.string()
