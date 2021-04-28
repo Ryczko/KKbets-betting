@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { StyledButton } from './Button.css';
 
 export interface ButtonProps {
     fill?: boolean;
     color?: string;
     borderColor?: string;
-    click?: () => void;
+    click?: (e: FormEvent<EventTarget>) => void;
     blocked?: boolean;
     style?: React.CSSProperties;
     children?: string;

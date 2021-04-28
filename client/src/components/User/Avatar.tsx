@@ -11,7 +11,7 @@ export interface AvatarProps {
 function Avatar(props: AvatarProps): JSX.Element {
     return (
         <StyledAvatar width={props.width || '50px'}>
-            <Link to="/acount">
+            <Link to="/account">
                 <img src={props.src && props.src !== '' ? props.src : avatarPhoto} alt="avatar" />
             </Link>
         </StyledAvatar>

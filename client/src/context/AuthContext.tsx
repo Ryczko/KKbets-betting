@@ -1,7 +1,9 @@
 import React from 'react';
 
 export interface UserType {
-    points: number;
+    points?: number;
+    username?: string;
+    email?: string;
 }
 
 export const AuthContext = React.createContext<{
@@ -12,7 +14,7 @@ export const AuthContext = React.createContext<{
 }>({
     isLogged: false,
     setIsLogged: () => undefined,
-    userData: { points: 0 },
+    userData: { points: 0, username: '', email: '' },
     setUserData: () => ({
         points: 0
     })

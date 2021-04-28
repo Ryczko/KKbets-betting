@@ -12,7 +12,7 @@ import { BACKEND_URL } from 'utilities/connection';
 
 function App(): JSX.Element {
     const [isLogged, setIsLogged] = useState<boolean>(false);
-    const [userData, setUserData] = useState<UserType>({ points: 0 });
+    const [userData, setUserData] = useState<UserType>({ points: 0, username: '', email: '' });
 
     useEffect(() => {
         checkAuth();
