@@ -2,14 +2,17 @@ import { StyledCoupon } from './Coupon.css';
 import Button from 'shared/Button/Button';
 import CouponEvent from './CouponEvent';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { AppState, updateAmount } from 'store/actions';
 import axios from 'axios';
 import { BACKEND_URL } from 'utilities/connection';
 import { removeAllEvents } from 'store/actions/coupon';
+import Loader from 'shared/Spinner/Loader';
 
 function Coupon(): JSX.Element {
     const [eventsList, setEventsList] = useState<JSX.Element[]>([]);
+    const [isLoaded, setIsLoaded] = useState<boolean>(true);
+    const [error, setError] = useState<string>('');
     const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
         (state) => state.coupon.possibleWinnings
     );
@@ -18,6 +21,7 @@ function Coupon(): JSX.Element {
     const totalRate = useSelector<AppState, AppState['coupon']['totalRate']>((state) => state.coupon.totalRate);
     const dispatch = useDispatch();
     const refSlider = useRef<HTMLInputElement>(null);
+    const refError = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const eventsList = events.map((el) => (
@@ -45,6 +49,7 @@ function Coupon(): JSX.Element {
 
     const betCouponHandler = async (e: FormEvent<EventTarget>) => {
         e.preventDefault();
+        setIsLoaded(false);
 
         const data = {
             events: events.map((event) => event.eventId),
@@ -57,56 +62,72 @@ function Coupon(): JSX.Element {
             await axios.post(BACKEND_URL + '/coupons', data, { withCredentials: true });
             dispatch(removeAllEvents());
         } catch (err) {
-            console.log(err);
+            setError(err.response.data);
+            refError.current?.classList.add('active');
+            setTimeout(() => {
+                setError('');
+                refError.current?.classList.remove('active');
+            }, 4000);
+        } finally {
+            setIsLoaded(true);
         }
     };
 
     return (
-        <StyledCoupon>
-            <div className="top">
-                Your coupon <i className="icon-trash-empty" />
-            </div>
-
-            <div className="events">{eventsList}</div>
-            {events.length === 0 && <p style={{ marginTop: '50px' }}>Coupon is empty</p>}
-            {events.length !== 0 && (
-                <div className="bottom">
-                    <div className="amount">
-                        <input
-                            className="slider"
-                            type="range"
-                            name=""
-                            min="10"
-                            step="20"
-                            max="1000"
-                            onChange={(e) => slideAmountHandler(e.target.value)}
-                            ref={refSlider}
-                        />
-                        <input
-                            className="value-field"
-                            value={amount}
-                            onChange={(e) => typeAmountHandler(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="info">
-                        <div>
-                            <span>Total rate</span>
-                            <span>{totalRate}</span>
-                        </div>
-                        <div>
-                            <span>Possible winnings</span>
-                            <span>{possibleWinning}</span>
-                        </div>
-                    </div>
-                    <form onSubmit={(e) => betCouponHandler(e)}>
-                        <Button style={{ width: '80%', padding: '10px 0' }} fill>
-                            Place a bet
-                        </Button>
-                    </form>
+        <>
+            <StyledCoupon>
+                <div className="top">
+                    Your coupon <i className="icon-trash-empty" />
                 </div>
-            )}
-        </StyledCoupon>
+                <div ref={refError} className="error">
+                    {error}
+                </div>
+                {!isLoaded && <Loader />}
+                {isLoaded && (
+                    <>
+                        <div className="events">{eventsList}</div>
+                        {events.length === 0 && <p style={{ marginTop: '50px' }}>Coupon is empty</p>}
+                        {events.length !== 0 && (
+                            <div className="bottom">
+                                <div className="amount">
+                                    <input
+                                        className="slider"
+                                        type="range"
+                                        name=""
+                                        min="10"
+                                        step="20"
+                                        max="1000"
+                                        onChange={(e) => slideAmountHandler(e.target.value)}
+                                        ref={refSlider}
+                                    />
+                                    <input
+                                        className="value-field"
+                                        value={amount}
+                                        onChange={(e) => typeAmountHandler(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="info">
+                                    <div>
+                                        <span>Total rate</span>
+                                        <span>{totalRate}</span>
+                                    </div>
+                                    <div>
+                                        <span>Possible winnings</span>
+                                        <span>{possibleWinning}</span>
+                                    </div>
+                                </div>
+                                <form onSubmit={(e) => betCouponHandler(e)}>
+                                    <Button style={{ width: '80%', padding: '10px 0' }} fill>
+                                        Place a bet
+                                    </Button>
+                                </form>
+                            </div>
+                        )}
+                    </>
+                )}
+            </StyledCoupon>
+        </>
     );
 }
 

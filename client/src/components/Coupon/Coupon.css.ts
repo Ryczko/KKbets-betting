@@ -6,7 +6,23 @@ export const StyledCoupon = styled.div`
     background-color: #3b3e3f;
     min-height: 200px;
     margin: 30px auto;
+    z-index: 2;
     position: relative;
+
+    .error {
+        background-color: rgba(255, 99, 71, 0.8);
+        height: 0px;
+        border-radius: 4px;
+        transition: 0.4s;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.active {
+            height: 50px;
+        }
+    }
 
     &::before {
         content: '';

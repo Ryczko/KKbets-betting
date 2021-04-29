@@ -1,6 +1,7 @@
 import LeftInfoView from './LeftNavigationViews/LeftInfoView';
 import LeftMainView from './LeftNavigationViews/LeftMainView';
 import { StyledLeftNavigationView } from './LeftNavigationView.css';
+import CouponsList from './LeftNavigationViews/CouponsList';
 
 export interface LeftNavigationViewProps {
     activeContent: string;
@@ -19,7 +20,7 @@ function LeftNavigationView({ activeContent, close, active }: LeftNavigationView
             content = <LeftInfoView />;
             break;
         default:
-            content = 'football';
+            content = <CouponsList />;
     }
 
     return (

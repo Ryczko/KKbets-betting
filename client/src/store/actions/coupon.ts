@@ -36,6 +36,10 @@ export const addEvent = (
 };
 
 export const removeAllEvents = () => {
+    const eventDOM = document.querySelectorAll(`[data-eventid] .active`);
+    eventDOM.forEach((el) => {
+        el.classList.remove('active');
+    });
     return {
         type: actionsTypes.COUPON_REMOVE_ALL
     };

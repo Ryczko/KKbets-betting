@@ -29,6 +29,9 @@ function LeftNavigation(props: LeftNavigationProps): JSX.Element {
                     <i className="icon-soccer-ball " onClick={(e) => changeCategory('football', e)} />
                 </div>
                 <div className="left-nav-icon">
+                    <i className="icon-clipboard" onClick={(e) => changeCategory('coupons', e)} />
+                </div>
+                <div className="left-nav-icon">
                     <i className="icon-info-circled" onClick={(e) => changeCategory('info', e)} />
                 </div>
             </StyledLeftNavigation>
