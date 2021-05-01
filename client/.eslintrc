@@ -10,6 +10,7 @@
     ],
     "rules": {
         "no-console": 1, // Means warning,
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "no-non-null-assertion": true
     }
 }

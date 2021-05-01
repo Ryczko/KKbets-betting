@@ -1,8 +1,10 @@
 import express, { Request, Response } from 'express';
 import passport from 'passport';
+import { Category } from '../models/Category';
 import { Coupon } from '../models/Coupon';
-import { BetTypes, EventsStates, UserTypes } from '../models/enums';
+import { BetTypes, EventsStates, UserBets } from '../models/enums';
 import { Event, IEvent } from '../models/Event';
+import { Team } from '../models/Team';
 import { IUser, User } from '../models/User';
 import { UsersEvent } from '../models/UsersEvent';
 
@@ -24,11 +26,11 @@ const checkPointsAmount = (user: IUser, amount: number): number => {
     if (user.points < amount) return 1;
 };
 
-const getCourse = (eventData: IEvent, betType: BetTypes, userType: UserTypes) => {
+const getCourse = (eventData: IEvent, betType: BetTypes, userBet: UserBets) => {
     if (betType === BetTypes.WINNER) {
-        if (userType === UserTypes.HOME) return eventData.courseHomeWin;
-        if (userType === UserTypes.DRAW) return eventData.courseDraw;
-        if (userType === UserTypes.AWAY) return eventData.courseAwayWin;
+        if (userBet === UserBets.HOME) return eventData.courseHomeWin;
+        if (userBet === UserBets.DRAW) return eventData.courseDraw;
+        if (userBet === UserBets.AWAY) return eventData.courseAwayWin;
     }
     return 0;
 };
@@ -48,9 +50,16 @@ router.get('/:id', isAuthenticated, async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
         const coupon = await Coupon.findById(id);
+
+        const populateQuery = [
+            { path: 'teamHome', model: Team },
+            { path: 'teamAway', model: Team },
+            { path: 'category', model: Category }
+        ];
         const couponEvents = await UsersEvent.find({ coupon: coupon._id }).populate({
             path: 'event',
-            model: Event
+            model: Event,
+            populate: populateQuery
         });
 
         const couponRes = {
@@ -100,7 +109,7 @@ router.post('/', isAuthenticated, async (req: Request, res: Response) => {
                 state: EventsStates.PENDING,
                 event: eventsData[index].id,
                 betType: betTypes[index],
-                userType: usersBets[index],
+                userBet: usersBets[index],
                 course: betCourse
             });
             await usersEvent.save();

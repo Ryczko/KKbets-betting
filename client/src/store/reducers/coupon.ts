@@ -37,7 +37,8 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
                 eventName: action.eventName,
                 userBet: action.userBet,
                 betType: action.betType,
-                course: action.course
+                course: action.course,
+                state: 'pending'
             };
             if (eventIndex !== -1) {
                 newEvents[eventIndex] = event;

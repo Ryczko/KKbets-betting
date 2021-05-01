@@ -2,7 +2,7 @@ enum BetTypes {
     WINNER = 'winner'
 }
 
-enum UserTypes {
+enum UserBets {
     HOME = 'home',
     DRAW = 'draw',
     AWAY = 'away'
@@ -14,4 +14,4 @@ enum EventsStates {
     WINNING = 'winning'
 }
 
-export { BetTypes, UserTypes, EventsStates };
+export { BetTypes, UserBets, EventsStates };
