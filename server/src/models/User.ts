@@ -9,6 +9,7 @@ export interface IUser extends Document {
     password: string;
     email: string;
     points: number;
+    googleId?: string;
     generateAuthToken: () => string;
 }
 
@@ -52,6 +53,7 @@ const User = mongoose.model<IUser>('User', userSchema);
 function validateUser(user: typeof User): Joi.ValidationResult {
     const schema = Joi.object({
         email: Joi.string().required().email(),
+        googleId: Joi.string(),
         password: passwordComplexity().required(),
         username: Joi.string().min(2).max(30).required(),
         points: Joi.number()

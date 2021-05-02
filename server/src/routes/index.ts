@@ -7,6 +7,7 @@ import coupons from './coupons';
 import { IUser } from '../models/User';
 import passport from 'passport';
 import me from './me';
+import users from './users';
 
 const isAuthenticated = passport.authenticate('jwt', { session: false });
 
@@ -19,6 +20,7 @@ router.use('/events', events);
 
 router.use('/coupons', coupons);
 router.use('/me', isAuthenticated, me);
+router.use('/users', users);
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace

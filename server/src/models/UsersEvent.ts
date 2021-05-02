@@ -1,13 +1,13 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
-import { BetTypes, EventsStates, UserTypes } from './enums';
+import { BetTypes, EventsStates, UserBets } from './enums';
 
 interface IUsersEvent extends mongoose.Document {
     coupon: mongoose.Schema.Types.ObjectId;
     state: EventsStates;
     event: mongoose.Schema.Types.ObjectId;
     betType: BetTypes;
-    userType: UserTypes;
+    UserBet: UserBets;
     course: number;
 }
 
@@ -30,8 +30,8 @@ const usersEventSchema = new mongoose.Schema({
         type: BetTypes,
         require: true
     },
-    userType: {
-        type: UserTypes,
+    userBet: {
+        type: UserBets,
         require: true
     },
     course: {
@@ -52,8 +52,8 @@ function validateUsersEvent(usersEvent: typeof UsersEvent): Joi.ValidationResult
         betType: Joi.string()
             .valid(...Object.values(BetTypes))
             .required(),
-        userType: Joi.string()
-            .valid(...Object.values(UserTypes))
+        userBet: Joi.string()
+            .valid(...Object.values(UserBets))
             .required(),
         course: Joi.number().required()
     });
