@@ -10,6 +10,7 @@ export interface IUser extends Document {
     email: string;
     points: number;
     googleId?: string;
+    admin?: boolean;
     generateAuthToken: () => string;
 }
 
@@ -41,6 +42,9 @@ const userSchema = new mongoose.Schema({
     },
     id: {
         type: String
+    },
+    admin: {
+        type: Boolean
     }
 });
 

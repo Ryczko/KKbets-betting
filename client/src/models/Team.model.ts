@@ -1,5 +1,5 @@
 export interface TeamType {
-    id: string;
+    _id: string;
     image: string;
     name: string;
     shortName: string;

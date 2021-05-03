@@ -1,5 +1,10 @@
 import express, { Request, Response } from 'express';
+import passport from 'passport';
 import { Category, validateCategory } from '../models/Category';
+import { User } from '../models/User';
+
+const isAuthenticated = passport.authenticate('jwt', { session: false });
+
 const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
@@ -11,8 +16,18 @@ router.get('/', async (req: Request, res: Response) => {
     }
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', isAuthenticated, async (req: Request, res: Response) => {
     try {
+        const user = await User.findById(req.user._id);
+
+        if (!user.admin) {
+            return res.status(400).send('You do not have permission');
+        }
+
+        const exists = await Category.find({ name: req.body.name });
+        if (exists.length > 0) {
+            return res.status(400).send('Category with that name exists');
+        }
         const category = new Category({
             name: req.body.name
         });

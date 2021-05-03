@@ -65,7 +65,8 @@ router.post('/', async (req: Request, res: Response) => {
             teamAway: req.body.teamAway,
             courseHomeWin: req.body.courseHomeWin,
             courseAwayWin: req.body.courseAwayWin,
-            courseDraw: req.body.courseDraw
+            courseDraw: req.body.courseDraw,
+            important: req.body.important
         });
         const { error } = validateEvent(req.body);
         if (error) return res.status(400).send(error.details[0].message);

@@ -11,6 +11,7 @@
     "rules": {
         "no-console": 1, // Means warning,
         "prettier/prettier": "error",
-        "no-non-null-assertion": true
+        "no-non-null-assertion": 0,
+        "@typescript-eslint/ban-ts-comment": "off"
     }
 }

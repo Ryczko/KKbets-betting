@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.div`
+    width: 100%;
     input {
         background-color: ${({ theme }) => theme.colors.black.light};
-        padding: 10px;
+        padding: 14px;
         letter-spacing: 1px;
         margin: 0.5rem auto;
-        font-size: 0.9rem;
+        font-size: 1rem;
         border: none;
         color: white;
         outline: none;
