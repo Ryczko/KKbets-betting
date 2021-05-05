@@ -6,10 +6,10 @@ export const StyledStatus = styled.div<StatusProps>`
     height: 18px;
     background-color: ${({ status, theme }) => {
         switch (status) {
-            case 'win': {
+            case 'winning': {
                 return theme.colors.green.light;
             }
-            case 'loss': {
+            case 'lost': {
                 return 'red';
             }
             case 'pending': {

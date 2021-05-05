@@ -3,12 +3,13 @@ import { StyledCouponData } from './CouponData.css';
 
 import { Link } from 'react-router-dom';
 import Status from 'shared/Status/Status';
+import { EventsStates } from 'models/EventState.model';
 
 export interface CouponDataProps {
     id: string;
     amount: number;
     win: number;
-    status: 'win' | 'loss' | 'pending';
+    status: EventsStates;
 }
 
 function CouponData(props: CouponDataProps): JSX.Element {

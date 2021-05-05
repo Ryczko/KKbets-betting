@@ -1,3 +1,4 @@
+import { EventsStates } from './EventState.model';
 import { MatchType } from './Match.model';
 
 export interface CouponEventType {
@@ -6,6 +7,6 @@ export interface CouponEventType {
     eventName: string;
     course: number;
     userBet: string;
-    state: 'win' | 'loss' | 'pending';
+    state: EventsStates;
     event?: MatchType;
 }

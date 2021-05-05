@@ -1,4 +1,5 @@
 import { CouponEventType } from 'models/CouponEvent.model';
+import { EventsStates } from 'models/EventState.model';
 import { AddAction } from 'store/actions/coupon';
 import * as actionTypes from '../actions/actionTypes';
 
@@ -38,7 +39,7 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
                 userBet: action.userBet,
                 betType: action.betType,
                 course: action.course,
-                state: 'pending'
+                state: EventsStates.PENDING
             };
             if (eventIndex !== -1) {
                 newEvents[eventIndex] = event;

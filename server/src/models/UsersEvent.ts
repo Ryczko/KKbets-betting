@@ -7,7 +7,7 @@ interface IUsersEvent extends mongoose.Document {
     state: EventsStates;
     event: mongoose.Schema.Types.ObjectId;
     betType: BetTypes;
-    UserBet: UserBets;
+    userBet: UserBets;
     course: number;
 }
 

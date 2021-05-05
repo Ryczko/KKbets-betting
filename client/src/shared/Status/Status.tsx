@@ -1,18 +1,19 @@
+import { EventsStates } from 'models/EventState.model';
 import React from 'react';
 import { StyledStatus } from './Status.css';
 
 export interface StatusProps {
-    status: 'win' | 'loss' | 'pending';
+    status: EventsStates;
 }
 
 function Status(props: StatusProps): JSX.Element {
     let iconClass = 'icon-help';
     switch (props.status) {
-        case 'win': {
+        case 'winning': {
             iconClass = 'icon-ok';
             break;
         }
-        case 'loss': {
+        case 'lost': {
             iconClass = 'icon-cancel';
             break;
         }

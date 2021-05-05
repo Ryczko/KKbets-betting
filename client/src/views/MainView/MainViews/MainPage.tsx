@@ -22,7 +22,7 @@ function MainPage(): JSX.Element {
     }, []);
 
     const loadData = async () => {
-        const res = await axios.get(BACKEND_URL + '/events');
+        const res = await axios.get(BACKEND_URL + '/events?ended=false');
         const matches: MatchType[] = res.data.filter((match: MatchType) => !match.important);
         const matchesElements: JSX.Element[] = matches.map(
             ({ _id, date, teamAway, teamHome, courseAwayWin, courseDraw, courseHomeWin }) => (

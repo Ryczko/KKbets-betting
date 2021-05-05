@@ -1,3 +1,4 @@
+import { EventsStates } from 'models/EventState.model';
 import { MatchType } from 'models/Match.model';
 import React from 'react';
 import Status from 'shared/Status/Status';
@@ -7,7 +8,7 @@ import { StyledPlacedCouponEvent } from './PlacedCouponEvent.css';
 export interface PlacedCouponEventProps {
     betType: string;
     course: number;
-    state: 'win' | 'loss' | 'pending';
+    state: EventsStates;
     userBet: string;
     event: MatchType;
 }
