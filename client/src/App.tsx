@@ -19,7 +19,7 @@ function App(): JSX.Element {
     }, []);
 
     const checkAuth = async () => {
-        const result = await axios
+        await axios
             .get(BACKEND_URL + '/me', { withCredentials: true })
             .then((res) => {
                 if (res.status === 200) {
@@ -29,7 +29,7 @@ function App(): JSX.Element {
                     setIsLogged(false);
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 setIsLogged(false);
             });
     };

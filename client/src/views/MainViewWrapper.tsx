@@ -3,7 +3,7 @@ import TopNavigation from 'components/Navigations/TopNavigation/TopNavigation';
 import RightPanel from 'components/RightPanel/RightPanel';
 import { useState } from 'react';
 
-import MainView from './MainView/MainView';
+import MainView from './MainView';
 
 function MainViewWrapper(): JSX.Element {
     const [isLeftOpened, setIsLeftOpened] = useState(true);

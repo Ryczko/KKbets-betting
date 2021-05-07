@@ -1,7 +1,7 @@
 import { FormControlLabel, Snackbar, Switch, TextField } from '@material-ui/core';
 import { Alert, Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
-import { TeamType } from 'models/Team.model';
+import { TeamType } from 'types/Team.model';
 import React, { useEffect, useState } from 'react';
 import Button from 'shared/Button/Button';
 import { BACKEND_URL } from 'utilities/connection';

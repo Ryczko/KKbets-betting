@@ -1,10 +1,10 @@
 import PlacedCoupon from 'components/PlacedCoupon/PlacedCoupon';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import AdminPage from 'views/Admin/AdminPage';
+import MainPage from 'views/MainPage/MainPage';
+import UserPage from 'views/UserPage/UserPage';
 import { StyledMainView } from './MainView.css';
-import AdminPage from './MainViews/AdminPage';
-import MainPage from './MainViews/MainPage';
-import UserPage from './MainViews/UserPage';
 
 export interface MainViewProps {
     tight: boolean;

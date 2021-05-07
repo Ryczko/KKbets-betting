@@ -1,5 +1,5 @@
-import { AppBar, Paper, Tab, Tabs } from '@material-ui/core';
-import { TabContext, TabList, TabPanel } from '@material-ui/lab';
+import { AppBar, Tab, Tabs } from '@material-ui/core';
+import { TabContext, TabPanel } from '@material-ui/lab';
 import AdminCategories from 'components/Admin/AdminCategories';
 import AdminEvents from 'components/Admin/AdminEvents';
 import AdminTeams from 'components/Admin/AdminTeams';
@@ -10,7 +10,7 @@ import React from 'react';
 function AdminPage(): JSX.Element {
     const [value, setValue] = React.useState('1');
 
-    const handleChange = (event: any, newValue: string) => {
+    const handleChange = (event: React.ChangeEvent<unknown>, newValue: string) => {
         setValue(newValue);
     };
 

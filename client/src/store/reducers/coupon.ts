@@ -1,5 +1,5 @@
-import { CouponEventType } from 'models/CouponEvent.model';
-import { EventsStates } from 'models/EventState.model';
+import { CouponEventType } from 'types/CouponEvent.model';
+import { EventsStates } from 'types/EventState.model';
 import { AddAction } from 'store/actions/coupon';
 import * as actionTypes from '../actions/actionTypes';
 

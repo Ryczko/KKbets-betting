@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LeftNavigationView from 'views/LeftNavigation/LeftNavigationView';
+import LeftNavigationView from 'components/Navigations/LeftNavigation/LeftNavigationView';
 import { StyledLeftNavigation } from './LeftNavigation.css';
 
 interface LeftNavigationProps {

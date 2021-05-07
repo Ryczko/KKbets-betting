@@ -1,6 +1,5 @@
-import { EventsStates } from 'models/EventState.model';
-import { MatchType } from 'models/Match.model';
-import React from 'react';
+import { EventsStates } from 'types/EventState.model';
+import { MatchType } from 'types/Match.model';
 import Status from 'shared/Status/Status';
 import { transformDate } from 'utilities/transformDate';
 import { StyledPlacedCouponEvent } from './PlacedCouponEvent.css';

@@ -2,7 +2,7 @@ import axios from 'axios';
 import Banner from 'components/Banner/Banner';
 import ImportantMatch from 'components/Events/ImportantMatch';
 import Match from 'components/Events/Match';
-import { MatchType } from 'models/Match.model';
+import { MatchType } from 'types/Match.model';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Loader from 'shared/Spinner/Loader';

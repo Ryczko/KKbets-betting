@@ -19,7 +19,6 @@ function CouponsList(): JSX.Element {
                             status={coupon.state}
                         />
                     ));
-                    console.log(couponsElements);
                     setCoupons(couponsElements);
                 }
             })

@@ -1,6 +1,6 @@
 import { StyledImportantMatch } from './ImportantMatch.css';
 
-import { TeamType } from 'models/Team.model';
+import { TeamType } from 'types/Team.model';
 import { addEvent } from 'store/actions';
 import { useDispatch } from 'react-redux';
 

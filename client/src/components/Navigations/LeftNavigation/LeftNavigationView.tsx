@@ -1,8 +1,8 @@
-import LeftInfoView from './LeftNavigationViews/LeftInfoView';
-import LeftMainView from './LeftNavigationViews/LeftMainView';
+import CouponsList from 'views/CouponsList/CouponsList';
+import LeftInfoView from 'views/Information/ProjectInfo/LeftInfoView';
+import LeftMainView from 'views/Information/WelcomeInfo/LeftMainView';
+import Ranking from 'views/Ranking/Ranking';
 import { StyledLeftNavigationView } from './LeftNavigationView.css';
-import CouponsList from './LeftNavigationViews/CouponsList';
-import Ranking from './LeftNavigationViews/Ranking';
 
 export interface LeftNavigationViewProps {
     activeContent: string;

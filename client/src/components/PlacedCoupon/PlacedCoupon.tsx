@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PlayedCouponType } from 'models/PlayedCoupon.model';
+import { PlayedCouponType } from 'types/PlayedCoupon.model';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loader from 'shared/Spinner/Loader';

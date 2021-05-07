@@ -14,13 +14,14 @@ interface InputProps {
 
 function Input(props: InputProps): JSX.Element {
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-        props.onChange!(event.target.value);
+        if (props.onChange) {
+            props.onChange(event.target.value);
+        }
     };
 
     return (
         <StyledInput>
             <input
-                // @ts-ignore */
                 onChange={handleChange}
                 placeholder={props.placeholder}
                 type={props.type || 'text'}

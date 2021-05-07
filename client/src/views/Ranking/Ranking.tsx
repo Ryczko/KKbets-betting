@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import RankingPlace, { RankingPlaceProps } from 'components/Ranking/RankingPlace';
+import React, { useEffect, useState } from 'react';
 import { BACKEND_URL } from 'utilities/connection';
 import { StyledRanking } from './Ranking.css';
-import RankingPlace, { RankingPlaceProps } from './RankingPlace';
 
 function Ranking(): JSX.Element {
     const [places, setPlaces] = useState<JSX.Element[]>([]);
@@ -20,8 +20,6 @@ function Ranking(): JSX.Element {
             <RankingPlace place={index + 1} username={place.username} points={place.points} />
         ));
         setPlaces(placesInfo);
-
-        console.log(res.data);
     };
 
     return (

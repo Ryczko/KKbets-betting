@@ -1,4 +1,4 @@
-import { EventsStates } from 'models/EventState.model';
+import { EventsStates } from 'types/EventState.model';
 import React from 'react';
 import { StyledStatus } from './Status.css';
 

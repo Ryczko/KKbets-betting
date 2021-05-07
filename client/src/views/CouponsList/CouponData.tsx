@@ -3,7 +3,7 @@ import { StyledCouponData } from './CouponData.css';
 
 import { Link } from 'react-router-dom';
 import Status from 'shared/Status/Status';
-import { EventsStates } from 'models/EventState.model';
+import { EventsStates } from 'types/EventState.model';
 
 export interface CouponDataProps {
     id: string;

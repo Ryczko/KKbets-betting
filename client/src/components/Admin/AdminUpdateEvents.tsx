@@ -1,7 +1,7 @@
 import { Snackbar, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import axios from 'axios';
-import { MatchType } from 'models/Match.model';
+import { MatchType } from 'types/Match.model';
 import React, { useEffect, useState } from 'react';
 import Button from 'shared/Button/Button';
 import Loader from 'shared/Spinner/Loader';
