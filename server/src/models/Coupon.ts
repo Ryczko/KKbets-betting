@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
-import { EventsStates } from './enums';
+import { EventsStates } from '../util/enums';
 
 interface ICoupon extends mongoose.Document {
     owner: mongoose.Schema.Types.ObjectId;

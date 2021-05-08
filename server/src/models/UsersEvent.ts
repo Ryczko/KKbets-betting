@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
-import { BetTypes, EventsStates, UserBets } from './enums';
+import { BetTypes, EventsStates, UserBets } from '../util/enums';
 
 interface IUsersEvent extends mongoose.Document {
     coupon: mongoose.Schema.Types.ObjectId;

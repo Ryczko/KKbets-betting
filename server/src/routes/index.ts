@@ -1,15 +1,18 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import categories from './categories';
 import teams from './teams';
 import events from './events';
 import google from './google';
 import coupons from './coupons';
 import { IUser } from '../models/User';
-import passport from 'passport';
 import me from './me';
 import users from './users';
 
-const isAuthenticated = passport.authenticate('jwt', { session: false });
+declare module 'express' {
+    export interface Request {
+        user: IUser;
+    }
+}
 
 const router = express.Router();
 
@@ -17,22 +20,8 @@ router.use('/google', google);
 router.use('/categories', categories);
 router.use('/teams', teams);
 router.use('/events', events);
-
 router.use('/coupons', coupons);
-router.use('/me', isAuthenticated, me);
+router.use('/me', me);
 router.use('/users', users);
-
-declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace Express {
-        // eslint-disable-next-line @typescript-eslint/no-empty-interface
-        export interface User extends IUser {}
-    }
-}
-
-// test route
-router.get('/', (req: Request, res: Response) => {
-    res.status(200).send(`response`);
-});
 
 export default router;
