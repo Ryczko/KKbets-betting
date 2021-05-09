@@ -1,12 +1,12 @@
-import { CouponEventType } from './CouponEvent.model';
+import { ICouponEvent } from './CouponEvent.model';
 import { EventsStates } from './EventState.model';
 
-export interface PlayedCouponType {
+export interface IPlayedCoupon {
     coupon: {
         amount: number;
         totalCourse: number;
         possiblyWin: number;
         state: EventsStates;
     };
-    couponEvents: CouponEventType[];
+    couponEvents: ICouponEvent[];
 }

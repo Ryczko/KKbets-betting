@@ -1,30 +1,16 @@
-import { Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import axios from 'axios';
-import React, { useState } from 'react';
+import withAlert, { WithAlertProps } from 'Hoc/withAlert';
+import { useState } from 'react';
 import Button from 'shared/Button/Button';
 import Input from 'shared/Input/Input';
 import Loader from 'shared/Spinner/Loader';
-import { BACKEND_URL } from 'utilities/connection';
+import axiosConfig from 'utilities/axiosConfig';
 
-function AdminTeams(): JSX.Element {
+function AdminTeams(props: WithAlertProps): JSX.Element {
     const [teamName, setTeamName] = useState('');
     const [teamShortname, setTeamShortname] = useState('');
     const [imageUrl, setImageUrl] = useState('');
 
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-
-    const [isSuccessOpened, setIsSuccessOpened] = useState(false);
-    const [isErrorOpened, setIsErrorOpened] = useState(false);
-
-    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setIsSuccessOpened(false);
-        setIsErrorOpened(false);
-    };
 
     const teamNameChangeHandler = (val: string): void => {
         setTeamName(val);
@@ -39,19 +25,18 @@ function AdminTeams(): JSX.Element {
     const addCategoryHandler = async () => {
         try {
             setLoading(true);
-            await axios.post(BACKEND_URL + '/teams', {
+            await axiosConfig.post('/teams', {
                 name: teamName,
                 shortName: teamShortname,
                 image: imageUrl
             });
-            setIsSuccessOpened(true);
-
+            props.setIsSuccessOpened?.(true);
             setTeamShortname('');
             setImageUrl('');
             setTeamName('');
         } catch (err) {
-            setError(err.response.data);
-            setIsErrorOpened(true);
+            props.setError?.(err.response.data);
+            props.setIsErrorOpened?.(true);
         } finally {
             setLoading(false);
         }
@@ -72,18 +57,8 @@ function AdminTeams(): JSX.Element {
                     </Button>
                 </>
             )}
-            <Snackbar open={isSuccessOpened} autoHideDuration={5000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="success">
-                    The category has been added
-                </Alert>
-            </Snackbar>
-            <Snackbar open={isErrorOpened} autoHideDuration={5000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="error">
-                    {error}
-                </Alert>
-            </Snackbar>
         </>
     );
 }
 
-export default AdminTeams;
+export default withAlert(AdminTeams);

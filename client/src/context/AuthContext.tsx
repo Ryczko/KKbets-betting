@@ -1,21 +1,16 @@
 import React from 'react';
 
-export interface UserType {
+export interface IUser {
     points?: number;
     username?: string;
     email?: string;
 }
 
-export const AuthContext = React.createContext<{
+interface IAuthContextProps {
     isLogged: boolean;
     setIsLogged: (atr: boolean) => void;
-    userData: UserType;
-    setUserData: (atr: UserType) => void;
-}>({
-    isLogged: false,
-    setIsLogged: () => undefined,
-    userData: { points: 0, username: '', email: '' },
-    setUserData: () => ({
-        points: 0
-    })
-});
+    userData: IUser;
+    setUserData: (atr: IUser) => void;
+}
+
+export const AuthContext = React.createContext({} as IAuthContextProps);

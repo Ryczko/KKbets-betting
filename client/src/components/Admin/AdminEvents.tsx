@@ -1,13 +1,15 @@
-import { FormControlLabel, Snackbar, Switch, TextField } from '@material-ui/core';
-import { Alert, Autocomplete } from '@material-ui/lab';
-import axios from 'axios';
-import { TeamType } from 'types/Team.model';
-import React, { useEffect, useState } from 'react';
+import { FormControlLabel, Switch } from '@material-ui/core';
+import { ITeam } from 'types/Team.model';
+import { useEffect, useState } from 'react';
 import Button from 'shared/Button/Button';
-import { BACKEND_URL } from 'utilities/connection';
+import withAlert, { WithAlertProps } from 'Hoc/withAlert';
+import AdminInputPicker from './AdminInputPicker/AdminInputPicker';
+import { AdminRow } from './AdminStyles.css';
+import AdminInput from './AdminInput/AdminInput';
+import axiosConfig from 'utilities/axiosConfig';
 
-function AdminEvents(): JSX.Element {
-    const [teamsList, setTeamsList] = useState<TeamType[]>([]);
+function AdminEvents(props: WithAlertProps): JSX.Element {
+    const [teamsList, setTeamsList] = useState<ITeam[]>([]);
     const [categoriesList, setCategoriesList] = useState<{ _id: string; name: string }[]>([]);
 
     const [teamHome, setTeamHome] = useState('');
@@ -29,34 +31,18 @@ function AdminEvents(): JSX.Element {
     }, []);
 
     const loadTeams = async () => {
-        const res = await axios.get(BACKEND_URL + '/teams');
+        const res = await axiosConfig.get('/teams');
         setTeamsList(res.data);
     };
 
     const loadCategories = async () => {
-        const res = await axios.get(BACKEND_URL + '/categories');
+        const res = await axiosConfig.get('/categories');
         setCategoriesList(res.data);
-    };
-
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-
-    const [isSuccessOpened, setIsSuccessOpened] = useState(false);
-    const [isErrorOpened, setIsErrorOpened] = useState(false);
-
-    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setIsSuccessOpened(false);
-        setIsErrorOpened(false);
     };
 
     const addCategoryHandler = async () => {
         try {
-            setLoading(true);
-
-            await axios.post(BACKEND_URL + '/events', {
+            await axiosConfig.post('/events', {
                 teamHome,
                 teamAway,
                 courseHomeWin,
@@ -66,195 +52,43 @@ function AdminEvents(): JSX.Element {
                 category,
                 important: true
             });
-            setIsSuccessOpened(true);
+            props.setIsSuccessOpened?.(true);
         } catch (err) {
-            setError(err.response.data);
-            setIsErrorOpened(true);
-        } finally {
-            setLoading(false);
+            props.setError?.(err.response.data);
+            props.setIsErrorOpened?.(true);
         }
     };
 
     return (
         <>
-            <>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Autocomplete
-                        id="combo-box-demo"
-                        options={teamsList}
-                        getOptionLabel={(option) => option.name}
-                        style={{ width: 300, color: 'white' }}
-                        onChange={(event, newValue) => {
-                            setTeamHome(newValue!._id);
-                        }}
-                        renderInput={(params) => (
-                            <TextField
-                                style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                                {...params}
-                                InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }}
-                                InputProps={{
-                                    ...params.InputProps,
-                                    style: { color: 'white' }
-                                }}
-                                label="Team home"
-                                variant="outlined"
-                            />
-                        )}
-                    />
-                    <div>VS</div>
-                    <Autocomplete
-                        id="combo-box-demo"
-                        options={teamsList}
-                        style={{ width: 300, color: 'white' }}
-                        getOptionLabel={(option) => option.name}
-                        onChange={(event, newValue) => {
-                            setTeamAway(newValue!._id);
-                        }}
-                        renderInput={(params) => (
-                            <TextField
-                                style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                                {...params}
-                                InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }}
-                                InputProps={{
-                                    ...params.InputProps,
-                                    style: { color: 'white' }
-                                }}
-                                label="Team away"
-                                variant="outlined"
-                            />
-                        )}
-                    />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', margin: '20px 0' }}>
-                    <TextField
-                        id="standard-number"
-                        label="Home win course"
-                        type="number"
-                        variant="outlined"
-                        onChange={(e) => setCourseHomeWin(e.target.value)}
-                        style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                        InputProps={{
-                            style: { color: 'white' },
-                            inputProps: {
-                                min: 1,
-                                step: '0.1'
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#fff' }
-                        }}
-                    />
-                    <TextField
-                        id="standard-number"
-                        label="Draw win course"
-                        type="number"
-                        variant="outlined"
-                        onChange={(e) => setCourseDraw(e.target.value)}
-                        style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                        InputProps={{
-                            style: { color: 'white' },
-                            inputProps: {
-                                min: 1,
-                                step: '0.1'
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#fff' }
-                        }}
-                    />
-                    <TextField
-                        id="standard-number"
-                        label="Away win course"
-                        type="number"
-                        variant="outlined"
-                        onChange={(e) => setCourseAwayWin(e.target.value)}
-                        style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                        InputProps={{
-                            style: { color: 'white' },
-                            inputProps: {
-                                min: 1,
-                                step: '0.1'
-                            }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#fff' }
-                        }}
-                    />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', margin: '15px 0' }}>
-                    <TextField
-                        id="date"
-                        label="Event day"
-                        type="date"
-                        value={day}
-                        variant="outlined"
-                        onChange={(e) => setDay(e.target.value)}
-                        style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                        InputProps={{
-                            style: { color: 'white' }
-                        }}
-                        InputLabelProps={{
-                            style: { color: '#fff' }
-                        }}
-                    />
-                    <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
-                    <Autocomplete
-                        id="combo-box-demo"
-                        options={categoriesList}
-                        getOptionLabel={(option) => option.name}
-                        style={{ width: 300, color: 'white' }}
-                        onChange={(event, newValue) => {
-                            setCategory(newValue!._id);
-                        }}
-                        renderInput={(params) => (
-                            <TextField
-                                style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
-                                {...params}
-                                InputLabelProps={{
-                                    style: { color: '#fff' }
-                                }}
-                                InputProps={{
-                                    ...params.InputProps,
-                                    style: { color: 'white' }
-                                }}
-                                label="Category"
-                                variant="outlined"
-                            />
-                        )}
-                    />
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={highlight}
-                                onChange={(e) => setHighlight(e.target.checked)}
-                                color="primary"
-                            />
-                        }
-                        label="Highlight"
-                    />
-                </div>
+            <AdminRow>
+                <AdminInputPicker options={teamsList} update={setTeamHome} label="Team home" />
+                <div>VS</div>
+                <AdminInputPicker options={teamsList} update={setTeamAway} label="Team away" />
+            </AdminRow>
+            <AdminRow>
+                <AdminInput label="Home win course" type="number" update={setCourseHomeWin} min={1} step={0.1} />
+                <AdminInput label="Draw course" type="number" update={setCourseDraw} min={1} step={0.1} />
+                <AdminInput label="Away win course" type="number" update={setCourseAwayWin} min={1} step={0.1} />
+            </AdminRow>
+            <AdminRow>
+                <AdminInput label="Event day" type="date" update={setDay} value={day} />
+                <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                <AdminInputPicker options={categoriesList} update={setCategory} label="Category" />
 
-                <Button fill style={{ padding: '10px 14px' }} click={addCategoryHandler}>
-                    Add
-                </Button>
-            </>
+                <FormControlLabel
+                    control={
+                        <Switch checked={highlight} onChange={(e) => setHighlight(e.target.checked)} color="primary" />
+                    }
+                    label="Highlight"
+                />
+            </AdminRow>
 
-            <Snackbar open={isSuccessOpened} autoHideDuration={5000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="success">
-                    The event has been added
-                </Alert>
-            </Snackbar>
-            <Snackbar open={isErrorOpened} autoHideDuration={5000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="error">
-                    {error}
-                </Alert>
-            </Snackbar>
+            <Button fill style={{ padding: '10px 14px' }} click={addCategoryHandler}>
+                Add
+            </Button>
         </>
     );
 }
 
-export default AdminEvents;
+export default withAlert(AdminEvents);

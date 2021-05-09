@@ -1,10 +1,10 @@
-import { CouponEventType } from 'types/CouponEvent.model';
+import { ICouponEvent } from 'types/CouponEvent.model';
 import { EventsStates } from 'types/EventState.model';
 import { AddAction } from 'store/actions/coupon';
 import * as actionTypes from '../actions/actionTypes';
 
 export interface CouponState {
-    events: CouponEventType[];
+    events: ICouponEvent[];
     totalRate: number;
     amount: number;
     possibleWinnings: number;
@@ -18,7 +18,7 @@ const initialState = {
     refreshCoupons: 0
 };
 
-const updateRate = (events: CouponEventType[]): number => {
+const updateRate = (events: ICouponEvent[]): number => {
     let total = 1;
     events.forEach((el) => {
         total *= el.course;
@@ -31,9 +31,9 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
         case actionTypes.COUPON_ADD_EVENT: {
             action = action as AddAction;
             const eventIndex = state.events.findIndex((el) => el.eventId === action.eventId);
-            let newEvents: CouponEventType[] = [...state.events];
+            let newEvents: ICouponEvent[] = [...state.events];
 
-            const event: CouponEventType = {
+            const event: ICouponEvent = {
                 eventId: action.eventId,
                 eventName: action.eventName,
                 userBet: action.userBet,
@@ -80,10 +80,10 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
             const savedCouponEvents = localStorage.getItem('coupon');
             const amount: string = localStorage.getItem('amount') || '10';
 
-            let couponEvents: CouponEventType[];
+            let couponEvents: ICouponEvent[];
 
             if (savedCouponEvents) {
-                couponEvents = JSON.parse(savedCouponEvents) as CouponEventType[];
+                couponEvents = JSON.parse(savedCouponEvents) as ICouponEvent[];
                 couponEvents.forEach((el) => {
                     const event = document.querySelector(`[data-eventid="${el.eventId}"] [data-bet="${el.userBet}"]`);
                     if (event) event.classList.add('active');

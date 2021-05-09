@@ -1,18 +1,14 @@
-import { Snackbar, TextField } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import axios from 'axios';
-import { MatchType } from 'types/Match.model';
+import { TextField } from '@material-ui/core';
+import { IMatch } from 'types/Match.model';
 import React, { useEffect, useState } from 'react';
 import Button from 'shared/Button/Button';
 import Loader from 'shared/Spinner/Loader';
-import { BACKEND_URL } from 'utilities/connection';
+import withAlert, { WithAlertProps } from 'Hoc/withAlert';
+import { AdminRow } from './AdminStyles.css';
+import axiosConfig from 'utilities/axiosConfig';
 
-function AdminUpdateEvents(): JSX.Element {
+function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
-
-    const [isSuccessOpened, setIsSuccessOpened] = useState(false);
-    const [isErrorOpened, setIsErrorOpened] = useState(false);
 
     const [events, setEvents] = useState<any[]>([]);
 
@@ -24,34 +20,22 @@ function AdminUpdateEvents(): JSX.Element {
         try {
             const eventData = events?.find((event) => event._id === id);
             setLoading(true);
-            await axios.patch(
-                BACKEND_URL + '/events/' + id,
-                {
-                    teamHomeScore: eventData.home,
-                    teamAwayScore: eventData.away
-                },
-                { withCredentials: true }
-            );
-            setIsSuccessOpened(true);
+            await axiosConfig.patch('/events/' + id, {
+                teamHomeScore: eventData.home,
+                teamAwayScore: eventData.away
+            });
+            props.setIsSuccessOpened?.(true);
         } catch (err) {
-            setError(err.response.data);
-            setIsErrorOpened(true);
+            props.setError?.(err.response.data);
+            props.setIsErrorOpened?.(true);
         } finally {
             setLoading(false);
         }
     };
 
     const loadEvents = async () => {
-        const res = await axios.get(BACKEND_URL + '/events');
+        const res = await axiosConfig.get('/events');
         setEvents(res.data);
-    };
-
-    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setIsSuccessOpened(false);
-        setIsErrorOpened(false);
     };
 
     const updateScoreHandler = (id: string, value: number, target: 'home' | 'away') => {
@@ -63,26 +47,17 @@ function AdminUpdateEvents(): JSX.Element {
 
     return (
         <>
-            {loading || !events ? (
+            {loading ? (
                 <Loader />
             ) : (
                 <>
-                    {events.map((event: MatchType) => (
-                        <div
-                            key={event._id}
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                padding: '10px',
-                                alignItems: 'center'
-                            }}
-                        >
+                    {events.map((event: IMatch) => (
+                        <AdminRow key={event._id}>
                             <p>
                                 {event.teamHome.shortName} vs {event.teamAway.shortName}
                             </p>
 
                             <TextField
-                                id="standard-number"
                                 label="Home score"
                                 type="number"
                                 variant="outlined"
@@ -100,7 +75,6 @@ function AdminUpdateEvents(): JSX.Element {
                                 }}
                             />
                             <TextField
-                                id="standard-number"
                                 label="Away score"
                                 type="number"
                                 variant="outlined"
@@ -120,22 +94,12 @@ function AdminUpdateEvents(): JSX.Element {
                             <Button click={() => updateEventHandler(event._id)} fill style={{ padding: '12px' }}>
                                 Update
                             </Button>
-                        </div>
+                        </AdminRow>
                     ))}
                 </>
             )}
-            <Snackbar open={isSuccessOpened} autoHideDuration={5000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="success">
-                    The event has been updated
-                </Alert>
-            </Snackbar>
-            <Snackbar open={isErrorOpened} autoHideDuration={5000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="error">
-                    {error}
-                </Alert>
-            </Snackbar>
         </>
     );
 }
 
-export default AdminUpdateEvents;
+export default withAlert(AdminUpdateEvents);

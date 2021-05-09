@@ -1,4 +1,4 @@
-export interface TeamType {
+export interface ITeam {
     _id: string;
     image: string;
     name: string;

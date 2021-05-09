@@ -6,21 +6,21 @@ import { BrowserRouter } from 'react-router-dom';
 import MainViewWrapper from 'views/MainViewWrapper';
 
 import { useEffect, useState } from 'react';
-import { AuthContext, UserType } from 'context/AuthContext';
-import axios from 'axios';
-import { BACKEND_URL } from 'utilities/connection';
+import { AuthContext, IUser } from 'context/AuthContext';
+
+import axiosConfig from 'utilities/axiosConfig';
 
 function App(): JSX.Element {
     const [isLogged, setIsLogged] = useState<boolean>(false);
-    const [userData, setUserData] = useState<UserType>({ points: 0, username: '', email: '' });
+    const [userData, setUserData] = useState<IUser>({});
 
     useEffect(() => {
         checkAuth();
     }, []);
 
     const checkAuth = async () => {
-        await axios
-            .get(BACKEND_URL + '/me', { withCredentials: true })
+        await axiosConfig
+            .get('/me')
             .then((res) => {
                 if (res.status === 200) {
                     setUserData(res.data);

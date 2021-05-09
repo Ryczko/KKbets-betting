@@ -2,15 +2,13 @@ import { StyledCoupon } from './Coupon.css';
 import Button from 'shared/Button/Button';
 import CouponEvent from './CouponEvent';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { AppState, updateAmount } from 'store/actions';
-import axios from 'axios';
-import { BACKEND_URL } from 'utilities/connection';
 import { removeAllEvents } from 'store/actions/coupon';
 import Loader from 'shared/Spinner/Loader';
+import axiosConfig from 'utilities/axiosConfig';
 
 function Coupon(): JSX.Element {
-    const [eventsList, setEventsList] = useState<JSX.Element[]>([]);
     const [isLoaded, setIsLoaded] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
     const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
@@ -22,19 +20,6 @@ function Coupon(): JSX.Element {
     const dispatch = useDispatch();
     const refSlider = useRef<HTMLInputElement>(null);
     const refError = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const eventsList = events.map((el) => (
-            <CouponEvent
-                eventId={el.eventId}
-                eventName={el.eventName}
-                betType={el.betType}
-                course={el.course}
-                userBet={el.userBet}
-            />
-        ));
-        setEventsList(eventsList);
-    }, [events]);
 
     const slideAmountHandler = (value: string) => {
         dispatch(updateAmount(+value));
@@ -59,7 +44,7 @@ function Coupon(): JSX.Element {
         };
 
         try {
-            await axios.post(BACKEND_URL + '/coupons', data, { withCredentials: true });
+            await axiosConfig.post('/coupons', data);
             dispatch(removeAllEvents());
         } catch (err) {
             setError(err.response.data);
@@ -85,7 +70,18 @@ function Coupon(): JSX.Element {
                 {!isLoaded && <Loader />}
                 {isLoaded && (
                     <>
-                        <div className="events">{eventsList}</div>
+                        <div className="events">
+                            {events.map((el) => (
+                                <CouponEvent
+                                    key={el.eventId}
+                                    eventId={el.eventId}
+                                    eventName={el.eventName}
+                                    betType={el.betType}
+                                    course={el.course}
+                                    userBet={el.userBet}
+                                />
+                            ))}
+                        </div>
                         {events.length === 0 && <p style={{ marginTop: '50px' }}>Coupon is empty</p>}
                         {events.length !== 0 && (
                             <div className="bottom">

@@ -1,5 +1,5 @@
 import { EventsStates } from 'types/EventState.model';
-import { MatchType } from 'types/Match.model';
+import { IMatch } from 'types/Match.model';
 import Status from 'shared/Status/Status';
 import { transformDate } from 'utilities/transformDate';
 import { StyledPlacedCouponEvent } from './PlacedCouponEvent.css';
@@ -9,7 +9,7 @@ export interface PlacedCouponEventProps {
     course: number;
     state: EventsStates;
     userBet: string;
-    event: MatchType;
+    event: IMatch;
 }
 
 function PlacedCouponEvent({ betType, course, state, userBet, event }: PlacedCouponEventProps): JSX.Element {

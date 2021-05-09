@@ -1,6 +1,6 @@
-import { TeamType } from './Team.model';
+import { ITeam } from './Team.model';
 
-export interface MatchType {
+export interface IMatch {
     ended: boolean;
     important: boolean;
     _id: string;
@@ -9,8 +9,8 @@ export interface MatchType {
     courseHomeWin: number;
     courseAwayWin: number;
     courseDraw: number;
-    teamHome: TeamType;
-    teamAway: TeamType;
+    teamHome: ITeam;
+    teamAway: ITeam;
     teamHomeScore: number;
     teamAwayScore: number;
 }

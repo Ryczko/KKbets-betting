@@ -6,20 +6,20 @@ import Status from 'shared/Status/Status';
 import { EventsStates } from 'types/EventState.model';
 
 export interface CouponDataProps {
-    id: string;
+    _id: string;
     amount: number;
-    win: number;
-    status: EventsStates;
+    possiblyWin: number;
+    state: EventsStates;
 }
 
 function CouponData(props: CouponDataProps): JSX.Element {
     return (
-        <Link to={`/coupons/${props.id}`}>
+        <Link to={`/coupons/${props._id}`}>
             <StyledCouponData>
                 <h6>{props.amount}</h6>
-                <h6>{props.win}</h6>
+                <h6>{props.possiblyWin}</h6>
                 <h6>
-                    <Status status={props.status}></Status>
+                    <Status status={props.state}></Status>
                 </h6>
             </StyledCouponData>
         </Link>

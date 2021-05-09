@@ -1,31 +1,24 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { BACKEND_URL } from 'utilities/connection';
-import CouponData from './CouponData';
+import axiosConfig from 'utilities/axiosConfig';
+import CouponData, { CouponDataProps } from './CouponData';
 import { StyledCouponsList } from './CouponsList.css';
 
 function CouponsList(): JSX.Element {
-    const [coupons, setCoupons] = useState<JSX.Element[]>([]);
+    const [coupons, setCoupons] = useState<CouponDataProps[]>([]);
+
     useEffect(() => {
-        axios
-            .get(BACKEND_URL + '/coupons', { withCredentials: true })
+        axiosConfig
+            .get('/coupons')
             .then((res) => {
                 if (res.status === 200) {
-                    const couponsElements = res.data.map((coupon: any) => (
-                        <CouponData
-                            id={coupon._id}
-                            amount={coupon.amount}
-                            win={coupon.possiblyWin}
-                            status={coupon.state}
-                        />
-                    ));
-                    setCoupons(couponsElements);
+                    setCoupons(res.data);
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
+
     return (
         <StyledCouponsList>
             <h2 className="title">Your coupons </h2>
@@ -35,7 +28,17 @@ function CouponsList(): JSX.Element {
                 <h5>possible win</h5>
                 <h5>status</h5>
             </div>
-            <div className="coupons-list">{coupons}</div>
+            <div className="coupons-list">
+                {coupons.map((coupon) => (
+                    <CouponData
+                        key={coupon._id}
+                        _id={coupon._id}
+                        amount={coupon.amount}
+                        possiblyWin={coupon.possiblyWin}
+                        state={coupon.state}
+                    />
+                ))}
+            </div>
         </StyledCouponsList>
     );
 }

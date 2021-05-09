@@ -1,14 +1,14 @@
 import { StyledImportantMatch } from './ImportantMatch.css';
 
-import { TeamType } from 'types/Team.model';
+import { ITeam } from 'types/Team.model';
 import { addEvent } from 'store/actions';
 import { useDispatch } from 'react-redux';
 
 interface ImportantMatchProps {
     eventId: string;
     league: string;
-    teamHome: TeamType;
-    teamAway: TeamType;
+    teamHome: ITeam;
+    teamAway: ITeam;
     date: string;
     courseHomeWin: number;
     courseAwayWin: number;

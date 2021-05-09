@@ -1,7 +1,7 @@
 export const transformDate = (date: string): string => {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
-    const month = newDate.getMonth();
+    const month = newDate.getMonth() + 1;
     const day = newDate.getDate();
     const hour = newDate.getHours();
     let minutes = newDate.getMinutes().toString();
