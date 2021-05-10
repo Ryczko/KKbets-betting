@@ -56,4 +56,12 @@ main {
    }
 }
 
+.display-above-sm {
+  display: none;
+  
+   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+     display: block;
+   }
+}
+
 `;

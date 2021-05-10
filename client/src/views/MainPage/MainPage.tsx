@@ -9,6 +9,7 @@ import { getCouponFromStorage } from 'store/actions';
 import { transformDate } from 'utilities/transformDate';
 import { StyledMainPage } from './MainPage.css';
 import axiosConfig from 'utilities/axiosConfig';
+import EventCounterMobile from 'components/Coupon/EventCounterMobile';
 
 function MainPage(): JSX.Element {
     const [importantMatches, setImportantMatches] = useState<IMatch[]>([]);
@@ -33,6 +34,8 @@ function MainPage(): JSX.Element {
 
     return (
         <StyledMainPage>
+            <EventCounterMobile />
+
             <Banner image="https://www.betopin.com/wp-content/uploads/CL_SF_Header.jpg" />
             {!isLoaded && <Loader />}
             <div className="important-match-container">

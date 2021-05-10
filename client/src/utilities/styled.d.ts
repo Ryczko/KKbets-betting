@@ -4,6 +4,7 @@ declare module 'styled-components' {
     export interface DefaultTheme {
         breakpoints: {
             md: string;
+            sm: string;
         };
         colors: {
             black: {

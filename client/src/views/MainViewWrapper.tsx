@@ -1,7 +1,8 @@
 import LeftNavigation from 'components/Navigations/LeftNavigation/LeftNavigation';
+import MobileNavigation from 'components/Navigations/MobileNavigation/MobileNavigation';
 import TopNavigation from 'components/Navigations/TopNavigation/TopNavigation';
 import RightPanel from 'components/RightPanel/RightPanel';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import MainView from './MainView';
 
@@ -21,6 +22,7 @@ function MainViewWrapper(): JSX.Element {
     return (
         <>
             <TopNavigation />
+            <MobileNavigation />
             <main>
                 <LeftNavigation open={openLeftMenu} close={closeLeftMenu} active={isLeftOpened} />
                 <MainView tight={isLeftOpened} />

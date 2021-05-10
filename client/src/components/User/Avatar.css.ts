@@ -4,7 +4,7 @@ import { AvatarProps } from './Avatar';
 export const StyledAvatar = styled.div<AvatarProps>`
     width: ${(props) => props.width};
     border-radius: 4px;
-    display: inline-block;
+
     cursor: pointer;
     overflow: hidden;
 

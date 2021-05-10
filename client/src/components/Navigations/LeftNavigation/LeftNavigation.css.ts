@@ -10,7 +10,7 @@ export const StyledLeftNavigation = styled.aside`
         top: 0;
         width: 60px;
         height: 100vh;
-        padding: 75px 10px 10px 10px;
+        padding: 65px 10px 10px 10px;
         background-color: ${({ theme }) => theme.colors.black.medium};
         z-index: 99;
 

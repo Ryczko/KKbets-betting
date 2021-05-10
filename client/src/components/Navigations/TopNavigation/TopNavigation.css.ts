@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 5px 20px;
     position: fixed;
     width: 100%;
     z-index: 100;
@@ -13,7 +13,15 @@ export const StyledHeader = styled.header`
     .user-data {
         display: flex;
         align-items: center;
-        min-width: 350px;
-        justify-content: space-between;
+        justify-content: flex-end;
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+            justify-content: space-between;
+            min-width: 200px;
+        }
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+            min-width: 250px;
+        }
     }
 `;
