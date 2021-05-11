@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledEventCounterMobile = styled.div`
-    color: white;
+    color: ${({ theme }) => theme.colors.font.light};
     position: fixed;
     z-index: 101;
     border-radius: 10px;
@@ -12,8 +12,8 @@ export const StyledEventCounterMobile = styled.div`
     cursor: pointer;
     right: 20px;
 
-    background-color: ${({ theme }) => theme.colors.green.dark};
-    border: 2px solid ${({ theme }) => theme.colors.green.light};
+    background-color: ${({ theme }) => theme.colors.accent.dark};
+    border: 2px solid ${({ theme }) => theme.colors.accent.light};
     width: 50px;
     height: 50px;
 

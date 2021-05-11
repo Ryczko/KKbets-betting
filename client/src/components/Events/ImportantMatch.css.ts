@@ -3,11 +3,12 @@ import styled from 'styled-components';
 export const StyledImportantMatch = styled.div`
     border-radius: 10px;
     padding: 20px;
-    background-color: ${({ theme }) => theme.colors.black.medium};
+    background-color: ${({ theme }) => theme.colors.background.medium};
     text-align: left;
+    color: ${({ theme }) => theme.colors.font.dark};
 
     h3 {
-        color: white;
+        color: ${({ theme }) => theme.colors.font.light};
         margin-bottom: 8px;
     }
 
@@ -27,6 +28,7 @@ export const StyledImportantMatch = styled.div`
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: ${({ theme }) => theme.colors.font.dark};
         }
 
         .team-image-container {
@@ -53,7 +55,6 @@ export const StyledImportantMatch = styled.div`
         flex-grow: 1;
         flex-basis: 33%;
         text-align: center;
-        color: gray;
         font-weight: 600;
     }
 
@@ -63,19 +64,21 @@ export const StyledImportantMatch = styled.div`
         flex-grow: 1;
         flex-basis: 33%;
         background-color: transparent;
-        color: white;
-        border: 2px solid gray;
-        border-radius: 8px;
+        color: ${({ theme }) => theme.colors.font.light};
+        border: 1px solid ${({ theme }) => theme.colors.font.dark};
+        border-radius: 4px;
         margin: 0 7px;
         cursor: pointer;
+        transition: 0.2s;
 
         &:focus {
             outline: none;
         }
 
         &.active {
-            border-color: ${({ theme }) => theme.colors.green.light};
-            background-color: ${({ theme }) => theme.colors.green.dark};
+            border-color: ${({ theme }) => theme.colors.accent.light};
+            background-color: ${({ theme }) => theme.colors.accent.dark};
+            transform: scale(0.95);
         }
     }
 `;

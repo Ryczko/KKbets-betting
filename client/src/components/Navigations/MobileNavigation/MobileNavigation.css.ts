@@ -9,7 +9,7 @@ export const StyledMobileNavigation = styled.aside`
     left: 0;
     z-index: 1000;
     width: 100%;
-    background-color: ${({ theme }) => theme.colors.black.dark};
+    background-color: ${({ theme }) => theme.colors.background.dark};
 
     ul {
         display: flex;
@@ -19,10 +19,10 @@ export const StyledMobileNavigation = styled.aside`
 
     a {
         font-size: 1.8rem;
-        color: ${({ theme }) => theme.colors.white.dark};
+        color: ${({ theme }) => theme.colors.font.dark};
 
         &.active {
-            color: ${({ theme }) => theme.colors.green.light};
+            color: ${({ theme }) => theme.colors.accent.light};
         }
     }
 

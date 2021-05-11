@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledRightPanel = styled.aside`
-    background-color: ${({ theme }) => theme.colors.black.medium};
+    background-color: ${({ theme }) => theme.colors.background.medium};
     text-align: center;
     width: 20%;
     position: fixed;
     right: 0;
     top: 0;
     height: 100vh;
-    padding: 75px 10px 25px 10px;
+    padding: 25px 0px 25px 0px;
 `;

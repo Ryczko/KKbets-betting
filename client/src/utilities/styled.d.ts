@@ -7,17 +7,17 @@ declare module 'styled-components' {
             sm: string;
         };
         colors: {
-            black: {
+            background: {
                 dark: string;
                 medium: string;
                 light: string;
-                theLightest: string;
             };
-            green: {
+            accent: {
                 light: string;
                 dark: string;
             };
-            white: {
+            font: {
+                light: string;
                 dark: string;
             };
         };

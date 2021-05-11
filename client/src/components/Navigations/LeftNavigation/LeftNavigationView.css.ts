@@ -5,7 +5,7 @@ interface LeftNavigationViewStyleProps {
 }
 
 export const StyledLeftNavigationView = styled.div<LeftNavigationViewStyleProps>`
-    background-color: ${({ theme }) => theme.colors.black.light};
+    background-color: ${({ theme }) => theme.colors.background.light};
     transition: 0.8s;
     left: 60px;
     padding: 100px 10px 25px 10px;

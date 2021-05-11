@@ -12,9 +12,6 @@ export const StyledLeftMainView = styled.div`
         padding: 12px 0 20px 0;
     }
 
-    .trophe {
-        width: 70px;
-    }
     .description {
         margin-top: 20px;
         font-weight: 600;

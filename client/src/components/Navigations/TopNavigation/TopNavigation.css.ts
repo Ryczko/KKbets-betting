@@ -7,8 +7,8 @@ export const StyledHeader = styled.header`
     position: fixed;
     width: 100%;
     z-index: 100;
-    background-color: ${({ theme }) => theme.colors.black.dark};
-    border-bottom: 1px solid black;
+    background-color: ${({ theme }) => theme.colors.background.dark};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.background.dark};
 
     .user-data {
         display: flex;

@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import img from 'assets/images/coupon.png';
 
 export const StyledCoupon = styled.div`
-    padding: 15px 6px 10px 10px;
-    background-color: #3b3e3f;
-    min-height: 200px;
+    padding: 10px 8px 20px;
+    background-color: ${({ theme }) => theme.colors.background.light};
+    min-height: 300px;
     margin: 30px auto;
     z-index: 2;
     position: relative;
@@ -22,32 +21,6 @@ export const StyledCoupon = styled.div`
         &.active {
             height: 50px;
         }
-    }
-
-    &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 14px;
-        background-repeat: repeat-x;
-        background-size: contain;
-        left: 0;
-        bottom: 99%;
-        transform: rotate(180deg);
-        background-image: url(${img});
-    }
-    &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 14px;
-        background-repeat: repeat-x;
-        background-size: contain;
-        left: 0;
-        top: 100%;
-        background-image: url(${img});
     }
 
     .item-enter {
@@ -90,22 +63,26 @@ export const StyledCoupon = styled.div`
         padding-right: 5px;
         overflow-y: auto;
         overflow-x: hidden;
-
         margin-bottom: 15px;
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+            max-height: 300px;
+        }
     }
+
     .bottom {
         .amount {
             margin-bottom: 15px;
             display: flex;
             justify-content: space-around;
             .value-field {
-                background-color: ${({ theme }) => theme.colors.black.theLightest};
+                background-color: ${({ theme }) => theme.colors.background.medium};
                 padding: 10px;
                 width: 30%;
                 letter-spacing: 1px;
                 font-size: 0.9rem;
                 border: none;
-                color: white;
+                color: ${({ theme }) => theme.colors.font.light};
                 outline: none;
                 text-align: center;
                 border-radius: 5px;

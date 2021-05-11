@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const StyledInput = styled.div`
     width: 100%;
     input {
-        background-color: ${({ theme }) => theme.colors.black.light};
+        background-color: ${({ theme }) => theme.colors.background.light};
         padding: 14px;
         letter-spacing: 1px;
         margin: 0.5rem auto;
         font-size: 1rem;
         border: none;
-        color: white;
+        color: ${({ theme }) => theme.colors.font.light};
         outline: none;
         width: 100%;
         border-radius: 5px;

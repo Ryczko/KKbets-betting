@@ -4,18 +4,18 @@ export const theme = {
         sm: '575px'
     },
     colors: {
-        black: {
+        background: {
             dark: '#141417',
             medium: '#1B1B1F',
-            light: '#28282E',
-            theLightest: '#3A3A3D'
+            light: '#28282E'
         },
-        green: {
+        accent: {
             light: '#0BB659',
             dark: '#175433'
         },
-        white: {
-            dark: '#B8B8B9'
+        font: {
+            dark: '#B8B8B9',
+            light: '#FFFFFF'
         }
     }
 };

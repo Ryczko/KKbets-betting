@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledCouponEvent = styled.div`
-    background-color: ${({ theme }) => theme.colors.black.theLightest};
+    background-color: ${({ theme }) => theme.colors.background.medium};
     padding: 10px 6px;
     border-radius: 5px;
     margin: 5px 0;
@@ -36,7 +36,7 @@ export const StyledCouponEvent = styled.div`
             font-size: 0.9rem;
         }
         .bet {
-            color: ${({ theme }) => theme.colors.green.light};
+            color: ${({ theme }) => theme.colors.accent.light};
         }
     }
 

@@ -8,8 +8,8 @@ export const StyledWallet = styled.div`
         margin-right: 5px;
         letter-spacing: 1px;
 
-        .currency {
-            color: ${({ theme }) => theme.colors.green.light};
+        &.currency {
+            color: ${({ theme }) => theme.colors.accent.light};
         }
     }
 `;

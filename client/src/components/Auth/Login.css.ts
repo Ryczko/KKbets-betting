@@ -26,7 +26,7 @@ export const StyledLogin = styled.div<LoginProps>`
         top: calc(100% + 15px);
         right: 56%;
         width: 350px;
-        border: ${({ shortcut, theme }) => (shortcut ? '1px solid ' + theme.colors.green.light : 'none')};
+        border: ${({ shortcut, theme }) => (shortcut ? '1px solid ' + theme.colors.accent.light : 'none')};
         &::after {
             content: '';
             position: absolute;
@@ -34,7 +34,7 @@ export const StyledLogin = styled.div<LoginProps>`
             bottom: 100%;
             border-left: solid 10px transparent;
             border-right: solid 10px transparent;
-            border-bottom: solid 10px ${({ theme }) => theme.colors.green.light};
+            border-bottom: solid 10px ${({ theme }) => theme.colors.accent.light};
         }
     }
 

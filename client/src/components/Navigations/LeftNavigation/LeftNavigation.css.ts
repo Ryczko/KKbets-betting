@@ -11,7 +11,7 @@ export const StyledLeftNavigation = styled.aside`
         width: 60px;
         height: 100vh;
         padding: 65px 10px 10px 10px;
-        background-color: ${({ theme }) => theme.colors.black.medium};
+        background-color: ${({ theme }) => theme.colors.background.medium};
         z-index: 99;
 
         i {
@@ -26,14 +26,14 @@ export const StyledLeftNavigation = styled.aside`
 
             &.active {
                 i {
-                    color: ${({ theme }) => theme.colors.green.light};
+                    color: ${({ theme }) => theme.colors.accent.light};
                 }
 
                 &::after {
                     content: '';
                     width: 4px;
                     height: 4px;
-                    background-color: ${({ theme }) => theme.colors.green.light};
+                    background-color: ${({ theme }) => theme.colors.accent.light};
                     border-radius: 50%;
                     left: -3px;
                     top: 50%;

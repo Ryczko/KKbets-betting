@@ -60,7 +60,7 @@ export const StyledLoader = styled.div`
         background-size: cover;
         animation: ${roll} 1s linear infinite;
 
-        background-color: white;
+        background-color: ${({ theme }) => theme.colors.font.light};
         border-radius: 50%;
     }
 `;

@@ -5,7 +5,7 @@ export const StyledPlacedCouponEvent = styled.div`
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    background-color: ${({ theme }) => theme.colors.black.medium};
+    background-color: ${({ theme }) => theme.colors.background.medium};
     padding: 20px;
     border-radius: 5px;
     margin: 15px 0;

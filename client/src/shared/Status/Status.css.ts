@@ -4,10 +4,10 @@ import { StatusProps } from './Status';
 export const StyledStatus = styled.div<StatusProps>`
     width: 18px;
     height: 18px;
-    background-color: ${({ status, theme }) => {
+    background-color: ${({ status }) => {
         switch (status) {
             case 'winning': {
-                return theme.colors.green.light;
+                return '#0BB659';
             }
             case 'lost': {
                 return 'red';
@@ -22,7 +22,7 @@ export const StyledStatus = styled.div<StatusProps>`
     }};
     border-radius: 3px;
     margin: 0 auto;
-    color: white;
+    color: ${({ theme }) => theme.colors.font.light};
     display: flex;
 
     justify-content: center;

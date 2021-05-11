@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledCouponData = styled.div`
-    background-color: ${({ theme }) => theme.colors.black.medium};
+    background-color: ${({ theme }) => theme.colors.background.medium};
     padding: 8px 0;
     margin: 2px 0;
     display: flex;

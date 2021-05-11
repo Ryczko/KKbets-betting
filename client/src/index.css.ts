@@ -28,13 +28,13 @@ ${normalize}
 }
 
 body {
-  background-color: ${({ theme }) => theme.colors.black.dark};
+  background-color: ${({ theme }) => theme.colors.background.dark};
   font-family: 'Arimo', sans-serif;
-  color: ${({ theme }) => theme.colors.white.dark};
+  color: ${({ theme }) => theme.colors.font.dark};
 }
 
 a {
-  color: ${({ theme }) => theme.colors.white.dark};
+  color: ${({ theme }) => theme.colors.font.dark};
   text-decoration: none;
 }
 

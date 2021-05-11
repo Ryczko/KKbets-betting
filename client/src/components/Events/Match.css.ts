@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledMatch = styled.div`
-    background-color: ${({ theme }) => theme.colors.black.medium};
+    background-color: ${({ theme }) => theme.colors.background.medium};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,7 +46,7 @@ export const StyledMatch = styled.div`
         padding: 10px 0;
         width: 55px;
         background-color: transparent;
-        color: white;
+        color: ${({ theme }) => theme.colors.font.light};
         border: 2px solid gray;
         border-radius: 8px;
         margin: 0 3px;
@@ -57,8 +57,8 @@ export const StyledMatch = styled.div`
         }
 
         &.active {
-            border-color: ${({ theme }) => theme.colors.green.light};
-            background-color: ${({ theme }) => theme.colors.green.dark};
+            border-color: ${({ theme }) => theme.colors.accent.light};
+            background-color: ${({ theme }) => theme.colors.accent.dark};
         }
     }
 `;
