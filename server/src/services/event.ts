@@ -10,13 +10,11 @@ export const resolveUserEvent = (
     if (betType === BetTypes.WINNER) {
         if (
             (userBet === UserBets.HOME && scoreHome > scoreAway) ||
-            (userBet === UserBets.AWAY && scoreHome < scoreAway)
+            (userBet === UserBets.AWAY && scoreHome < scoreAway) ||
+            (userBet === UserBets.DRAW && scoreAway === scoreHome)
         ) {
             result = EventsStates.WINNING;
-        } else if (
-            (userBet === UserBets.HOME && scoreHome <= scoreAway) ||
-            (userBet === UserBets.AWAY && scoreHome >= scoreAway)
-        ) {
+        } else {
             result = EventsStates.LOST;
         }
     }

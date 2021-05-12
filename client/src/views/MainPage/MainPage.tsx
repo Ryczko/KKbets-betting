@@ -22,7 +22,7 @@ function MainPage(): JSX.Element {
     }, []);
 
     const loadData = async () => {
-        const res = await axiosConfig.get('/events?ended=false');
+        const res = await axiosConfig.get('/events?ended=false&started=false');
         const matches: IMatch[] = res.data.filter((match: IMatch) => !match.important);
         const ImportantMatches: IMatch[] = res.data.filter((match: IMatch) => match.important);
 

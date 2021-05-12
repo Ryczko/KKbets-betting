@@ -23,4 +23,10 @@ export const StyledCouponsList = styled.div`
             flex-grow: 1;
         }
     }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+        .coupons-list {
+            max-height: 400px;
+        }
+    }
 `;

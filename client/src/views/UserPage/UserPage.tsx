@@ -14,7 +14,7 @@ function UserPage(): JSX.Element {
         e.preventDefault();
         const date = new Date();
         date.setDate(date.getDate() - 1);
-        document.cookie = `jwt= ; expires= ${date.getUTCDate()}; path=/`;
+        document.cookie = `jwt= ; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
         history.push('/');
         setIsLogged(false);
         setUserData({});
@@ -25,7 +25,11 @@ function UserPage(): JSX.Element {
             <div className="user-profile">
                 <Avatar width="90px" />
                 <div className="badges">
-                    <h2 className="title">user badges</h2>
+                    <h2 className="title">
+                        user badges
+                        <br />
+                        <small>(cooming soon)</small>
+                    </h2>
                 </div>
             </div>
 

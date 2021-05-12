@@ -25,10 +25,7 @@ function Auth(): JSX.Element {
     return (
         <AuthStyle>
             <Login isOpened={isOpened} shortcut />
-            <Button fill click={handleLogin}>
-                Login
-            </Button>
-            <Button>Sign up</Button>
+            <Button click={handleLogin}>Login / Sign up</Button>
         </AuthStyle>
     );
 }

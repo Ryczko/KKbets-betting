@@ -7,7 +7,7 @@ export const StyledUserPage = styled.div`
     .user-profile {
         display: flex;
         margin: 0 auto;
-        background-color: ${({ theme }) => theme.colors.black.light};
+        background-color: ${({ theme }) => theme.colors.background.light};
         padding: 15px;
         margin-bottom: 20px;
         border-radius: 10px;
@@ -21,13 +21,13 @@ export const StyledUserPage = styled.div`
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                color: ${({ theme }) => theme.colors.white.dark};
+                color: ${({ theme }) => theme.colors.font.dark};
                 opacity: 0.7;
                 font-size: 1.4rem;
             }
             flex-grow: 1;
             margin-left: 15px;
-            background-color: ${({ theme }) => theme.colors.black.medium};
+            background-color: ${({ theme }) => theme.colors.background.medium};
             min-height: 100%;
             position: relative;
         }

@@ -11,7 +11,7 @@ function Trophe(): JSX.Element {
             xmlns="&ns_svg;"
             viewBox="0 0 173.338 255.207"
             overflow="visible"
-            enable-background="new 0 0 173.338 255.207"
+            enableBackground="new 0 0 173.338 255.207"
             width="70px"
         >
             <g>
@@ -40,7 +40,7 @@ function Trophe(): JSX.Element {
             <line
                 fill="none"
                 stroke={theme.colors.font.light}
-                stroke-width="5"
+                strokeWidth="5"
                 x1="86.689"
                 y1="44.668"
                 x2="86.689"

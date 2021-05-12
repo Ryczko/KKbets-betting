@@ -25,6 +25,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
                 teamAwayScore: eventData.away
             });
             props.setIsSuccessOpened?.(true);
+            await loadEvents();
         } catch (err) {
             props.setError?.(err.response.data);
             props.setIsErrorOpened?.(true);
@@ -34,7 +35,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     };
 
     const loadEvents = async () => {
-        const res = await axiosConfig.get('/events');
+        const res = await axiosConfig.get('/events?ended=false');
         setEvents(res.data);
     };
 

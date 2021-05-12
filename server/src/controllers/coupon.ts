@@ -11,7 +11,7 @@ import { EventsStates } from '../util/enums';
 
 export const getUsersCoupons = async (req: Request, res: Response): Promise<void> => {
     try {
-        const coupons = await Coupon.find({ owner: req.user._id });
+        const coupons = await Coupon.find({ owner: req.user._id }).sort({ date: -1 });
         res.status(200).send(coupons);
     } catch (err) {
         res.status(500).send('Something went wrong.');
@@ -56,7 +56,11 @@ export const postCoupon = async (req: Request, res: Response): Promise<any> => {
         }
 
         if ((await validateEvents(eventsData)) === 1) {
-            return res.status(400).send('incorect events data');
+            return res.status(400).send('Some of events has already started');
+        }
+
+        if (amount < 20) {
+            return res.status(400).send('The minimum bet is 20');
         }
 
         if ((await checkPointsAmount(user, amount)) === 1) {

@@ -2,15 +2,19 @@ import { StyledCoupon } from './Coupon.css';
 import Button from 'shared/Button/Button';
 import CouponEvent from './CouponEvent';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useContext, useRef, useState } from 'react';
 import { AppState, updateAmount } from 'store/actions';
 import { removeAllEvents } from 'store/actions/coupon';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { AuthContext } from 'context/AuthContext';
+import EmptyCoupon from './EmptyCoupon';
 
 function Coupon(): JSX.Element {
     const [isLoaded, setIsLoaded] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
+    const { userData, setUserData } = useContext(AuthContext);
     const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
         (state) => state.coupon.possibleWinnings
     );
@@ -26,6 +30,9 @@ function Coupon(): JSX.Element {
     };
 
     const typeAmountHandler = (value: string) => {
+        if (isNaN(+value)) {
+            value = '20';
+        }
         dispatch(updateAmount(+value));
         if (refSlider && refSlider.current) {
             refSlider.current.value = value;
@@ -46,6 +53,7 @@ function Coupon(): JSX.Element {
         try {
             await axiosConfig.post('/coupons', data);
             dispatch(removeAllEvents());
+            setUserData({ ...userData, points: userData.points! - amount });
         } catch (err) {
             setError(err.response.data);
             refError.current?.classList.add('active');
@@ -62,7 +70,7 @@ function Coupon(): JSX.Element {
         <>
             <StyledCoupon>
                 <div className="top">
-                    Your coupon <i className="icon-trash-empty" />
+                    Your coupon <i className="icon-trash-empty" onClick={() => dispatch(removeAllEvents())} />
                 </div>
                 <div ref={refError} className="error">
                     {error}
@@ -71,28 +79,31 @@ function Coupon(): JSX.Element {
                 {isLoaded && (
                     <>
                         <div className="events">
-                            {events.map((el) => (
-                                <CouponEvent
-                                    key={el.eventId}
-                                    eventId={el.eventId}
-                                    eventName={el.eventName}
-                                    betType={el.betType}
-                                    course={el.course}
-                                    userBet={el.userBet}
-                                />
-                            ))}
+                            <TransitionGroup exit={false}>
+                                {events.map((el) => (
+                                    <CSSTransition key={el.eventId} timeout={500} classNames="item">
+                                        <CouponEvent
+                                            key={el.eventId}
+                                            eventId={el.eventId}
+                                            eventName={el.eventName}
+                                            betType={el.betType}
+                                            course={el.course}
+                                            userBet={el.userBet}
+                                        />
+                                    </CSSTransition>
+                                ))}
+                            </TransitionGroup>
                         </div>
-                        {events.length === 0 && <p style={{ marginTop: '50px' }}>Coupon is empty</p>}
+                        {events.length === 0 && <EmptyCoupon />}
                         {events.length !== 0 && (
                             <div className="bottom">
                                 <div className="amount">
                                     <input
                                         className="slider"
                                         type="range"
-                                        name=""
-                                        min="10"
-                                        step="20"
-                                        max="1000"
+                                        min="20"
+                                        value={amount}
+                                        max={userData.points || 1000}
                                         onChange={(e) => slideAmountHandler(e.target.value)}
                                         ref={refSlider}
                                     />

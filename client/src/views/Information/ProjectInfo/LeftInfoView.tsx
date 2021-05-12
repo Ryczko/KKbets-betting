@@ -19,10 +19,10 @@ function LeftInfoView(): JSX.Element {
             <div className="bottom">
                 <h5>
                     App developer:
-                    <a href="https://www.linkedin.com/in/konrad-ryczko-2298b7188/" target="_blank">
+                    <a href="https://github.com/Ryczko" target="_blank">
                         <i className="icon-github-circled" />
                     </a>
-                    <a href="https://github.com/Ryczko" target="_blank">
+                    <a href="https://www.linkedin.com/in/konrad-ryczko-2298b7188/" target="_blank">
                         <i className="icon-linkedin-rect" />
                     </a>
                 </h5>

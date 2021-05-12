@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import ball from 'assets/images/ball.svg';
 
 const roll = keyframes`
     0% {
@@ -30,7 +29,7 @@ const shadowScale = keyframes`
 `;
 
 export const StyledLoader = styled.div`
-    margin: 0 auto;
+    margin: 20px auto 0;
     width: 40px;
     height: 100px;
 
@@ -56,10 +55,7 @@ export const StyledLoader = styled.div`
     .ball {
         width: 40px;
         height: 40px;
-        background-image: url(${ball});
-        background-size: cover;
         animation: ${roll} 1s linear infinite;
-
         background-color: ${({ theme }) => theme.colors.font.light};
         border-radius: 50%;
     }

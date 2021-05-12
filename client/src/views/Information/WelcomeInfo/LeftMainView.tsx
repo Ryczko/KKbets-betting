@@ -7,8 +7,8 @@ function LeftMainView(): JSX.Element {
             <h3 className="title">Bet Champions league now!</h3>
             <Trophe />
             <p className="description">
-                New Chempions league season already started. Don't waste your time, and place. Unique badges and cash
-                prizes await the best!
+                New Chempions league season already started. Don't waste your time, and bet. Unique badges await the
+                best!
             </p>
         </StyledLeftMainView>
     );

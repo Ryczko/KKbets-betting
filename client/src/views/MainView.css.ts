@@ -10,7 +10,7 @@ export const StyledMainView = styled.div<MainViewProps>`
     margin: 0 auto;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-        max-width: 1650px;
+        max-width: 1460px;
         padding: 75px calc(20% + 20px) 25px ${({ tight }) => (tight ? '350px' : '80px')};
     }
 `;

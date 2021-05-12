@@ -13,7 +13,7 @@ export interface CouponState {
 const initialState = {
     events: [],
     totalRate: 1,
-    amount: 10,
+    amount: 20,
     possibleWinnings: 10,
     refreshCoupons: 0
 };
@@ -78,7 +78,7 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
         }
         case actionTypes.COUPON_FROM_STORAGE: {
             const savedCouponEvents = localStorage.getItem('coupon');
-            const amount: string = localStorage.getItem('amount') || '10';
+            const amount: string = localStorage.getItem('amount') || '20';
 
             let couponEvents: ICouponEvent[];
 

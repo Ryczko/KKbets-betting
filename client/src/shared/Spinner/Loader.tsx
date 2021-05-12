@@ -1,12 +1,12 @@
-import React from 'react';
 import { StyledLoader } from './Loader.css';
+import Ball from './Ball';
 
 function Loader(): JSX.Element {
     return (
         <StyledLoader>
             <div className="shadow"></div>
             <div className="gravity">
-                <div className="ball"></div>
+                <Ball class="ball" />
             </div>
         </StyledLoader>
     );

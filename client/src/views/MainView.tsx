@@ -1,3 +1,4 @@
+import Login from 'components/Auth/Login';
 import Coupon from 'components/Coupon/Coupon';
 import PlacedCoupon from 'components/PlacedCoupon/PlacedCoupon';
 import React from 'react';
@@ -26,6 +27,9 @@ function MainView({ tight }: MainViewProps): JSX.Element {
                 <Route path="/coupon">
                     <Coupon />
                 </Route>
+                <Route path="/login">
+                    <Login isOpened={true} shortcut={false} />
+                </Route>
                 <Route path="/coupons" exact>
                     <CouponsList />
                 </Route>
@@ -37,6 +41,9 @@ function MainView({ tight }: MainViewProps): JSX.Element {
                 </Route>
                 <Route path="/admin">
                     <AdminPage />
+                </Route>
+                <Route>
+                    <MainPage />
                 </Route>
             </Switch>
         </StyledMainView>

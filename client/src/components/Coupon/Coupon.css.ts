@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import img from 'assets/images/coupon-clip.svg';
 
 export const StyledCoupon = styled.div`
     padding: 10px 8px 20px;
     background-color: ${({ theme }) => theme.colors.background.light};
     min-height: 300px;
-    margin: 30px auto;
+    margin: 60px auto 20px;
     z-index: 2;
     position: relative;
 
@@ -23,6 +24,27 @@ export const StyledCoupon = styled.div`
         }
     }
 
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 14px;
+        background-color: ${({ theme }) => theme.colors.background.light};
+        mask-image: url(${img});
+        mask-repeat: repeat-x;
+    }
+
+    &::before {
+        left: 0;
+        bottom: 99%;
+        transform: rotate(180deg);
+    }
+    &::after {
+        left: 0;
+        top: 100%;
+    }
+
     .item-enter {
         opacity: 0;
         transform: translateX(200px);
@@ -30,15 +52,6 @@ export const StyledCoupon = styled.div`
     .item-enter-active {
         opacity: 1;
         transform: translateX(0px);
-        transition: 500ms;
-    }
-    .item-exit {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-    .item-exit-active {
-        opacity: 0;
-        transform: translateX(200px);
         transition: 500ms;
     }
 
@@ -60,7 +73,6 @@ export const StyledCoupon = styled.div`
     }
 
     .events {
-        padding-right: 5px;
         overflow-y: auto;
         overflow-x: hidden;
         margin-bottom: 15px;

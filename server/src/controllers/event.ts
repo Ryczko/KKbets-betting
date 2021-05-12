@@ -11,9 +11,23 @@ import { User } from '../models/User';
 
 export const getEvents = async (req: Request, res: Response): Promise<any> => {
     try {
-        const query = req.query.ended === undefined ? {} : { ended: !!req.query.active };
+        const { ended, started } = req.query;
+
+        const query: { date?; ended?: boolean } = {};
+        if (ended !== undefined) {
+            query.ended = ended === 'true' ? true : false;
+        }
+
+        if (started !== undefined) {
+            if (started === 'false') {
+                query.date = {
+                    $gt: new Date()
+                };
+            }
+        }
 
         const eventsMainData = await Event.find(query)
+            .sort({ date: 1 })
             .populate({
                 path: 'teamHome',
                 model: Team
@@ -64,7 +78,7 @@ export const updateEvent = async (req: Request, res: Response): Promise<any> => 
         if (teamHomeScore === undefined || !teamAwayScore === undefined) {
             return res.status(404).send('Incorrect data.');
         }
-        await Event.updateOne({
+        await event.updateOne({
             $set: { teamHomeScore, teamAwayScore, ended: true }
         });
 
@@ -93,7 +107,7 @@ export const updateEvent = async (req: Request, res: Response): Promise<any> => 
 
             if (couponState !== EventsStates.PENDING) {
                 const coupon = await Coupon.findById(usersEvents[i].coupon);
-                await coupon.update({ $set: { state: couponState } });
+                await coupon.updateOne({ $set: { state: couponState } });
 
                 if (couponState === EventsStates.WINNING) {
                     const user = await User.findById(coupon.owner);
