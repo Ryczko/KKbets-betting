@@ -12,6 +12,7 @@ import axiosConfig from 'utilities/axiosConfig';
 
 function App(): JSX.Element {
     const [isLogged, setIsLogged] = useState<boolean>(false);
+    const [isUserDataLoaded, setIsUserDataLoaded] = useState<boolean>(false);
     const [userData, setUserData] = useState<IUser>({});
 
     useEffect(() => {
@@ -32,10 +33,11 @@ function App(): JSX.Element {
             .catch(() => {
                 setIsLogged(false);
             });
+        setIsUserDataLoaded(true);
     };
     return (
         <ThemeProvider theme={theme}>
-            <AuthContext.Provider value={{ isLogged, setIsLogged, userData, setUserData }}>
+            <AuthContext.Provider value={{ isLogged, setIsLogged, userData, setUserData, isUserDataLoaded }}>
                 <BrowserRouter>
                     <GlobalStyles />
                     <MainViewWrapper />

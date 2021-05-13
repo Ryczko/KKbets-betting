@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(appRouter);
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect(connection_uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect(connection_uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
     if (env === 'development') {
         console.log('connected to db');
         app.listen(port, function () {

@@ -7,7 +7,7 @@ import Logo from '../Logo';
 import { StyledHeader } from './TopNavigation.css';
 
 function TopNavigation(): JSX.Element {
-    const { isLogged } = useContext(AuthContext);
+    const { isLogged, userData } = useContext(AuthContext);
 
     return (
         <StyledHeader>
@@ -15,7 +15,11 @@ function TopNavigation(): JSX.Element {
             {isLogged ? (
                 <div className="user-data">
                     <Wallet />
-                    <Avatar className="display-above-sm" width="45px" />
+                    <Avatar
+                        src={userData.showAvatar ? userData.avatarUrl : ''}
+                        className="display-above-sm"
+                        width="45px"
+                    />
                 </div>
             ) : (
                 <Auth />

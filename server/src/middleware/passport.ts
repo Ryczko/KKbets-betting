@@ -30,12 +30,17 @@ passport.use(
         async (accessToken, refreshToken, profile, done) => {
             const userGoogle = await User.findOne({ googleId: profile.id });
             if (userGoogle) {
+                await userGoogle.updateOne({ avatarUrl: profile._json.picture });
+
                 done(null, userGoogle);
             } else {
+                const exUsers = await User.find({ username: new RegExp('^' + profile.displayName + '$', 'i') });
+                const name = exUsers.length > 0 ? `${profile.displayName} (${exUsers.length})` : profile.displayName;
                 const newUser = await new User({
-                    username: profile.displayName,
+                    username: name,
                     email: profile.emails[0].value,
-                    googleId: profile.id
+                    googleId: profile.id,
+                    avatarUrl: profile._json.picture
                 }).save();
                 done(null, newUser);
             }

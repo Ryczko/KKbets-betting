@@ -5,9 +5,13 @@ export const StyledCoupon = styled.div`
     padding: 10px 8px 20px;
     background-color: ${({ theme }) => theme.colors.background.light};
     min-height: 300px;
-    margin: 60px auto 20px;
     z-index: 2;
     position: relative;
+    margin: 60px 15px 20px;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+        margin: 60px auto 20px;
+    }
 
     .error {
         background-color: rgba(255, 99, 71, 0.8);
@@ -29,10 +33,9 @@ export const StyledCoupon = styled.div`
         content: '';
         position: absolute;
         width: 100%;
-        height: 14px;
+        height: 12px;
         background-color: ${({ theme }) => theme.colors.background.light};
         mask-image: url(${img});
-        mask-repeat: repeat-x;
     }
 
     &::before {
@@ -42,7 +45,7 @@ export const StyledCoupon = styled.div`
     }
     &::after {
         left: 0;
-        top: 100%;
+        top: 99%;
     }
 
     .item-enter {
