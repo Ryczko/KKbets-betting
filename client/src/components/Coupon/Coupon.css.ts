@@ -7,7 +7,6 @@ export const StyledCoupon = styled.div`
     min-height: 300px;
     z-index: 2;
     position: relative;
-    margin: 60px 15px 20px;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
         margin: 60px auto 20px;
@@ -62,16 +61,11 @@ export const StyledCoupon = styled.div`
         margin-top: 20px;
         font-size: 1.2rem;
         margin-bottom: 15px;
+        transform: translateX(5px);
         position: relative;
 
         i {
             cursor: pointer;
-        }
-        .icon-resize-full {
-            font-size: 0.9rem;
-            position: absolute;
-            left: -5px;
-            top: 3px;
         }
     }
 
@@ -119,7 +113,7 @@ export const StyledCoupon = styled.div`
                     font-size: 0.7rem;
                 }
                 &:nth-child(2) {
-                    font-size: 1.5rem;
+                    font-size: 1.3rem;
                 }
             }
         }

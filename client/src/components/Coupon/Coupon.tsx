@@ -10,6 +10,7 @@ import axiosConfig from 'utilities/axiosConfig';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AuthContext } from 'context/AuthContext';
 import EmptyCoupon from './EmptyCoupon';
+import { Slider } from '@material-ui/core';
 
 function Coupon(): JSX.Element {
     const [isLoaded, setIsLoaded] = useState<boolean>(true);
@@ -25,8 +26,8 @@ function Coupon(): JSX.Element {
     const refSlider = useRef<HTMLInputElement>(null);
     const refError = useRef<HTMLDivElement>(null);
 
-    const slideAmountHandler = (value: string) => {
-        dispatch(updateAmount(+value));
+    const slideAmountHandler = (event: any, newValue: number | number[]) => {
+        dispatch(updateAmount(newValue as number));
     };
 
     const typeAmountHandler = (value: string) => {
@@ -94,17 +95,21 @@ function Coupon(): JSX.Element {
                                 ))}
                             </TransitionGroup>
                         </div>
-                        {events.length === 0 && <EmptyCoupon />}
+                        {events.length === 0 && (
+                            <>
+                                <EmptyCoupon />
+                                <p style={{ marginTop: '20px' }}>Your coupon is empty</p>
+                            </>
+                        )}
                         {events.length !== 0 && (
                             <div className="bottom">
                                 <div className="amount">
-                                    <input
-                                        className="slider"
-                                        type="range"
-                                        min="20"
+                                    <Slider
                                         value={amount}
-                                        max={userData.points || 1000}
-                                        onChange={(e) => slideAmountHandler(e.target.value)}
+                                        min={20}
+                                        max={userData.points || 500}
+                                        onChange={slideAmountHandler}
+                                        className="slider"
                                         ref={refSlider}
                                     />
                                     <input

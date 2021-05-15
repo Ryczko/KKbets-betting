@@ -1,8 +1,10 @@
+import EmptyCoupon from 'components/Coupon/EmptyCoupon';
 import { AuthContext } from 'context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
 import Button from 'shared/Button/Button';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
+import { transformDate } from 'utilities/transformDate';
 import CouponData, { CouponDataProps } from './CouponData';
 import { StyledCouponsList } from './CouponsList.css';
 
@@ -38,12 +40,20 @@ function CouponsList(): JSX.Element {
                 <StyledCouponsList>
                     {isLogged ? (
                         <>
-                            <h2 className="title">Your coupons </h2>
-                            <div className="info">
-                                <h5>amount</h5>
-                                <h5>possible win</h5>
-                                <h5>status</h5>
-                            </div>
+                            {coupons.length > 0 ? (
+                                <div className="info">
+                                    <h5 className="date">Date</h5>
+                                    <h5 className="amount">Amount</h5>
+                                    <h5 className="win">To win</h5>
+                                    <h5 className="status">Status</h5>
+                                </div>
+                            ) : (
+                                <>
+                                    <EmptyCoupon />
+                                    <p style={{ marginTop: '20px' }}>You don't have any coupons yet.</p>
+                                </>
+                            )}
+
                             <div className="coupons-list">
                                 {coupons.map((coupon) => (
                                     <CouponData
@@ -52,6 +62,7 @@ function CouponsList(): JSX.Element {
                                         amount={coupon.amount}
                                         possiblyWin={coupon.possiblyWin}
                                         state={coupon.state}
+                                        date={transformDate(coupon.date)}
                                     />
                                 ))}
                             </div>

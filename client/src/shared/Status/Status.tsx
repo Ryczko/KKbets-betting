@@ -1,9 +1,10 @@
 import { EventsStates } from 'types/EventState.model';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { StyledStatus } from './Status.css';
 
 export interface StatusProps {
     status: EventsStates;
+    style?: CSSProperties;
 }
 
 function Status(props: StatusProps): JSX.Element {
@@ -28,7 +29,7 @@ function Status(props: StatusProps): JSX.Element {
 
     return (
         <StyledStatus status={props.status}>
-            <i className={iconClass} />
+            <i style={props.style} className={iconClass} />
         </StyledStatus>
     );
 }

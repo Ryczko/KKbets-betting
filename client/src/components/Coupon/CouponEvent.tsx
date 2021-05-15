@@ -21,13 +21,13 @@ function CouponEvent(props: CouponEventProps): JSX.Element {
     return (
         <StyledCouponEvent>
             <div className="left">
-                <Link to={`/event/${props.eventId}`}>
-                    <span className="event"> {props.eventName}</span>
-                </Link>
+                <span className="event"> {props.eventName}</span>
+
                 <span className="bet-type"> {props.betType}</span>
+                <span className="bet"> {props.userBet}</span>
             </div>
             <div className="right">
-                <span className="bet"> {props.userBet}</span>-<span className="course">{props.course}</span>
+                <span className="course">{props.course}</span>
                 <i className="icon-cancel" onClick={handleRemoveEvent} />
             </div>
         </StyledCouponEvent>
