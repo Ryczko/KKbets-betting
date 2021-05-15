@@ -1,4 +1,5 @@
 import RankingPlace, { RankingPlaceProps } from 'components/Ranking/RankingPlace';
+import TopPlaces from 'components/Ranking/TopPlaces';
 import React, { useEffect, useState } from 'react';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
@@ -24,16 +25,12 @@ function Ranking(): JSX.Element {
                 <Loader />
             ) : (
                 <StyledRanking>
-                    <div className="info">
-                        <h5>place</h5>
-                        <h5>name</h5>
-                        <h5>points</h5>
-                    </div>
-
-                    {places.map((place, index) => (
+                    <TopPlaces data={places.slice(0, 3)} />
+                    {places.slice(3).map((place, index) => (
                         <RankingPlace
                             key={place.username}
                             place={index + 1}
+                            avatarUrl={place.avatarUrl}
                             username={place.username}
                             points={place.points}
                         />

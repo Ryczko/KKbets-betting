@@ -1,3 +1,4 @@
+import Avatar from 'components/User/Avatar';
 import React from 'react';
 import { StyledRankingPlace } from './RankingPlace.css';
 
@@ -5,13 +6,15 @@ export interface RankingPlaceProps {
     place: number;
     username: string;
     points: number;
+    avatarUrl: string;
 }
 
 function RankingPlace(props: RankingPlaceProps): JSX.Element {
     return (
         <StyledRankingPlace>
-            <h6 className="number">{props.place}</h6> <h6 className="name">{props.username}</h6>
-            <h6 className="point">{props.points}</h6>
+            <Avatar width="40px" blockLink src={props.avatarUrl} />
+            <div className="name">{props.username}</div>
+            <div className="points">{props.points}</div>
         </StyledRankingPlace>
     );
 }

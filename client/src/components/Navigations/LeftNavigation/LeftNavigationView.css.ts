@@ -8,9 +8,9 @@ export const StyledLeftNavigationView = styled.div<LeftNavigationViewStyleProps>
     background-color: ${({ theme }) => theme.colors.background.light};
     transition: 0.8s;
     left: 60px;
-    padding: 100px 10px 25px 10px;
+    padding: 95px 12px 25px;
     height: 100vh;
-    width: 270px;
+    width: 300px;
     position: fixed;
     top: 0;
     transform: translateX(${({ active }) => (active ? '0' : '-100%')});
@@ -18,14 +18,13 @@ export const StyledLeftNavigationView = styled.div<LeftNavigationViewStyleProps>
     .closeBtn {
         position: absolute;
         right: 10px;
-        top: 75px;
+        top: 70px;
         cursor: pointer;
 
         i {
             font-size: 25px;
             transition: 0.8s;
             display: block;
-            transform: translateX(${({ active }) => (active ? '0px' : '-50px')});
         }
     }
 `;

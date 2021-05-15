@@ -2,25 +2,23 @@ import styled from 'styled-components';
 
 export const StyledRankingPlace = styled.div`
     background-color: ${({ theme }) => theme.colors.background.medium};
-    padding: 8px;
-    margin: 2px 0;
+    border-radius: 4px;
+    max-width: 400px;
+    margin: 4px auto;
     display: flex;
     align-items: center;
-
-    h6 {
-        flex-basis: 33%;
-        flex-grow: 1;
-        font-size: 0.9rem;
-    }
-
-    .number {
-        flex-basis: 10%;
-    }
+    justify-content: space-between;
 
     .name {
-        flex-basis: 70%;
+        flex-basis: 50%;
+        word-break: break-word;
+        text-align: left;
+        font-size: 12px;
     }
 
     .points {
+        flex-basis: 20%;
+        text-align: center;
+        font-size: 13px;
     }
 `;

@@ -6,7 +6,6 @@ export const StyledAvatar = styled.div<AvatarProps>`
     border-radius: 4px;
 
     cursor: pointer;
-    overflow: hidden;
 
     img {
         display: block;
