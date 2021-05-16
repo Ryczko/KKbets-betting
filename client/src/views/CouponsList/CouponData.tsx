@@ -10,17 +10,18 @@ export interface CouponDataProps {
     amount: number;
     possiblyWin: number;
     state: EventsStates;
+    date: string;
 }
 
 function CouponData(props: CouponDataProps): JSX.Element {
     return (
         <Link to={`/coupons/${props._id}`}>
             <StyledCouponData>
-                <h6>{props.amount}</h6>
-                <h6>{props.possiblyWin}</h6>
-                <h6>
-                    <Status status={props.state}></Status>
-                </h6>
+                <div className="date">{props.date}</div>
+                <div className="amount">{props.amount}</div>
+                <div className="win">{props.possiblyWin}</div>
+
+                <Status style={{ width: '28px', height: '28px', fontSize: '16px' }} status={props.state}></Status>
             </StyledCouponData>
         </Link>
     );

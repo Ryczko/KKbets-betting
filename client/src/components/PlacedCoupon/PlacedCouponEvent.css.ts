@@ -1,32 +1,59 @@
 import styled from 'styled-components';
 
 export const StyledPlacedCouponEvent = styled.div`
-    display: flex;
     width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    background-color: ${({ theme }) => theme.colors.background.medium};
-    padding: 20px;
+    border-bottom: 2px dashed ${({ theme }) => theme.colors.background.medium};
+    padding: 5px 15px 15px;
     border-radius: 5px;
-    margin: 15px 0;
+    margin: 10px 0;
+    text-align: left;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    .teams-info {
-        flex-basis: 50%;
+    &:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .left {
         display: flex;
-        justify-content: space-around;
         align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 90%;
 
-        .team-image-container {
-            overflow: hidden;
-            display: inline-block;
-            img {
-                width: 40px;
-                height: 40px;
-                object-fit: contain;
+        & > div {
+            margin-bottom: 15px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+            flex-direction: row;
+
+            & > div {
+                margin-bottom: 0;
             }
         }
     }
-    .bet-info {
-        flex-basis: 20%;
+
+    .teams-info {
+        display: flex;
+        align-items: flex-end;
+
+        .team {
+            text-align: center;
+            width: 80px;
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
     }
 `;

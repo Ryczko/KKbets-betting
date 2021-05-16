@@ -1,12 +1,54 @@
 import styled from 'styled-components';
+import img from 'assets/images/coupon-clip.svg';
 
 export const StyledPlacedCoupon = styled.div`
-    margin-top: 50px;
     min-height: 300px;
-    padding: 30px 15px;
-    background-color: ${({ theme }) => theme.colors.background.light};
 
     h4 {
-        margin: 15px;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
+
+    .value {
+        color: ${({ theme }) => theme.colors.font.light};
+    }
+
+    .events {
+        background-color: ${({ theme }) => theme.colors.background.light};
+        padding: 5px 0 10px;
+        position: relative;
+        border-radius: 4px;
+        z-index: 1;
+
+        &::after {
+            content: '';
+            position: absolute;
+
+            width: 100%;
+            height: 12px;
+            background-color: ${({ theme }) => theme.colors.background.light};
+            mask-image: url(${img});
+        }
+
+        &::after {
+            left: 0;
+            top: 99%;
+        }
+    }
+
+    .coupon-info {
+        transform: translateY(-10px);
+        padding: 35px 15px 10px;
+        background-color: ${({ theme }) => theme.colors.background.medium};
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+    }
+    .right {
+        h4 {
+            margin-top: 5px;
+        }
     }
 `;

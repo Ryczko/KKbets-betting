@@ -2,14 +2,26 @@ import styled from 'styled-components';
 
 export const StyledCouponData = styled.div`
     background-color: ${({ theme }) => theme.colors.background.medium};
-    padding: 8px 0;
-    margin: 2px 0;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 4px 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    text-align: center;
 
-    h6 {
-        flex-basis: 33%;
-        flex-grow: 1;
-        font-size: 0.9rem;
+    .date {
+        font-size: 0.7rem;
+        flex-basis: 18%;
+        text-align: left;
+    }
+
+    .amount {
+        flex-basis: 31%;
+    }
+
+    .win {
+        flex-basis: 50%;
     }
 `;

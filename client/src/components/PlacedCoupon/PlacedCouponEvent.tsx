@@ -15,25 +15,27 @@ export interface PlacedCouponEventProps {
 function PlacedCouponEvent({ betType, course, state, userBet, event }: PlacedCouponEventProps): JSX.Element {
     return (
         <StyledPlacedCouponEvent>
-            <div className="event-info">{transformDate(event.date)}</div>
-            <div className="teams-info">
-                <div className="team-image-container">
-                    <img src={event.teamHome.image} />
+            <div className="left">
+                <div className="event-info">{event && event.date ? transformDate(event.date) : '???'}</div>
+                <div className="teams-info">
+                    <div className="team">
+                        <img src={event?.teamHome?.image} />
+                        <div>{event?.teamHome?.shortName || '???'}</div>
+                    </div>
+                    <span> - </span>
+                    <div className="team">
+                        <img src={event?.teamAway?.image} />
+                        <div>{event?.teamAway?.shortName || '???'}</div>
+                    </div>
                 </div>
-                <span>{event.teamHome.shortName}</span>
-                <span> vs </span>
-                <span>{event.teamAway.shortName}</span>
-                <div className="team-image-container">
-                    <img src={event.teamAway.image} />
+                <div className="bet-info">
+                    <span>
+                        {betType}: {userBet}
+                    </span>
                 </div>
             </div>
-            <div className="bet-info">
-                <span>
-                    {betType}: {userBet}
-                </span>
-            </div>
-            <div className="status-container">
-                <Status status={state}></Status>
+            <div className="right">
+                <Status style={{ width: '28px', height: '28px', fontSize: '18px' }} status={state}></Status>
             </div>
         </StyledPlacedCouponEvent>
     );

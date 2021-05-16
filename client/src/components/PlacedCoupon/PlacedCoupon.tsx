@@ -27,29 +27,43 @@ function PlacedCoupon(): JSX.Element {
 
     return (
         <StyledPlacedCoupon>
-            <h2>Coupon data</h2>
             {loading ? (
                 <Loader />
             ) : (
                 <>
-                    {couponData?.couponEvents.map((couponEvent, index) => (
-                        <PlacedCouponEvent
-                            key={index}
-                            betType={couponEvent.betType}
-                            course={couponEvent.course}
-                            state={couponEvent.state}
-                            userBet={couponEvent.userBet}
-                            event={couponEvent.event!}
-                        />
-                    ))}
+                    <div className="events">
+                        {couponData?.couponEvents.map((couponEvent, index) => (
+                            <PlacedCouponEvent
+                                key={index}
+                                betType={couponEvent.betType}
+                                course={couponEvent.course}
+                                state={couponEvent.state}
+                                userBet={couponEvent.userBet}
+                                event={couponEvent.event!}
+                            />
+                        ))}
+                    </div>
+                    <div className="coupon-info">
+                        <div className="left">
+                            <h4>
+                                Amount: <span className="value">{couponData?.coupon.amount}</span>
+                            </h4>
 
-                    <h4>Amount: {couponData?.coupon.amount}</h4>
-
-                    <h4>Total course: {couponData?.coupon.totalCourse}</h4>
-                    <h4>Possible win: {couponData?.coupon.possiblyWin}</h4>
-                    <h4>
-                        <Status status={couponData?.coupon.state || EventsStates.PENDING}></Status>
-                    </h4>
+                            <h4>
+                                Total course: <span className="value"> {couponData?.coupon.totalCourse}</span>
+                            </h4>
+                            <h4>
+                                Possible win: <span className="value">{couponData?.coupon.possiblyWin}</span>
+                            </h4>
+                        </div>
+                        <div className="right">
+                            <Status
+                                style={{ width: '28px', height: '28px', fontSize: '18px' }}
+                                status={couponData?.coupon.state || EventsStates.PENDING}
+                            ></Status>
+                            <h4>{couponData?.coupon.state || EventsStates.PENDING}</h4>
+                        </div>
+                    </div>
                 </>
             )}
         </StyledPlacedCoupon>
