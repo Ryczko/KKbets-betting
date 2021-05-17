@@ -7,6 +7,7 @@ import coupons from './coupons';
 import { IUser } from '../models/User';
 import me from './me';
 import users from './users';
+import bonus from './bonus';
 
 declare module 'express' {
     export interface Request {
@@ -23,5 +24,6 @@ router.use('/events', events);
 router.use('/coupons', coupons);
 router.use('/me', me);
 router.use('/users', users);
+router.use('/bonus', bonus);
 
 export default router;

@@ -1,18 +1,18 @@
 import Joi from 'joi';
 import mongoose, { Document } from 'mongoose';
 import jwt from 'jsonwebtoken';
-import passwordComplexity from 'joi-password-complexity';
 
 export interface IUser extends Document {
     id: string;
     username: string;
-    password: string;
     email: string;
     points: number;
     googleId?: string;
     admin?: boolean;
     avatarUrl: string;
     showAvatar: boolean;
+    createdDate: Date;
+    bonusDate: Date;
     generateAuthToken: () => string;
 }
 
@@ -22,27 +22,18 @@ const userSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    password: {
-        type: String,
-        minLength: 8,
-        maxLength: 1024,
-        required: false
-    },
     username: {
         type: String,
         minLength: 2,
-        maxLength: 30,
+        maxLength: 25,
         unique: true,
         required: true
     },
     points: {
         type: Number,
-        default: 1000
+        default: 500
     },
     googleId: {
-        type: String
-    },
-    id: {
         type: String
     },
     admin: {
@@ -50,6 +41,14 @@ const userSchema = new mongoose.Schema({
     },
     avatarUrl: {
         type: String
+    },
+    createdDate: {
+        type: Date,
+        default: new Date()
+    },
+    bonusDate: {
+        type: Date,
+        default: new Date(Date.now() - 864e5)
     },
     showAvatar: {
         type: Boolean,
@@ -63,14 +62,14 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model<IUser>('User', userSchema);
 
-function validateUser(user: typeof User): Joi.ValidationResult {
+function validateUser(user: typeof User | IUser): Joi.ValidationResult {
     const schema = Joi.object({
         email: Joi.string().required().email(),
         googleId: Joi.string(),
-        password: passwordComplexity().required(),
-        username: Joi.string().min(2).max(30).required(),
-        points: Joi.number()
-    });
+        username: Joi.string().min(2).max(25).required(),
+        points: Joi.number(),
+        showAvatar: Joi.boolean()
+    }).unknown(true);
 
     return schema.validate(user);
 }
