@@ -5,7 +5,7 @@ import { isAuthenticated } from '../middleware/isAuthenticated';
 
 const router = express.Router();
 
-router.get('/', getTeams);
+router.get('/', isAuthenticated, checkAdminPermissions, getTeams);
 
 router.post('/', isAuthenticated, checkAdminPermissions, postTeam);
 

@@ -3,7 +3,7 @@ import { Category, validateCategory } from '../models/Category';
 
 export const getCategories = async (req: Request, res: Response): Promise<void> => {
     try {
-        const categories = await Category.find({});
+        const categories = await Category.find({}).sort({ name: 1 });
         res.send(categories);
     } catch (error) {
         res.status(500).send('Something went wrong.');

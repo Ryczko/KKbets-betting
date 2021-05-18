@@ -1,6 +1,7 @@
 import passport from 'passport';
 import passportGoogle from 'passport-google-oauth20';
 import passportJWT from 'passport-jwt';
+import randomstring from 'randomstring';
 
 import { User } from '../models/User';
 
@@ -31,13 +32,23 @@ passport.use(
             const userGoogle = await User.findOne({ googleId: profile.id });
             if (userGoogle) {
                 await userGoogle.updateOne({ avatarUrl: profile._json.picture });
-
                 done(null, userGoogle);
             } else {
-                const exUsers = await User.find({ username: new RegExp('^' + profile.displayName + '$', 'i') });
-                const name = exUsers.length > 0 ? `${profile.displayName} (${exUsers.length})` : profile.displayName;
+                let username = profile.name.givenName.trim() + ' ' + profile.name.familyName.trim();
+
+                if (username.length > 19) {
+                    username = username.slice(0, 19);
+                }
+
+                let exUsersLen = (await User.find({ username })).length;
+                while (exUsersLen > 0) {
+                    const hash = randomstring.generate({ length: 5, charset: 'alphanumeric' });
+                    username = exUsersLen > 0 ? `${username}#${hash}` : username;
+                    exUsersLen = (await User.find({ username })).length;
+                }
+
                 const newUser = await new User({
-                    username: name,
+                    username: username,
                     email: profile.emails[0].value,
                     googleId: profile.id,
                     avatarUrl: profile._json.picture

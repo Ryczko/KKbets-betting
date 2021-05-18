@@ -59,7 +59,9 @@ function UserPage(props: WithAlertProps): JSX.Element {
                 ) : (
                     <StyledUserPage>
                         <div className="user-profile">
-                            <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} width="90px" />
+                            <div className="avatar-box">
+                                <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} width="90px" />
+                            </div>
                             <div className="badges">
                                 <h2 className="title">
                                     user badges

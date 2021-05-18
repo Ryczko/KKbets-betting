@@ -1,3 +1,4 @@
+import Auth from 'components/Auth/Auth';
 import EmptyCoupon from 'components/Coupon/EmptyCoupon';
 import { AuthContext } from 'context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
@@ -70,7 +71,7 @@ function CouponsList(): JSX.Element {
                     ) : (
                         <>
                             <h2 style={{ margin: '15px auto 20px' }}>Login to see yours coupons list</h2>
-                            <Button click={() => window.open('http://localhost:3001/google', '_self')}>Login</Button>
+                            <Auth />
                         </>
                     )}
                 </StyledCouponsList>

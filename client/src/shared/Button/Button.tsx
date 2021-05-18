@@ -8,7 +8,7 @@ export interface ButtonProps {
     click?: (e: FormEvent<EventTarget>) => void;
     blocked?: boolean;
     style?: React.CSSProperties;
-    children?: string;
+    children?: JSX.Element | string;
 }
 
 function Button(props: ButtonProps): JSX.Element {

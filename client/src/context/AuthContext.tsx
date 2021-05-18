@@ -7,6 +7,7 @@ export interface IUser {
     avatarUrl?: string;
     showAvatar?: boolean;
     admin?: boolean;
+    bonusDate?: Date;
 }
 
 interface IAuthContextProps {

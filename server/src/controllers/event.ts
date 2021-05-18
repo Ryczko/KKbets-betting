@@ -23,6 +23,10 @@ export const getEvents = async (req: Request, res: Response): Promise<any> => {
                 query.date = {
                     $gt: new Date()
                 };
+            } else {
+                query.date = {
+                    $lt: new Date()
+                };
             }
         }
 
@@ -49,15 +53,16 @@ export const getEvents = async (req: Request, res: Response): Promise<any> => {
 
 export const postEvent = async (req: Request, res: Response): Promise<any> => {
     try {
+        const { date, category, teamHome, teamAway, courseHomeWin, courseAwayWin, courseDraw, important } = req.body;
         const event = new Event({
-            date: req.body.date,
-            category: req.body.category,
-            teamHome: req.body.teamHome,
-            teamAway: req.body.teamAway,
-            courseHomeWin: req.body.courseHomeWin,
-            courseAwayWin: req.body.courseAwayWin,
-            courseDraw: req.body.courseDraw,
-            important: req.body.important
+            date,
+            category,
+            teamHome,
+            teamAway,
+            courseHomeWin,
+            courseAwayWin,
+            courseDraw,
+            important
         });
         const { error } = validateEvent(req.body);
         if (error) return res.status(400).send(error.details[0].message);
@@ -92,27 +97,30 @@ export const updateEvent = async (req: Request, res: Response): Promise<any> => 
             );
             await usersEvents[i].updateOne({ $set: { state: result } });
 
-            const allEventsInCoupon = await UsersEvent.find({ coupon: usersEvents[i].coupon });
+            const coupon = await Coupon.findById(usersEvents[i].coupon);
 
-            let couponState = EventsStates.WINNING;
-            for (let j = 0; j < allEventsInCoupon.length; j++) {
-                if (allEventsInCoupon[j].state === EventsStates.LOST) {
-                    couponState = EventsStates.LOST;
-                    break;
-                } else if (allEventsInCoupon[j].state !== EventsStates.WINNING) {
-                    couponState = EventsStates.PENDING;
-                    break;
+            if (coupon.state === EventsStates.PENDING) {
+                const allEventsInCoupon = await UsersEvent.find({ coupon: usersEvents[i].coupon });
+
+                let couponState = EventsStates.WINNING;
+                for (let j = 0; j < allEventsInCoupon.length; j++) {
+                    if (allEventsInCoupon[j].state === EventsStates.LOST) {
+                        couponState = EventsStates.LOST;
+                        break;
+                    } else if (allEventsInCoupon[j].state !== EventsStates.WINNING) {
+                        couponState = EventsStates.PENDING;
+                        break;
+                    }
                 }
-            }
 
-            if (couponState !== EventsStates.PENDING) {
-                const coupon = await Coupon.findById(usersEvents[i].coupon);
-                await coupon.updateOne({ $set: { state: couponState } });
+                if (couponState !== EventsStates.PENDING) {
+                    await coupon.updateOne({ $set: { state: couponState } });
 
-                if (couponState === EventsStates.WINNING) {
-                    const user = await User.findById(coupon.owner);
-                    const wallet = user.points;
-                    await user.updateOne({ points: wallet + coupon.possiblyWin });
+                    if (couponState === EventsStates.WINNING) {
+                        const user = await User.findById(req.user._id);
+                        const wallet = user.points;
+                        await user.updateOne({ points: wallet + coupon.possiblyWin });
+                    }
                 }
             }
         }

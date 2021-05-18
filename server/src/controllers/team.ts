@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 export const getTeams = async (req: Request, res: Response): Promise<any> => {
     try {
-        const teams = await Team.find({});
+        const teams = await Team.find({}).sort({ name: 1 });
         res.send(teams);
     } catch (error) {
         res.status(500).send('Something went wrong.');

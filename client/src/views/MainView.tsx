@@ -1,4 +1,3 @@
-import Login from 'components/Auth/Login';
 import Coupon from 'components/Coupon/Coupon';
 import PlacedCoupon from 'components/PlacedCoupon/PlacedCoupon';
 import React from 'react';
@@ -26,9 +25,6 @@ function MainView({ tight }: MainViewProps): JSX.Element {
                 </Route>
                 <Route path="/coupon">
                     <Coupon />
-                </Route>
-                <Route path="/login">
-                    <Login isOpened={true} shortcut={false} />
                 </Route>
                 <Route path="/coupons" exact>
                     <CouponsList />

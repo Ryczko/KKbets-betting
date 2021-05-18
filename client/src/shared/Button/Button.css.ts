@@ -12,7 +12,7 @@ export const StyledButton = styled.button<ButtonProps>`
     margin: 0 5px;
     cursor: ${({ blocked }) => (blocked ? 'not-allowed' : 'pointer')};
     ${({ blocked }) => blocked && 'background-color: gray'};
-    border-radius: 6px;
+    border-radius: 4px;
     transition: 0.4s;
 
     box-shadow: ${({ fill, theme }) => (fill ? '0px 0px 15px -5px ' + theme.colors.accent.light : 'none')};

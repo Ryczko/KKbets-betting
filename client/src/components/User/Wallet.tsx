@@ -10,7 +10,6 @@ function Wallet(): JSX.Element {
             <span>
                 {userData.points} <span className="currency">$</span>
             </span>
-            {/* <Button>Add tips</Button> */}
         </StyledWallet>
     );
 }

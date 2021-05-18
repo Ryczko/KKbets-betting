@@ -27,6 +27,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
             props.setIsSuccessOpened?.(true);
             await loadEvents();
         } catch (err) {
+            console.log(err);
             props.setError?.(err.response.data);
             props.setIsErrorOpened?.(true);
         } finally {
@@ -35,7 +36,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     };
 
     const loadEvents = async () => {
-        const res = await axiosConfig.get('/events?ended=false');
+        const res = await axiosConfig.get('/events?ended=false&started=true');
         setEvents(res.data);
     };
 

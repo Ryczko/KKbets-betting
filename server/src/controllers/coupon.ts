@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import { Category } from '../models/Category';
 import { Coupon } from '../models/Coupon';
-import { IEvent } from '../models/Event';
 import { Team } from '../models/Team';
-import { User } from '../models/User';
 import { Event } from '../models/Event';
 import { UsersEvent } from '../models/UsersEvent';
 import { checkPointsAmount, getCourse, validateEvents } from '../services/coupon';
@@ -28,6 +26,7 @@ export const getCoupon = async (req: Request, res: Response): Promise<any> => {
             { path: 'teamAway', model: Team },
             { path: 'category', model: Category }
         ];
+
         const couponEvents = await UsersEvent.find({ coupon: coupon._id }).populate({
             path: 'event',
             model: Event,
@@ -47,15 +46,12 @@ export const getCoupon = async (req: Request, res: Response): Promise<any> => {
 export const postCoupon = async (req: Request, res: Response): Promise<any> => {
     try {
         const { events, amount, betTypes, usersBets } = req.body;
-        const user = await User.findById(req.user._id);
 
-        const eventsData: IEvent[] = [];
-        for (let i = 0; i < events.length; i++) {
-            const event = await Event.findById(events[i]);
-            eventsData.push(event);
-        }
+        const eventsData = await Event.find({
+            _id: { $in: events }
+        });
 
-        if ((await validateEvents(eventsData)) === 1) {
+        if (validateEvents(eventsData) === 1) {
             return res.status(400).send('Some of events has already started');
         }
 
@@ -63,12 +59,12 @@ export const postCoupon = async (req: Request, res: Response): Promise<any> => {
             return res.status(400).send('The minimum bet is 20');
         }
 
-        if ((await checkPointsAmount(user, amount)) === 1) {
+        if (checkPointsAmount(req.user, amount) === 1) {
             return res.status(400).send('User does not have enough points');
         }
 
         const coupon = new Coupon({
-            owner: user._id,
+            owner: req.user._id,
             amount: amount,
             state: EventsStates.PENDING,
             date: new Date()
@@ -91,12 +87,13 @@ export const postCoupon = async (req: Request, res: Response): Promise<any> => {
             totalCourse *= betCourse;
         }
 
-        const wallet = user.points;
+        const wallet = req.user.points;
+
         coupon.totalCourse = +totalCourse.toFixed(2);
         coupon.possiblyWin = Math.round(totalCourse * amount);
 
-        await user.updateOne({ points: wallet - amount });
-        await user.save();
+        await req.user.updateOne({ points: wallet - amount });
+
         await coupon.save();
 
         res.send('Coupon has been created');

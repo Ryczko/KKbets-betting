@@ -10,6 +10,7 @@ ${normalize}
   padding: 0; 
 }
 
+
 ::-webkit-scrollbar-track {
 	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 10px;
@@ -31,6 +32,10 @@ body {
   background-color: ${({ theme }) => theme.colors.background.dark};
   font-family: 'Arimo', sans-serif;
   color: ${({ theme }) => theme.colors.font.dark};
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 
 a {

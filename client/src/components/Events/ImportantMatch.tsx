@@ -4,7 +4,7 @@ import { ITeam } from 'types/Team.model';
 import { addEvent } from 'store/actions';
 import { useDispatch } from 'react-redux';
 
-interface ImportantMatchProps {
+export interface MatchProps {
     eventId: string;
     league: string;
     teamHome: ITeam;
@@ -15,7 +15,7 @@ interface ImportantMatchProps {
     courseDraw: number;
 }
 
-function ImportantMatch(props: ImportantMatchProps): JSX.Element {
+function ImportantMatch(props: MatchProps): JSX.Element {
     const dispatch = useDispatch();
 
     const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {

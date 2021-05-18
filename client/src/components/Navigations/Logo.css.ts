@@ -7,10 +7,14 @@ export const StyledLogo = styled.div`
     a {
         display: flex;
         align-items: center;
-        font-size: 52px;
+        font-size: 44px;
         line-height: 30px;
         font-weight: 800;
         padding: 5px 0 7px;
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+            font-size: 52px;
+        }
     }
 
     .first-letter {

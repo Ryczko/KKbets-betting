@@ -1,8 +1,7 @@
 import Banner from 'components/Banner/Banner';
 import ImportantMatch from 'components/Events/ImportantMatch';
-import Match from 'components/Events/Match';
 import { IMatch } from 'types/Match.model';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Loader from 'shared/Spinner/Loader';
 import { getCouponFromStorage } from 'store/actions';
@@ -10,8 +9,12 @@ import { transformDate } from 'utilities/transformDate';
 import { StyledMainPage } from './MainPage.css';
 import axiosConfig from 'utilities/axiosConfig';
 import EventCounterMobile from 'components/Coupon/EventCounterMobile';
+import MatchMin from 'components/Events/MatchMin';
+import DailyBonus from 'components/User/DailyBonus';
+import { AuthContext } from 'context/AuthContext';
 
 function MainPage(): JSX.Element {
+    const { userData } = useContext(AuthContext);
     const [importantMatches, setImportantMatches] = useState<IMatch[]>([]);
     const [matches, setMatches] = useState<IMatch[]>([]);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -35,10 +38,12 @@ function MainPage(): JSX.Element {
     return (
         <StyledMainPage>
             <EventCounterMobile />
-
-            <Banner image="https://www.betopin.com/wp-content/uploads/CL_SF_Header.jpg" />
+            {userData.bonusDate && new Date().getTime() - new Date(userData.bonusDate).getTime() > 864e5 && (
+                <DailyBonus></DailyBonus>
+            )}
+            <Banner image="https://i.pinimg.com/originals/5e/37/a4/5e37a4179884eee9be9dbf640b44474b.png" />
             {!isLoaded && <Loader />}
-            <div className="important-match-container">
+            <div className="matches-container">
                 {importantMatches.map(
                     ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
                         <ImportantMatch
@@ -55,18 +60,23 @@ function MainPage(): JSX.Element {
                     )
                 )}
             </div>
-            {matches.map(({ _id, date, teamAway, teamHome, courseAwayWin, courseDraw, courseHomeWin }) => (
-                <Match
-                    key={_id}
-                    eventId={_id}
-                    date={transformDate(date)}
-                    teamAway={teamAway.shortName}
-                    teamHome={teamHome.shortName}
-                    courseAwayWin={courseAwayWin}
-                    courseDraw={courseDraw}
-                    courseHomeWin={courseHomeWin}
-                />
-            ))}
+            <div className="matches-container">
+                {matches.map(
+                    ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
+                        <MatchMin
+                            key={_id}
+                            eventId={_id}
+                            league={category.name}
+                            date={transformDate(date)}
+                            teamAway={teamAway}
+                            teamHome={teamHome}
+                            courseAwayWin={courseAwayWin}
+                            courseDraw={courseDraw}
+                            courseHomeWin={courseHomeWin}
+                        />
+                    )
+                )}
+            </div>
         </StyledMainPage>
     );
 }

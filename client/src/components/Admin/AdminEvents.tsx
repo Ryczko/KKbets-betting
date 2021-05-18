@@ -50,7 +50,7 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
                 courseAwayWin,
                 date: new Date(day + ' ' + time),
                 category,
-                important: true
+                important: highlight
             });
             props.setIsSuccessOpened?.(true);
         } catch (err) {

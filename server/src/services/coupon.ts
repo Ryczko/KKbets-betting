@@ -5,7 +5,7 @@ import { BetTypes, UserBets } from '../util/enums';
 export const validateEvents = (eventsData: IEvent[]): number => {
     const currentTime = new Date().getTime();
     for (let i = 0; i < eventsData.length; i++) {
-        if (currentTime >= new Date(eventsData[i].date).getTime()) {
+        if (currentTime >= new Date(eventsData[i].date).getTime() || eventsData[i].ended) {
             return 1;
         }
     }
