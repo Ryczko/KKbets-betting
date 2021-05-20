@@ -26,7 +26,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_API_CLIENT,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: '/google/redirect'
+            callbackURL: '/api/google/redirect'
         },
         async (accessToken, refreshToken, profile, done) => {
             const userGoogle = await User.findOne({ googleId: profile.id });

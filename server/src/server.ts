@@ -9,13 +9,22 @@ import './middleware/passport';
 
 const port = process.env.PORT || 3001;
 const env = process.env.NODE_ENV || 'development';
-let connection_uri = process.env.MONGODB_DEV_URI || 'mongodb://localhost/KKBets';
-
-if (env === 'test') {
-    connection_uri = process.env.MONGODB_TEST_URI || 'mongodb://localhost/KKBets-test';
-}
+const connection_uri = process.env.MONGODB_URI || 'mongodb://localhost/KKBets';
 
 const app = express();
+
+mongoose.connect(
+    connection_uri,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    },
+    () => {
+        if (env === 'development') console.log('connected to db');
+    }
+);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -32,12 +41,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(appRouter);
 
-mongoose.set('useCreateIndex', true);
-mongoose.connect(connection_uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }, () => {
-    if (env === 'development') {
-        console.log('connected to db');
-        app.listen(port, function () {
-            if (env === 'development') console.log('App listening on port: ' + port);
-        });
-    }
+app.listen(port, function () {
+    if (env === 'development') console.log('App listening on port: ' + port);
 });

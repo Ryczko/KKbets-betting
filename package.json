@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "concurrently \"cd server && npm install\" \"cd client && npm install\"",
-    "start": "concurrently \"cd server && npm start\"  \"cd client && npm start\"",
-    "lint": "prettier --write"
+    "install-dev": "concurrently \"cd server && npm install\" \"cd client && npm install\"",
+    "start-dev": "concurrently \"cd server && npm start\"  \"cd client && npm start\"",
+    "lint": "prettier --write",
+    "install": "(cd client && npm install --dev) & (cd server && npm install --dev)",
+    "heroku-postbuild": "cd client && npm install --only=dev && NODE_ENV=development npm install --no-shrinkwrap && npm run build",
+    "start": "cd server && npm run start:prod"
   },
   "author": "",
   "license": "ISC",

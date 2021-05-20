@@ -4,7 +4,13 @@ import { AuthStyle } from './Auth.css';
 function Auth(): JSX.Element {
     return (
         <AuthStyle>
-            <Button click={() => window.open('http://localhost:3001/google', '_self')}>Login / Register</Button>
+            <Button
+                click={() =>
+                    window.open(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/google`, '_self')
+                }
+            >
+                Login / Register
+            </Button>
         </AuthStyle>
     );
 }

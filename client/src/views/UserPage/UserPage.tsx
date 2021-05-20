@@ -6,9 +6,9 @@ import { AuthContext } from 'context/AuthContext';
 import Button from 'shared/Button/Button';
 import { Redirect, useHistory } from 'react-router-dom';
 import { FormControlLabel, Switch } from '@material-ui/core';
-import axios from 'axios';
 import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 import Loader from 'shared/Spinner/Loader';
+import axiosConfig from 'utilities/axiosConfig';
 
 function UserPage(props: WithAlertProps): JSX.Element {
     const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } = useContext(AuthContext);
@@ -39,7 +39,7 @@ function UserPage(props: WithAlertProps): JSX.Element {
     const saveHandler = async (e: FormEvent<EventTarget>) => {
         e.preventDefault();
         try {
-            const res = await axios.patch('/users', {
+            const res = await axiosConfig.patch('/users', {
                 username: newUsername,
                 showAvatar: displayAvatar
             });
