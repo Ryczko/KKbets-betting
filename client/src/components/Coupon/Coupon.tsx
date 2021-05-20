@@ -45,9 +45,7 @@ function Coupon(): JSX.Element {
         setIsLoaded(false);
 
         const data = {
-            events: events.map((event) => event.eventId),
-            betTypes: events.map((event) => event.betType),
-            usersBets: events.map((event) => event.userBet),
+            betData: events,
             amount
         };
 

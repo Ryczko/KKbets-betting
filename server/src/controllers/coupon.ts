@@ -45,10 +45,11 @@ export const getCoupon = async (req: Request, res: Response): Promise<any> => {
 
 export const postCoupon = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { events, amount, betTypes, usersBets } = req.body;
+        const { betData, amount } = req.body;
 
+        const eventsIds = betData.map((bet) => bet.eventId);
         const eventsData = await Event.find({
-            _id: { $in: events }
+            _id: { $in: eventsIds }
         });
 
         if (validateEvents(eventsData) === 1) {
@@ -72,15 +73,16 @@ export const postCoupon = async (req: Request, res: Response): Promise<any> => {
 
         let totalCourse = 1;
 
-        for (let index = 0; index < events.length; index++) {
-            const betCourse = getCourse(eventsData[index], betTypes[index], usersBets[index]);
+        for (let index = 0; index < eventsData.length; index++) {
+            const bet = betData.filter((bet) => bet.eventId === eventsData[index].id)[0];
+            const betCourse = getCourse(eventsData[index], bet.betType, bet.userBet);
             if (!betCourse) return res.status(400).send('Invalid bet type');
             const usersEvent = new UsersEvent({
                 coupon: coupon._id,
                 state: EventsStates.PENDING,
                 event: eventsData[index].id,
-                betType: betTypes[index],
-                userBet: usersBets[index],
+                betType: bet.betType,
+                userBet: bet.userBet,
                 course: betCourse
             });
             await usersEvent.save();
