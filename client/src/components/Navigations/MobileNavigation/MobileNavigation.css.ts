@@ -18,7 +18,7 @@ export const StyledMobileNavigation = styled.aside`
     }
 
     a {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         color: ${({ theme }) => theme.colors.font.dark};
 
         &.active {
@@ -28,5 +28,8 @@ export const StyledMobileNavigation = styled.aside`
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
         display: none;
+        a {
+            font-size: 1.8rem;
+        }
     }
 `;

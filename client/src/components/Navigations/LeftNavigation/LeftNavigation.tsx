@@ -35,6 +35,9 @@ function LeftNavigation(props: LeftNavigationProps): JSX.Element {
                     <i className="icon-award" onClick={(e) => changeCategory('ranking', e)} />
                 </div>
                 <div className="left-nav-icon">
+                    <i className="icon-chat" onClick={(e) => changeCategory('chat', e)} />
+                </div>
+                <div className="left-nav-icon">
                     <i className="icon-info-circled" onClick={(e) => changeCategory('info', e)} />
                 </div>
             </StyledLeftNavigation>

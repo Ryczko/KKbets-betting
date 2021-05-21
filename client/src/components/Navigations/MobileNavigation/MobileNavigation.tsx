@@ -25,6 +25,11 @@ function MobileNavigation(): JSX.Element {
                         </NavLink>
                     </li>
                     <li>
+                        <NavLink to="/chat">
+                            <i className="icon-chat" />
+                        </NavLink>
+                    </li>
+                    <li>
                         <NavLink to="/account">
                             <i className="icon-user" />
                         </NavLink>

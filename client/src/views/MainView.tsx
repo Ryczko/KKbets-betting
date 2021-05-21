@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import AdminPage from 'views/Admin/AdminPage';
 import MainPage from 'views/MainPage/MainPage';
 import UserPage from 'views/UserPage/UserPage';
+import Chat from './Chat/Chat';
 import CouponsList from './CouponsList/CouponsList';
 import { StyledMainView } from './MainView.css';
 import Ranking from './Ranking/Ranking';
@@ -34,6 +35,9 @@ function MainView({ tight }: MainViewProps): JSX.Element {
                 </Route>
                 <Route path="/ranking">
                     <Ranking />
+                </Route>
+                <Route path="/chat">
+                    <Chat />
                 </Route>
                 <Route path="/admin">
                     <AdminPage />

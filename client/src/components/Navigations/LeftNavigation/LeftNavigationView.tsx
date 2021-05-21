@@ -1,3 +1,5 @@
+import React from 'react';
+import Chat from 'views/Chat/Chat';
 import CouponsList from 'views/CouponsList/CouponsList';
 import LeftInfoView from 'views/Information/ProjectInfo/LeftInfoView';
 import LeftMainView from 'views/Information/WelcomeInfo/LeftMainView';
@@ -25,6 +27,9 @@ function LeftNavigationView({ activeContent, close, active }: LeftNavigationView
             break;
         case 'info':
             content = <LeftInfoView />;
+            break;
+        case 'chat':
+            content = <Chat />;
             break;
         default:
             content = <LeftMainView />;
