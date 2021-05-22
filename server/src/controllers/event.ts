@@ -117,7 +117,7 @@ export const updateEvent = async (req: Request, res: Response): Promise<any> => 
                     await coupon.updateOne({ $set: { state: couponState } });
 
                     if (couponState === EventsStates.WINNING) {
-                        const user = await User.findById(req.user._id);
+                        const user = await User.findById(coupon.owner);
                         const wallet = user.points;
                         await user.updateOne({ points: wallet + coupon.possiblyWin });
                     }
