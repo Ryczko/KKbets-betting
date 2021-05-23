@@ -9,6 +9,7 @@ import me from './me';
 import users from './users';
 import bonus from './bonus';
 import * as path from 'path';
+import messages from './messages';
 
 declare module 'express' {
     export interface Request {
@@ -26,6 +27,7 @@ router.use('/api/coupons', coupons);
 router.use('/api/me', me);
 router.use('/api/users', users);
 router.use('/api/bonus', bonus);
+router.use('/api/messages', messages);
 
 const publicPath = path.join(__dirname, '../../../client/build');
 router.use(serveStatic(publicPath));

@@ -4,19 +4,20 @@ export const StyledMessage = styled.div`
     display: flex;
 
     background-color: ${({ theme }) => theme.colors.background.medium};
-    padding: 5px;
     margin-bottom: 5px;
     border-radius: 4px;
+    padding: 5px;
+
     .user {
         display: flex;
     }
 
     .message {
         .nickname {
-            color: white;
+            color: ${({ theme }) => theme.colors.font.light};
             font-size: 0.9rem;
-            margin-bottom: 5px;
         }
+
         flex-basis: 80%;
         font-size: 0.8rem;
         display: flex;

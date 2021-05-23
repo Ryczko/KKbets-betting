@@ -10,7 +10,10 @@ export const StyledChat = styled.div`
 
     .messages {
         height: 100%;
+        max-height: 75vh;
         overflow-x: hidden;
+        display: flex;
+        flex-direction: column-reverse;
     }
 
     .bottom {
