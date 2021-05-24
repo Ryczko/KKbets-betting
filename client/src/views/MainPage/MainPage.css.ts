@@ -8,7 +8,7 @@ export const StyledMainPage = styled.div`
         grid-gap: 10px;
 
         @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
     }
 `;

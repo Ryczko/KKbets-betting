@@ -9,7 +9,7 @@ export const StyledCoupon = styled.div`
     position: relative;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-        margin: 50px auto 20px;
+        margin: 50px 10px 20px 0;
     }
 
     .error {

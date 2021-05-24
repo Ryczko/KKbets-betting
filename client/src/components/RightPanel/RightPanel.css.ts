@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledRightPanel = styled.aside`
     text-align: center;
-    width: 20%;
+    width: 21%;
     position: fixed;
     right: 0;
     top: 0;

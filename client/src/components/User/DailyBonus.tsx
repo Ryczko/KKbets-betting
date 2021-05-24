@@ -2,6 +2,7 @@ import { AuthContext } from 'context/AuthContext';
 import axiosConfig from 'utilities/axiosConfig';
 import { StyledDailyBonus } from './DailyBonus.css';
 import { useContext } from 'react';
+import Countdown from 'react-countdown';
 
 function DailyBonus(): JSX.Element {
     const { userData, setUserData } = useContext(AuthContext);
@@ -15,11 +16,21 @@ function DailyBonus(): JSX.Element {
         }
     };
 
-    return (
-        <StyledDailyBonus onClick={clickHandler}>
-            <p>Click to claim daily 50$ </p>
-        </StyledDailyBonus>
-    );
+    if (userData.bonusDate) {
+        return (
+            <StyledDailyBonus onClick={clickHandler}>
+                {new Date().getTime() - new Date(userData.bonusDate).getTime() > 864e5 ? (
+                    <p>Click to claim daily 50$ </p>
+                ) : (
+                    <p>
+                        Daily bonus will be available in{' '}
+                        <Countdown daysInHours={true} date={new Date(userData.bonusDate).getTime() + 864e5} />
+                    </p>
+                )}
+            </StyledDailyBonus>
+        );
+    }
+    return <></>;
 }
 
 export default DailyBonus;

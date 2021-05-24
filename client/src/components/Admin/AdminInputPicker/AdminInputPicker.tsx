@@ -15,7 +15,7 @@ function AdminInputPicker(props: AdminInputPickerProps): JSX.Element {
             getOptionLabel={(option) => option.name}
             style={{ width: 300, color: 'white' }}
             onChange={(event, newValue) => {
-                props.update(newValue!._id);
+                props.update(newValue?._id || '');
             }}
             renderInput={(params) => (
                 <TextField
