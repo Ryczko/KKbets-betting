@@ -34,7 +34,11 @@ passport.use(
                 await userGoogle.updateOne({ avatarUrl: profile._json.picture });
                 done(null, userGoogle);
             } else {
-                let username = profile.name.givenName.trim() + ' ' + profile.name.familyName.trim();
+                let username = profile.name.givenName.trim();
+
+                if (profile.name.familyName) {
+                    username = `${username} ${profile.name.familyName.trim()}`;
+                }
 
                 if (username.length > 19) {
                     username = username.slice(0, 19);
