@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-export const StyledMessage = styled.div`
+interface MessageStyleProps {
+    admin?: boolean;
+}
+
+export const StyledMessage = styled.div<MessageStyleProps>`
     display: flex;
 
-    background-color: ${({ theme }) => theme.colors.background.medium};
     margin-bottom: 5px;
     border-radius: 4px;
     padding: 5px;
@@ -14,8 +17,10 @@ export const StyledMessage = styled.div`
 
     .message {
         .nickname {
-            color: ${({ theme }) => theme.colors.font.light};
+            color: ${({ theme, admin }) => (admin ? theme.colors.accent.light : theme.colors.font.light)};
+            font-weight: ${({ admin }) => (admin ? 700 : 500)};
             font-size: 0.9rem;
+            margin-bottom: 7px;
         }
 
         flex-basis: 80%;

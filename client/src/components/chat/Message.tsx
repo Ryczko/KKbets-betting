@@ -6,11 +6,12 @@ interface MessageProps {
     nickname: string;
     avatarUrl: string;
     userId: string;
+    admin?: boolean;
 }
 
 function Message(props: MessageProps): JSX.Element {
     return (
-        <StyledMessage>
+        <StyledMessage admin={props.admin}>
             <Avatar width="40px" blockLink src={props.avatarUrl} />
             <div className="message">
                 <p className="nickname">{props.nickname}</p>

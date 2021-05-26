@@ -9,7 +9,7 @@ export const getMessages = async (req: Request, res: Response): Promise<void> =>
             .populate({
                 path: 'user',
                 model: User,
-                select: ['username', 'avatarUrl', 'showAvatar']
+                select: ['username', 'avatarUrl', 'showAvatar', 'admin']
             });
         messages.forEach((message) => {
             /* eslint-disable */

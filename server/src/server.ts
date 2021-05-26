@@ -74,11 +74,16 @@ io.on('connection', (socket) => {
             message: data.chatMessage
         })
         await message.save();
-        const messageWithData =  await Message.findById(message._id).populate({
+        const messageWithData = await Message.findById(message._id).populate({
             path: 'user',
             model: User,
-            select: ['username', 'avatarUrl', 'showAvatar']
+            select: ['username', 'avatarUrl', 'showAvatar', 'admin']
         })
+
+        if(!(messageWithData.user as any).showAvatar) {
+            (messageWithData.user as any).avatarUrl = undefined;
+        }
+
 
         io.emit("Output Chat Message", messageWithData)
     });

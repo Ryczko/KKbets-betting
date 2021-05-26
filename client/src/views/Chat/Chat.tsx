@@ -55,14 +55,15 @@ function Chat(): JSX.Element {
                             nickname={message.user.username}
                             avatarUrl={message.user.avatarUrl}
                             message={message.message}
+                            admin={message.user.admin}
                         />
                     );
                 })}
             </div>
             <div className="bottom">
                 <form>
-                    <input value={chatMessage} onChange={handleSearchChange} />
-                    <Button click={submitChatMessage} fill style={{ fontSize: '0.9rem', padding: '7px' }}>
+                    <input placeholder="Your message" value={chatMessage} onChange={handleSearchChange} />
+                    <Button click={submitChatMessage} fill style={{ fontSize: '0.9rem', margin: '0px' }}>
                         Send
                     </Button>
                 </form>
