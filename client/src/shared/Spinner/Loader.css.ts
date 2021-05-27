@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { LoaderProps } from './Loader';
 
 const roll = keyframes`
     0% {
@@ -28,12 +29,15 @@ const shadowScale = keyframes`
     }
 `;
 
-export const StyledLoader = styled.div`
+export const StyledLoader = styled.div<LoaderProps>`
     margin: 20px auto 0;
     width: 40px;
     height: 100px;
 
-    position: relative;
+    position: ${({ absolute }) => (absolute ? 'absolute' : 'relative')};
+    left: ${({ absolute }) => (absolute ? '50%' : 'auto')};
+    top: ${({ absolute }) => (absolute ? '45%' : 'auto')};
+    transform: ${({ absolute }) => (absolute ? 'translate(-50%, -50%)' : 'none')};
 
     .shadow {
         position: absolute;

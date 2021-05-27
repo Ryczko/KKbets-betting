@@ -2,6 +2,7 @@ import Auth from 'components/Auth/Auth';
 import EmptyCoupon from 'components/Coupon/EmptyCoupon';
 import { AuthContext } from 'context/AuthContext';
 import { useContext, useEffect, useState } from 'react';
+import AuthRequired from 'shared/AuthRequired/AuthRequired';
 import Button from 'shared/Button/Button';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
@@ -69,10 +70,7 @@ function CouponsList(): JSX.Element {
                             </div>
                         </>
                     ) : (
-                        <>
-                            <h2 style={{ margin: '15px auto 20px' }}>Login to see yours coupons list</h2>
-                            <Auth />
-                        </>
+                        <AuthRequired />
                     )}
                 </StyledCouponsList>
             )}

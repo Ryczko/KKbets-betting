@@ -13,8 +13,8 @@ ${normalize}
 
 ::-webkit-scrollbar-track {
 	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+	border-radius: 4px;
+	background-color: ${({ theme }) => theme.colors.background.dark};
 }
 
 ::-webkit-scrollbar {
@@ -23,19 +23,16 @@ ${normalize}
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
+	border-radius: 4px;
+	box-shadow: inset 0 0 6px ${({ theme }) => theme.colors.accent.light};
+	background-color: ${({ theme }) => theme.colors.accent.light};
 }
 
 body {
   background-color: ${({ theme }) => theme.colors.background.dark};
   font-family: 'Arimo', sans-serif;
   color: ${({ theme }) => theme.colors.font.dark};
-
-  &::-webkit-scrollbar{
-    display: none;
-  }
+  overflow-y: scroll;
 }
 
 a {

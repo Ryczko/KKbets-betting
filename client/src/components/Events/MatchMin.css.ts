@@ -2,28 +2,18 @@ import styled from 'styled-components';
 
 export const StyledMatchMin = styled.div`
     background-color: ${({ theme }) => theme.colors.background.medium};
+    border-radius: 4px;
+    padding: 6px 14px;
 
-    border-radius: 10px;
-    padding: 15px 20px;
-    flex-direction: column;
+    margin-top: 10px;
 
-    .top {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 20px;
+    .event-data {
         color: ${({ theme }) => theme.colors.font.light};
+        min-width: 185px;
     }
 
     .date {
-        text-align: left;
-        padding: 0 5px;
-        font-size: 0.9rem;
-    }
-
-    .teams {
-        text-align: left;
-        padding: 0 5px;
+        display: none;
     }
 
     .buttons {
@@ -32,36 +22,76 @@ export const StyledMatchMin = styled.div`
     }
 
     .hints {
-        margin-bottom: 5px;
+        margin-top: 10px;
+        margin-bottom: 2px;
     }
 
     .hint {
-        flex-grow: 1;
-        flex-basis: 33%;
+        width: 100%;
         text-align: center;
-        font-weight: 600;
+        font-weight: 500;
+        font-size: 0.7rem;
+        margin: 0 3px;
     }
 
     .course {
-        flex-grow: 1;
-        flex-basis: 33%;
+        margin: 0 3px;
+        width: 100%;
         background-color: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
         color: ${({ theme }) => theme.colors.font.light};
-        border: 1px solid ${({ theme }) => theme.colors.font.dark};
+        background-color: ${({ theme }) => theme.colors.background.light};
         border-radius: 4px;
-        margin: 0 5px;
         cursor: pointer;
         transition: 0.2s;
-        padding: 10px 0;
+        padding: 5px 0;
+
+        &:hover {
+            border-bottom: 2px solid ${({ theme }) => theme.colors.font.dark};
+        }
 
         &:focus {
             outline: none;
         }
 
         &.active {
-            border-color: ${({ theme }) => theme.colors.accent.light};
             background-color: ${({ theme }) => theme.colors.accent.dark};
             transform: scale(0.95);
+            border-bottom: none;
+        }
+    }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3px 14px 5px;
+
+        .date {
+            font-size: 0.8rem;
+            margin-top: 3px;
+            color: ${({ theme }) => theme.colors.font.dark};
+            display: block;
+        }
+
+        .course {
+            width: 48px;
+        }
+
+        .hints {
+            margin-top: 0;
+        }
+
+        .hint {
+            width: 48px;
+        }
+
+        .teams {
+            text-align: left;
+        }
+        .date {
+            text-align: left;
         }
     }
 `;

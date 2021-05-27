@@ -49,7 +49,7 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
 
             const totalRate = updateRate(newEvents);
 
-            localStorage.setItem('coupon', JSON.stringify(newEvents));
+            sessionStorage.setItem('coupon', JSON.stringify(newEvents));
 
             return {
                 ...state,
@@ -64,9 +64,9 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
             const rate = updateRate(updatedEvents);
             const win = +(rate * state.amount).toFixed(0);
             if (updatedEvents.length === 0) {
-                localStorage.removeItem('coupon');
+                sessionStorage.removeItem('coupon');
             } else {
-                localStorage.setItem('coupon', JSON.stringify(updatedEvents));
+                sessionStorage.setItem('coupon', JSON.stringify(updatedEvents));
             }
 
             return {
@@ -77,8 +77,8 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
             };
         }
         case actionTypes.COUPON_FROM_STORAGE: {
-            const savedCouponEvents = localStorage.getItem('coupon');
-            const amount: string = localStorage.getItem('amount') || '20';
+            const savedCouponEvents = sessionStorage.getItem('coupon');
+            const amount: string = sessionStorage.getItem('amount') || '20';
 
             let couponEvents: ICouponEvent[];
 
@@ -103,7 +103,7 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
             };
         }
         case actionTypes.COUPON_UPDATE_AMOUNT:
-            localStorage.setItem('amount', action.amount.toString());
+            sessionStorage.setItem('amount', action.amount.toString());
 
             return {
                 ...state,
@@ -111,8 +111,8 @@ const reducer = (state: CouponState = initialState, action: AddAction): CouponSt
                 possibleWinnings: +(action.amount * state.totalRate).toFixed(0)
             };
         case actionTypes.COUPON_REMOVE_ALL:
-            localStorage.removeItem('coupon');
-            localStorage.removeItem('amount');
+            sessionStorage.removeItem('coupon');
+            sessionStorage.removeItem('amount');
             return initialState;
         default: {
             return state;

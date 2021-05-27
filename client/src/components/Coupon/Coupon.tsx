@@ -11,11 +11,12 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AuthContext } from 'context/AuthContext';
 import EmptyCoupon from './EmptyCoupon';
 import { Slider } from '@material-ui/core';
+import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 
-function Coupon(): JSX.Element {
+function Coupon(props: WithAlertProps): JSX.Element {
     const [isLoaded, setIsLoaded] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
-    const { userData, setUserData } = useContext(AuthContext);
+    const { userData, setUserData, isLogged } = useContext(AuthContext);
     const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
         (state) => state.coupon.possibleWinnings
     );
@@ -42,6 +43,10 @@ function Coupon(): JSX.Element {
 
     const betCouponHandler = async (e: FormEvent<EventTarget>) => {
         e.preventDefault();
+        if (!isLogged) {
+            window.open(`${process.env.REACT_APP_API_URL || 'http://localhost:3001'}/api/google`, '_self');
+            return;
+        }
         setIsLoaded(false);
 
         const data = {
@@ -53,6 +58,7 @@ function Coupon(): JSX.Element {
             await axiosConfig.post('/coupons', data);
             dispatch(removeAllEvents());
             setUserData({ ...userData, points: userData.points! - amount });
+            props.setIsSuccessOpened?.(true);
         } catch (err) {
             setError(err.response.data);
             refError.current?.classList.add('active');
@@ -127,9 +133,10 @@ function Coupon(): JSX.Element {
                                         <span>{possibleWinning}</span>
                                     </div>
                                 </div>
+
                                 <form onSubmit={(e) => betCouponHandler(e)}>
                                     <Button style={{ width: '80%', padding: '10px 0' }} fill>
-                                        Place a bet
+                                        {isLogged ? 'Place a bet' : 'Login to bet'}
                                     </Button>
                                 </form>
                             </div>
@@ -141,4 +148,4 @@ function Coupon(): JSX.Element {
     );
 }
 
-export default Coupon;
+export default withAlert(Coupon, 'Coupon has been created');

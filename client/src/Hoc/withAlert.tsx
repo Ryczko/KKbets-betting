@@ -8,7 +8,10 @@ export interface WithAlertProps {
     setIsErrorOpened?: (val: boolean) => void;
 }
 
-const withAlert = (Component: React.ComponentType<WithAlertProps>): React.FC<WithAlertProps> => (props) => {
+const withAlert = (
+    Component: React.ComponentType<WithAlertProps>,
+    successMessage?: string
+): React.FC<WithAlertProps> => (props) => {
     const [isSuccessOpened, setIsSuccessOpened] = useState(false);
     const [isErrorOpened, setIsErrorOpened] = useState(false);
     const [error, setError] = useState('');
@@ -31,7 +34,7 @@ const withAlert = (Component: React.ComponentType<WithAlertProps>): React.FC<Wit
             />
             <Snackbar open={isSuccessOpened} autoHideDuration={5000} onClose={handleClose}>
                 <Alert variant="filled" onClose={handleClose} severity="success">
-                    Success
+                    {successMessage || 'Success'}
                 </Alert>
             </Snackbar>
             <Snackbar open={isErrorOpened} autoHideDuration={5000} onClose={handleClose}>

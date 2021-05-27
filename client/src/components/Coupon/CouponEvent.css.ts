@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledCouponEvent = styled.div`
     background-color: ${({ theme }) => theme.colors.background.medium};
     padding: 10px 6px;
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 5px 0;
 
     display: flex;

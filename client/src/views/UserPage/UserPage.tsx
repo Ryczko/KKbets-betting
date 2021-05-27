@@ -9,6 +9,7 @@ import { FormControlLabel, Switch } from '@material-ui/core';
 import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
+import AuthRequired from 'shared/AuthRequired/AuthRequired';
 
 function UserPage(props: WithAlertProps): JSX.Element {
     const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } = useContext(AuthContext);
@@ -55,7 +56,7 @@ function UserPage(props: WithAlertProps): JSX.Element {
         return (
             <>
                 {!isLogged ? (
-                    <Redirect to="/" />
+                    <AuthRequired />
                 ) : (
                     <StyledUserPage>
                         <div className="user-profile">

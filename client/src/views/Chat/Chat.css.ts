@@ -7,11 +7,13 @@ export const StyledChat = styled.div`
     position: relative;
 
     .messages {
+        position: relative;
         overflow-x: hidden;
         display: flex;
         flex-direction: column-reverse;
         background-color: ${({ theme }) => theme.colors.background.dark};
         margin-bottom: 40px;
+        border-radius: 4px;
     }
 
     .bottom {

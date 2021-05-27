@@ -15,6 +15,7 @@ function AdminCategories(props: WithAlertProps): JSX.Element {
     };
 
     const addCategoryHandler = async () => {
+        props.setIsErrorOpened?.(false);
         try {
             setLoading(true);
             await axiosConfig.post('/categories', {

@@ -43,17 +43,21 @@ export const StyledPlacedCouponEvent = styled.div`
 
     .teams-info {
         display: flex;
-        align-items: flex-end;
 
         .team {
             text-align: center;
             width: 80px;
         }
 
+        span {
+            margin-top: 20px;
+        }
+
         img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             object-fit: contain;
+            margin-bottom: 3px;
         }
     }
 `;

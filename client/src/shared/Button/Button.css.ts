@@ -15,5 +15,6 @@ export const StyledButton = styled.button<ButtonProps>`
     border-radius: 4px;
     transition: 0.4s;
 
-    box-shadow: ${({ fill, theme }) => (fill ? '0px 0px 15px -5px ' + theme.colors.accent.light : 'none')};
+    box-shadow: ${({ fill, theme, blocked }) =>
+        fill && !blocked ? '0px 0px 15px -5px ' + theme.colors.accent.light : 'none'};
 `;

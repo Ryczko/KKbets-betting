@@ -1,4 +1,5 @@
 import Avatar from 'components/User/Avatar';
+import { transformDate } from 'utilities/transformDate';
 import { StyledMessage } from './Message.css';
 
 interface MessageProps {
@@ -7,6 +8,7 @@ interface MessageProps {
     avatarUrl: string;
     userId: string;
     admin?: boolean;
+    date: string;
 }
 
 function Message(props: MessageProps): JSX.Element {
@@ -14,7 +16,11 @@ function Message(props: MessageProps): JSX.Element {
         <StyledMessage admin={props.admin}>
             <Avatar width="40px" blockLink src={props.avatarUrl} />
             <div className="message">
-                <p className="nickname">{props.nickname}</p>
+                <div className="head">
+                    <p className="nickname">{props.nickname}</p>
+                    <p className="date">{transformDate(props.date)}</p>
+                </div>
+
                 <p>{props.message}</p>
             </div>
         </StyledMessage>

@@ -1,8 +1,7 @@
 import { StyledImportantMatch } from './ImportantMatch.css';
 
 import { ITeam } from 'types/Team.model';
-import { addEvent } from 'store/actions';
-import { useDispatch } from 'react-redux';
+import withAddEvent, { WithAddEvent } from './withAddEvent';
 
 export interface MatchProps {
     eventId: string;
@@ -15,27 +14,7 @@ export interface MatchProps {
     courseDraw: number;
 }
 
-function ImportantMatch(props: MatchProps): JSX.Element {
-    const dispatch = useDispatch();
-
-    const handleButtonClick = (e: React.MouseEvent<HTMLElement>) => {
-        const target = e.target as HTMLTextAreaElement;
-        if (target && target.parentElement && target.dataset.bet && target.dataset.course) {
-            const activeElement = target.parentElement.querySelector('.active');
-            if (activeElement) activeElement.classList.remove('active');
-            target.classList.add('active');
-            dispatch(
-                addEvent(
-                    props.eventId,
-                    target.dataset.bet,
-                    'winner',
-                    +target.dataset.course,
-                    `${props.teamHome.shortName}-${props.teamAway.shortName}`
-                )
-            );
-        }
-    };
-
+function ImportantMatch(props: MatchProps & WithAddEvent): JSX.Element {
     return (
         <StyledImportantMatch data-eventid={props.eventId}>
             <h3>{props.league}</h3>
@@ -47,7 +26,7 @@ function ImportantMatch(props: MatchProps): JSX.Element {
                     </div>
                     {props.teamHome.shortName}
                 </div>
-                <div>VS</div>
+                <div className="vs">VS</div>
                 <div className="team-info">
                     <div className="team-image-container">
                         <img src={props.teamAway.image} />
@@ -65,18 +44,23 @@ function ImportantMatch(props: MatchProps): JSX.Element {
                     className="course"
                     data-bet="home"
                     data-course={props.courseHomeWin}
-                    onClick={handleButtonClick}
+                    onClick={props.addEventHandler}
                 >
                     {props.courseHomeWin}
                 </button>
-                <button className="course" data-bet="draw" data-course={props.courseDraw} onClick={handleButtonClick}>
+                <button
+                    className="course"
+                    data-bet="draw"
+                    data-course={props.courseDraw}
+                    onClick={props.addEventHandler}
+                >
                     {props.courseDraw}
                 </button>
                 <button
                     className="course"
                     data-bet="away"
                     data-course={props.courseAwayWin}
-                    onClick={handleButtonClick}
+                    onClick={props.addEventHandler}
                 >
                     {props.courseAwayWin}
                 </button>
@@ -85,4 +69,4 @@ function ImportantMatch(props: MatchProps): JSX.Element {
     );
 }
 
-export default ImportantMatch;
+export default withAddEvent(ImportantMatch);

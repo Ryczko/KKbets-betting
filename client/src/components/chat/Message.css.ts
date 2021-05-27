@@ -6,13 +6,21 @@ interface MessageStyleProps {
 
 export const StyledMessage = styled.div<MessageStyleProps>`
     display: flex;
+    border-top: 1px solid ${({ theme }) => theme.colors.accent.dark};
+    padding: 10px 5px;
 
-    margin-bottom: 5px;
-    border-radius: 4px;
-    padding: 5px;
+    &:last-of-type {
+        border-top: none;
+    }
 
-    .user {
+    .head {
         display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .date {
+            font-size: 0.7rem;
+        }
     }
 
     .message {
@@ -24,6 +32,7 @@ export const StyledMessage = styled.div<MessageStyleProps>`
         }
 
         flex-basis: 80%;
+        flex-grow: 1;
         font-size: 0.8rem;
         display: flex;
         flex-direction: column;
