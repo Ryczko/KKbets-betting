@@ -9,19 +9,18 @@ export const StyledChat = styled.div`
     .messages {
         position: relative;
         overflow-x: hidden;
-        display: flex;
-        flex-direction: column-reverse;
         background-color: ${({ theme }) => theme.colors.background.dark};
-        margin-bottom: 40px;
         border-radius: 4px;
+        margin-top: 40px;
     }
 
-    .bottom {
+    .top {
         background-color: ${({ theme }) => theme.colors.background.dark};
         position: fixed;
-        bottom: 45px;
+        z-index: 10;
+        top: 50px;
         width: calc(100% - 30px);
-        padding: 10px 0 15px;
+        padding: 8px 0;
     }
 
     form {
@@ -47,16 +46,17 @@ export const StyledChat = styled.div`
     }
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-        .bottom {
+        .top {
             background-color: transparent;
             padding: 0;
             position: static;
             width: 100%;
+            margin-bottom: 8px;
         }
 
         .messages {
-            height: 75vh;
-            margin-bottom: 0;
+            height: 70vh;
+            margin-top: 0;
         }
     }
 `;

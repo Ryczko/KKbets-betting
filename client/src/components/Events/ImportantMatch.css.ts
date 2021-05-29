@@ -74,14 +74,12 @@ export const StyledImportantMatch = styled.div`
     }
 
     .course {
-        padding: 8px 0;
+        padding: 6px 0;
         min-width: 55px;
         flex-grow: 1;
         flex-basis: 33%;
-        background-color: transparent;
         color: ${({ theme }) => theme.colors.font.light};
-        border: none;
-        border-bottom: 2px solid transparent;
+        border: 2px solid transparent;
         background-color: ${({ theme }) => theme.colors.background.light};
         border-radius: 4px;
         margin: 0 5px;
@@ -89,7 +87,7 @@ export const StyledImportantMatch = styled.div`
         transition: 0.2s;
 
         &:hover {
-            border-bottom: 2px solid ${({ theme }) => theme.colors.font.dark};
+            border: 2px solid ${({ theme }) => theme.colors.font.dark};
         }
 
         &:focus {
@@ -98,7 +96,6 @@ export const StyledImportantMatch = styled.div`
 
         &.active {
             background-color: ${({ theme }) => theme.colors.accent.dark};
-            border-bottom: none;
             transform: scale(0.95);
         }
     }

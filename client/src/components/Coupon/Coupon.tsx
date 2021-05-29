@@ -102,7 +102,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
                         {events.length === 0 && (
                             <>
                                 <EmptyCoupon />
-                                <p style={{ marginTop: '20px' }}>Your coupon is empty</p>
+                                <p style={{ margin: '20px 0' }}>Your coupon is empty</p>
                             </>
                         )}
                         {events.length !== 0 && (

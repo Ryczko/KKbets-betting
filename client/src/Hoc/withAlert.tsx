@@ -1,12 +1,21 @@
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 export interface WithAlertProps {
     setError?: (val: string) => void;
     setIsSuccessOpened?: (val: boolean) => void;
     setIsErrorOpened?: (val: boolean) => void;
 }
+
+const StyledAlert = styled.div`
+    .alert {
+        @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+            bottom: 55px;
+        }
+    }
+`;
 
 const withAlert = (
     Component: React.ComponentType<WithAlertProps>,
@@ -25,24 +34,24 @@ const withAlert = (
     };
 
     return (
-        <>
+        <StyledAlert>
             <Component
                 {...props}
                 setError={setError}
                 setIsErrorOpened={setIsErrorOpened}
                 setIsSuccessOpened={setIsSuccessOpened}
             />
-            <Snackbar open={isSuccessOpened} autoHideDuration={5000} onClose={handleClose}>
+            <Snackbar className="alert" open={isSuccessOpened} autoHideDuration={4000} onClose={handleClose}>
                 <Alert variant="filled" onClose={handleClose} severity="success">
                     {successMessage || 'Success'}
                 </Alert>
             </Snackbar>
-            <Snackbar open={isErrorOpened} autoHideDuration={5000} onClose={handleClose}>
+            <Snackbar className="alert" open={isErrorOpened} autoHideDuration={4000} onClose={handleClose}>
                 <Alert variant="filled" onClose={handleClose} severity="error">
                     {error}
                 </Alert>
             </Snackbar>
-        </>
+        </StyledAlert>
     );
 };
 

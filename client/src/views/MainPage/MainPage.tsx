@@ -61,19 +61,24 @@ function MainPage(): JSX.Element {
                     )
                 )}
             </div>
-            {matches.map(({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
-                <MatchMin
-                    key={_id}
-                    eventId={_id}
-                    league={category?.name}
-                    date={transformDate(date)}
-                    teamAway={teamAway}
-                    teamHome={teamHome}
-                    courseAwayWin={courseAwayWin}
-                    courseDraw={courseDraw}
-                    courseHomeWin={courseHomeWin}
-                />
-            ))}
+
+            <div style={{ marginTop: '30px' }}>
+                {matches.map(
+                    ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
+                        <MatchMin
+                            key={_id}
+                            eventId={_id}
+                            league={category?.name}
+                            date={transformDate(date)}
+                            teamAway={teamAway}
+                            teamHome={teamHome}
+                            courseAwayWin={courseAwayWin}
+                            courseDraw={courseDraw}
+                            courseHomeWin={courseHomeWin}
+                        />
+                    )
+                )}
+            </div>
         </StyledMainPage>
     );
 }

@@ -6,11 +6,11 @@ interface MessageStyleProps {
 
 export const StyledMessage = styled.div<MessageStyleProps>`
     display: flex;
-    border-top: 1px solid ${({ theme }) => theme.colors.accent.dark};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.accent.dark};
     padding: 10px 5px;
 
     &:last-of-type {
-        border-top: none;
+        border-bottom: none;
     }
 
     .head {
@@ -20,6 +20,7 @@ export const StyledMessage = styled.div<MessageStyleProps>`
 
         .date {
             font-size: 0.7rem;
+            min-width: 55px;
         }
     }
 

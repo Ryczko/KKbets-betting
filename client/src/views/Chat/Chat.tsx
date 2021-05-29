@@ -8,7 +8,7 @@ import axiosConfig from 'utilities/axiosConfig';
 import Loader from 'shared/Spinner/Loader';
 
 function Chat(): JSX.Element {
-    const { userData } = useContext(AuthContext);
+    const { userData, isLogged } = useContext(AuthContext);
     const [chatMessage, setChatMessage] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
     const socketRef: any = useRef();
@@ -58,6 +58,24 @@ function Chat(): JSX.Element {
 
     return (
         <StyledChat>
+            <div className="top">
+                <form>
+                    <input
+                        placeholder={isLogged ? 'Your message' : 'Login to write'}
+                        value={chatMessage}
+                        disabled={!isLogged}
+                        onChange={handleSearchChange}
+                    />
+                    <Button
+                        blocked={coolDown || !isLogged}
+                        click={submitChatMessage}
+                        fill
+                        style={{ fontSize: '0.9rem', margin: '0px' }}
+                    >
+                        Send
+                    </Button>
+                </form>
+            </div>
             <div className="messages">
                 {isLoaded ? (
                     messages.map((message: any) => {
@@ -75,19 +93,6 @@ function Chat(): JSX.Element {
                 ) : (
                     <Loader absolute />
                 )}
-            </div>
-            <div className="bottom">
-                <form>
-                    <input placeholder="Your message" value={chatMessage} onChange={handleSearchChange} />
-                    <Button
-                        blocked={coolDown}
-                        click={submitChatMessage}
-                        fill
-                        style={{ fontSize: '0.9rem', margin: '0px' }}
-                    >
-                        Send
-                    </Button>
-                </form>
             </div>
         </StyledChat>
     );

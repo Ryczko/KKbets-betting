@@ -39,6 +39,8 @@ function UserPage(props: WithAlertProps): JSX.Element {
 
     const saveHandler = async (e: FormEvent<EventTarget>) => {
         e.preventDefault();
+        props.setIsSuccessOpened?.(false);
+        props.setIsErrorOpened?.(false);
         try {
             const res = await axiosConfig.patch('/users', {
                 username: newUsername,

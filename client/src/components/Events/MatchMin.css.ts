@@ -39,16 +39,16 @@ export const StyledMatchMin = styled.div`
         width: 100%;
         background-color: transparent;
         border: none;
-        border-bottom: 2px solid transparent;
+        border: 2px solid transparent;
         color: ${({ theme }) => theme.colors.font.light};
         background-color: ${({ theme }) => theme.colors.background.light};
         border-radius: 4px;
         cursor: pointer;
         transition: 0.2s;
-        padding: 5px 0;
+        padding: 3px 0;
 
         &:hover {
-            border-bottom: 2px solid ${({ theme }) => theme.colors.font.dark};
+            border: 2px solid ${({ theme }) => theme.colors.font.dark};
         }
 
         &:focus {
@@ -58,7 +58,6 @@ export const StyledMatchMin = styled.div`
         &.active {
             background-color: ${({ theme }) => theme.colors.accent.dark};
             transform: scale(0.95);
-            border-bottom: none;
         }
     }
 
