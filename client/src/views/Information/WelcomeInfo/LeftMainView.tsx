@@ -1,14 +1,14 @@
 import { StyledLeftMainView } from './LeftMainView.css';
-import Trophe from './Trophe';
+import euroLogo from 'assets/images/euro-logo.png';
 
 function LeftMainView(): JSX.Element {
     return (
         <StyledLeftMainView>
-            <h3 className="title">Bet Champions league now!</h3>
-            <Trophe />
+            <h1 className="title">Time for Euro 2020!</h1>
+            <img src={euroLogo} alt="logo euro" />
             <p className="description">
-                New Chempions league season already started. Don't waste your time, and bet. Unique badges await the
-                best!
+                The time has come for the long-awaited euro 2020. Don't waste your time, and bet. Beat the rest of the
+                players and become a football specialist!
             </p>
         </StyledLeftMainView>
     );

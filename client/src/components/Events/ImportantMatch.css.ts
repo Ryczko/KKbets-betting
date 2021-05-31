@@ -96,6 +96,7 @@ export const StyledImportantMatch = styled.div`
 
         &.active {
             background-color: ${({ theme }) => theme.colors.accent.dark};
+            border: 2px solid transparent;
             transform: scale(0.95);
         }
     }

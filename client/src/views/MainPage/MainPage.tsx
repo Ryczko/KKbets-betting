@@ -11,6 +11,7 @@ import axiosConfig from 'utilities/axiosConfig';
 import EventCounterMobile from 'components/Coupon/EventCounterMobile';
 import MatchMin from 'components/Events/MatchMin';
 import DailyBonus from 'components/User/DailyBonus';
+import euroBanner from 'assets/images/euro-banner.png';
 
 function MainPage(): JSX.Element {
     const [importantMatches, setImportantMatches] = useState<IMatch[]>([]);
@@ -39,7 +40,7 @@ function MainPage(): JSX.Element {
 
             <DailyBonus></DailyBonus>
 
-            <Banner image="https://i.pinimg.com/originals/5e/37/a4/5e37a4179884eee9be9dbf640b44474b.png" />
+            <Banner image={euroBanner} />
             {!isLoaded && <Loader />}
             {isLoaded && importantMatches.length === 0 && matches.length === 0 && (
                 <h3 style={{ marginTop: '50px' }}>There are no active events at the moment</h3>

@@ -9,11 +9,16 @@ export const StyledLeftMainView = styled.div`
     height: 100%;
 
     .title {
-        padding: 12px 0 20px 0;
+        font-size: 25px;
+    }
+
+    img {
+        margin-top: 20px;
+        width: 160px;
     }
 
     .description {
-        margin-top: 20px;
+        margin-top: 35px;
         font-weight: 600;
         line-height: 22px;
         flex-grow: 1;

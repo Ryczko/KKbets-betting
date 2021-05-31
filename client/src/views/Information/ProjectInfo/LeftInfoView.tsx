@@ -5,16 +5,11 @@ function LeftInfoView(): JSX.Element {
         <StyledLeftInfoView>
             <h2>Information</h2>
             <p className="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum, lectus vitae congue malesuada, augue
-                eros facilisis lorem, suscipit eleifend ante leo a orci. Sed nisl leo, congue ut urna finibus, finibus
-                ornare nibh. In consequat magna quis lacinia mollis.
+                KKbets is a website that allows you to bet on sports events using virtual currency. Players compete
+                against each other by collecting as many points as possible and gaining achievements. <br />
+                <br />
+                Did you lose all points? Do not worry! You can claim a free bonus once a day.
             </p>
-            <h4>
-                Support our project:{' '}
-                <a href="#" target="_blank">
-                    <i className="icon-paypal" />
-                </a>
-            </h4>
 
             <div className="bottom">
                 <h5>
