@@ -35,7 +35,7 @@ export const addEvent = (
     };
 };
 
-export const removeAllEvents = () => {
+export const removeAllEvents = (): { type: string } => {
     const eventDOM = document.querySelectorAll(`[data-eventid] .active`);
     eventDOM.forEach((el) => {
         el.classList.remove('active');

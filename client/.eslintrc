@@ -9,7 +9,6 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "no-console": 1, // Means warning,
         "prettier/prettier": "error",
         "@typescript-eslint/no-non-null-assertion": 0,
         "@typescript-eslint/ban-ts-comment": "off"

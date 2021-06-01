@@ -1,16 +1,24 @@
 import { TextField } from '@material-ui/core';
-import { IMatch } from 'types/Match.model';
 import React, { useEffect, useState } from 'react';
 import Button from 'shared/Button/Button';
 import Loader from 'shared/Spinner/Loader';
 import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 import { AdminRow } from './AdminStyles.css';
 import axiosConfig from 'utilities/axiosConfig';
+import { ITeam } from 'types/Team.model';
+
+interface IEventToUpdate {
+    _id: string;
+    homeScore: number;
+    awayScore: number;
+    teamHome: ITeam;
+    teamAway: ITeam;
+}
 
 function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     const [loading, setLoading] = useState(false);
 
-    const [events, setEvents] = useState<any[]>([]);
+    const [events, setEvents] = useState<IEventToUpdate[]>([]);
 
     useEffect(() => {
         loadEvents();
@@ -19,17 +27,17 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     const updateEventHandler = async (id: string) => {
         try {
             const eventData = events?.find((event) => event._id === id);
+            if (!eventData) return;
             setLoading(true);
             await axiosConfig.patch('/events/' + id, {
-                teamHomeScore: eventData.home,
-                teamAwayScore: eventData.away
+                teamHomeScore: eventData.homeScore,
+                teamAwayScore: eventData.awayScore
             });
-            props.setIsSuccessOpened?.(true);
+            props.setIsSuccessOpened(true);
             await loadEvents();
         } catch (err) {
-            console.log(err);
-            props.setError?.(err.response.data);
-            props.setIsErrorOpened?.(true);
+            props.setError(err.response.data);
+            props.setIsErrorOpened(true);
         } finally {
             setLoading(false);
         }
@@ -40,7 +48,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
         setEvents(res.data);
     };
 
-    const updateScoreHandler = (id: string, value: number, target: 'home' | 'away') => {
+    const updateScoreHandler = (id: string, value: number, target: 'homeScore' | 'awayScore') => {
         const eventIndex = events?.findIndex((event) => event._id === id);
         const newEvents = [...events];
         newEvents[eventIndex][target] = value;
@@ -53,7 +61,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
                 <Loader />
             ) : (
                 <>
-                    {events.map((event: IMatch) => (
+                    {events.map((event) => (
                         <AdminRow key={event._id}>
                             <p>
                                 {event.teamHome.shortName} vs {event.teamAway.shortName}
@@ -63,7 +71,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
                                 label="Home score"
                                 type="number"
                                 variant="outlined"
-                                onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'home')}
+                                onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'homeScore')}
                                 style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
                                 InputProps={{
                                     style: { color: 'white' },
@@ -80,7 +88,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
                                 label="Away score"
                                 type="number"
                                 variant="outlined"
-                                onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'away')}
+                                onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'awayScore')}
                                 style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
                                 InputProps={{
                                     style: { color: 'white' },

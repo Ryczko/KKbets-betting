@@ -52,10 +52,10 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
                 category,
                 important: highlight
             });
-            props.setIsSuccessOpened?.(true);
+            props.setIsSuccessOpened(true);
         } catch (err) {
-            props.setError?.(err.response.data);
-            props.setIsErrorOpened?.(true);
+            props.setError(err.response.data);
+            props.setIsErrorOpened(true);
         }
     };
 

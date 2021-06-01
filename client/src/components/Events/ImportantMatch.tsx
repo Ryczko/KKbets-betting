@@ -1,7 +1,7 @@
 import { StyledImportantMatch } from './ImportantMatch.css';
 
 import { ITeam } from 'types/Team.model';
-import withAddEvent, { WithAddEvent } from './withAddEvent';
+import withAddEvent, { WithAddEvent } from 'Hoc/withAddEvent';
 
 export interface MatchProps {
     eventId: string;

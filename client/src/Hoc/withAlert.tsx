@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export interface WithAlertProps {
-    setError?: (val: string) => void;
-    setIsSuccessOpened?: (val: boolean) => void;
-    setIsErrorOpened?: (val: boolean) => void;
+    setError: (val: string) => void;
+    setIsSuccessOpened: (val: boolean) => void;
+    setIsErrorOpened: (val: boolean) => void;
 }
 
 const StyledAlert = styled.div`
@@ -17,10 +17,10 @@ const StyledAlert = styled.div`
     }
 `;
 
-const withAlert = (
-    Component: React.ComponentType<WithAlertProps>,
+const withAlert = <P extends unknown>(
+    Component: React.ComponentType<P & WithAlertProps>,
     successMessage?: string
-): React.FC<WithAlertProps> => (props) => {
+): React.FC<P> => (props) => {
     const [isSuccessOpened, setIsSuccessOpened] = useState(false);
     const [isErrorOpened, setIsErrorOpened] = useState(false);
     const [error, setError] = useState('');

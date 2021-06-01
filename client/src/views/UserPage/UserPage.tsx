@@ -4,7 +4,7 @@ import Input from 'shared/Input/Input';
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import { AuthContext } from 'context/AuthContext';
 import Button from 'shared/Button/Button';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FormControlLabel, Switch } from '@material-ui/core';
 import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 import Loader from 'shared/Spinner/Loader';
@@ -39,18 +39,18 @@ function UserPage(props: WithAlertProps): JSX.Element {
 
     const saveHandler = async (e: FormEvent<EventTarget>) => {
         e.preventDefault();
-        props.setIsSuccessOpened?.(false);
-        props.setIsErrorOpened?.(false);
+        props.setIsSuccessOpened(false);
+        props.setIsErrorOpened(false);
         try {
             const res = await axiosConfig.patch('/users', {
                 username: newUsername,
                 showAvatar: displayAvatar
             });
             setUserData({ ...userData, showAvatar: res.data.showAvatar, username: res.data.username });
-            props.setIsSuccessOpened?.(true);
+            props.setIsSuccessOpened(true);
         } catch (err) {
-            props.setError?.(err.response.data);
-            props.setIsErrorOpened?.(true);
+            props.setError(err.response.data);
+            props.setIsErrorOpened(true);
         }
     };
 

@@ -30,13 +30,13 @@ function AdminTeams(props: WithAlertProps): JSX.Element {
                 shortName: teamShortname,
                 image: imageUrl
             });
-            props.setIsSuccessOpened?.(true);
+            props.setIsSuccessOpened(true);
             setTeamShortname('');
             setImageUrl('');
             setTeamName('');
         } catch (err) {
-            props.setError?.(err.response.data);
-            props.setIsErrorOpened?.(true);
+            props.setError(err.response.data);
+            props.setIsErrorOpened(true);
         } finally {
             setLoading(false);
         }

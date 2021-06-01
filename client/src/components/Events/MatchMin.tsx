@@ -1,6 +1,6 @@
 import { StyledMatchMin } from './MatchMin.css';
 import { MatchProps } from './ImportantMatch';
-import withAddEvent, { WithAddEvent } from './withAddEvent';
+import withAddEvent, { WithAddEvent } from 'Hoc/withAddEvent';
 
 function MatchMin({
     eventId,

@@ -1,10 +1,10 @@
+import { MatchProps } from 'components/Events/ImportantMatch';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addEvent, removeEvent } from 'store/actions';
-import { MatchProps } from './ImportantMatch';
 
 export interface WithAddEvent {
-    addEventHandler?: (e: React.MouseEvent<HTMLElement>) => void;
+    addEventHandler: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const withAddEvent = (Component: React.ComponentType<MatchProps & WithAddEvent>): React.FC<MatchProps> => (props) => {

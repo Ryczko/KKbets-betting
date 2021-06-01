@@ -27,7 +27,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
     const refSlider = useRef<HTMLInputElement>(null);
     const refError = useRef<HTMLDivElement>(null);
 
-    const slideAmountHandler = (event: any, newValue: number | number[]) => {
+    const slideAmountHandler = (event: React.ChangeEvent<unknown>, newValue: number | number[]) => {
         dispatch(updateAmount(newValue as number));
     };
 
@@ -58,7 +58,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
             await axiosConfig.post('/coupons', data);
             dispatch(removeAllEvents());
             setUserData({ ...userData, points: userData.points! - amount });
-            props.setIsSuccessOpened?.(true);
+            props.setIsSuccessOpened(true);
         } catch (err) {
             setError(err.response.data);
             refError.current?.classList.add('active');
