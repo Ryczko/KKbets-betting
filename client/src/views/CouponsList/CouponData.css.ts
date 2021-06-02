@@ -15,10 +15,12 @@ export const StyledCouponData = styled.div`
         font-size: 0.7rem;
         flex-basis: 18%;
         text-align: left;
+        min-width: 55px;
     }
 
     .amount {
         flex-basis: 31%;
+        margin-left: 10px;
     }
 
     .win {

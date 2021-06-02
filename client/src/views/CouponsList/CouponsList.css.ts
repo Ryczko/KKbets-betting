@@ -20,11 +20,13 @@ export const StyledCouponsList = styled.div`
 
         .date {
             flex-basis: 18%;
+            min-width: 55px;
             text-align: left;
         }
 
         .amount {
             flex-basis: 32%;
+            margin-left: 10px;
         }
 
         .win {
@@ -36,7 +38,7 @@ export const StyledCouponsList = styled.div`
         padding: 0;
 
         .coupons-list {
-            max-height: 400px;
+            height: 77vh;
         }
     }
 `;

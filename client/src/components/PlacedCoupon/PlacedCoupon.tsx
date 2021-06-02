@@ -46,14 +46,14 @@ function PlacedCoupon(): JSX.Element {
                     <div className="coupon-info">
                         <div className="left">
                             <h4>
-                                Amount: <span className="value">{couponData?.coupon.amount}</span>
+                                Amount: <span className="value">{couponData?.coupon.amount} $</span>
                             </h4>
 
                             <h4>
                                 Total course: <span className="value"> {couponData?.coupon.totalCourse}</span>
                             </h4>
                             <h4>
-                                Possible win: <span className="value">{couponData?.coupon.possiblyWin}</span>
+                                Possible win: <span className="value">{couponData?.coupon.possiblyWin} $</span>
                             </h4>
                         </div>
                         <div className="right">

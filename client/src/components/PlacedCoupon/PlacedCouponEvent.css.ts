@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledPlacedCouponEvent = styled.div`
     width: 100%;
     border-bottom: 2px dashed ${({ theme }) => theme.colors.background.medium};
-    padding: 5px 15px 15px;
+    padding: 5px 12px 15px;
     border-radius: 5px;
     margin: 10px 0;
     text-align: left;
@@ -11,38 +11,35 @@ export const StyledPlacedCouponEvent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     &:last-of-type {
         border-bottom: none;
         padding-bottom: 0;
     }
 
-    .left {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: column;
-        width: 90%;
-
-        & > div {
-            margin-bottom: 15px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
+    .event-info {
+        order: 1;
+        .bet-type,
+        .course {
+            font-size: 0.8rem;
         }
 
-        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-            flex-direction: row;
+        .date {
+            margin-bottom: 5px;
+        }
 
-            & > div {
-                margin-bottom: 0;
-            }
+        .value {
+            color: ${({ theme }) => theme.colors.accent.light};
         }
     }
 
     .teams-info {
         display: flex;
+        order: 0;
+        flex-basis: 100%;
+        justify-content: center;
+        margin-bottom: 20px;
 
         .team {
             text-align: center;
@@ -59,5 +56,39 @@ export const StyledPlacedCouponEvent = styled.div`
             object-fit: contain;
             margin-bottom: 3px;
         }
+    }
+
+    .more-info {
+        display: flex;
+        order: 2;
+    }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+        .event-info {
+            order: 0;
+        }
+
+        .teams-info {
+            order: 0;
+            flex-basis: auto;
+            margin-bottom: 0;
+        }
+
+        .more-info {
+            order: 0;
+        }
+    }
+
+    .score {
+        width: 40px;
+        text-align: center;
+        background-color: ${({ theme }) => theme.colors.background.medium};
+        color: ${({ theme }) => theme.colors.font.light};
+        border-radius: 4px;
+        padding: 4px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `;

@@ -13,7 +13,7 @@ ${normalize}
 
 ::-webkit-scrollbar-track {
 	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 4px;
+	border-radius: 2px;
 	background-color: ${({ theme }) => theme.colors.background.dark};
 }
 
@@ -23,7 +23,7 @@ ${normalize}
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 4px;
+	border-radius: 2px;
 	box-shadow: inset 0 0 6px ${({ theme }) => theme.colors.accent.light};
 	background-color: ${({ theme }) => theme.colors.accent.light};
 }

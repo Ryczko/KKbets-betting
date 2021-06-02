@@ -51,11 +51,11 @@ export const StyledChat = styled.div`
             padding: 0;
             position: static;
             width: 100%;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .messages {
-            height: 70vh;
+            height: 75vh;
             margin-top: 0;
         }
     }

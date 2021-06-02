@@ -25,11 +25,12 @@ function Ranking(): JSX.Element {
                 <Loader />
             ) : (
                 <StyledRanking>
+                    <h1>Top 10 players</h1>
                     <TopPlaces data={places.slice(0, 3)} />
                     {places.slice(3).map((place, index) => (
                         <RankingPlace
                             key={place.username}
-                            place={index + 1}
+                            place={index + 4}
                             avatarUrl={place.avatarUrl}
                             username={place.username}
                             points={place.points}

@@ -64,7 +64,7 @@ io.on('connection', (socket) => {
         if (userMessages.length>0 && new Date().getTime() -  userMessages[0].date.getTime() < 5000) return;
       
 
-        if (messages.length >= 30){
+        if (messages.length >= 50){
             await messages[messages.length-1].deleteOne();
         }
         

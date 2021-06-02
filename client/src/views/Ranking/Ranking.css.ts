@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledRanking = styled.div`
-    margin-top: 55px;
+    h1 {
+        margin: 16px 0 70px;
+        font-size: 25px;
+        text-align: center;
+    }
 `;

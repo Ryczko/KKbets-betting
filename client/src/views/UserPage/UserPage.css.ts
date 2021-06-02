@@ -10,7 +10,7 @@ export const StyledUserPage = styled.div`
         background-color: ${({ theme }) => theme.colors.background.light};
         padding: 15px;
         margin-bottom: 20px;
-        border-radius: 10px;
+        border-radius: 4px;
 
         .avatar-box {
             margin: 0 auto;

@@ -15,26 +15,31 @@ export interface PlacedCouponEventProps {
 function PlacedCouponEvent({ betType, course, state, userBet, event }: PlacedCouponEventProps): JSX.Element {
     return (
         <StyledPlacedCouponEvent>
-            <div className="left">
-                <div className="event-info">{event && event.date ? transformDate(event.date) : '???'}</div>
-                <div className="teams-info">
-                    <div className="team">
-                        <img src={event?.teamHome?.image} />
-                        <div>{event?.teamHome?.shortName || '???'}</div>
-                    </div>
-                    <span> - </span>
-                    <div className="team">
-                        <img src={event?.teamAway?.image} />
-                        <div>{event?.teamAway?.shortName || '???'}</div>
-                    </div>
+            <div className="event-info">
+                <div className="date">{event && event.date ? transformDate(event.date) : '???'}</div>
+                <div className="bet-type">
+                    {betType}: <span className="value">{userBet}</span>
                 </div>
-                <div className="bet-info">
-                    <span>
-                        {betType}: {userBet}
-                    </span>
+                <div className="course">
+                    course: <span className="value">{course}</span>
                 </div>
             </div>
-            <div className="right">
+            <div className="teams-info">
+                <div className="team">
+                    <img src={event?.teamHome?.image} />
+                    <div>{event?.teamHome?.shortName || '???'}</div>
+                </div>
+                <span> - </span>
+                <div className="team">
+                    <img src={event?.teamAway?.image} />
+                    <div>{event?.teamAway?.shortName || '???'}</div>
+                </div>
+            </div>
+
+            <div className="more-info">
+                <div className="score">
+                    {event?.teamHomeScore ?? '_'} : {event?.teamAwayScore ?? '_'}
+                </div>
                 <Status style={{ width: '28px', height: '28px', fontSize: '18px' }} status={state}></Status>
             </div>
         </StyledPlacedCouponEvent>

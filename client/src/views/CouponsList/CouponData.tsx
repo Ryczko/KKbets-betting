@@ -18,8 +18,8 @@ function CouponData(props: CouponDataProps): JSX.Element {
         <Link to={`/coupons/${props._id}`}>
             <StyledCouponData>
                 <div className="date">{props.date}</div>
-                <div className="amount">{props.amount}</div>
-                <div className="win">{props.possiblyWin}</div>
+                <div className="amount">{props.amount} $</div>
+                <div className="win">{props.possiblyWin} $</div>
 
                 <Status style={{ width: '28px', height: '28px', fontSize: '16px' }} status={props.state}></Status>
             </StyledCouponData>

@@ -1,6 +1,5 @@
 import { AuthContext } from 'context/AuthContext';
 import React, { useContext } from 'react';
-import Button from 'shared/Button/Button';
 import { StyledWallet } from './Wallet.css';
 
 function Wallet(): JSX.Element {
