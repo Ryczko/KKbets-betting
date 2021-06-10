@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const StyledCouponsList = styled.div`
     text-align: center;
 
-    margin-top: 12px;
-
     .coupons-list {
         overflow-y: auto;
         padding-right: 3px;
@@ -36,6 +34,7 @@ export const StyledCouponsList = styled.div`
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
         padding: 0;
+        margin-top: 12px;
 
         .coupons-list {
             height: 77vh;

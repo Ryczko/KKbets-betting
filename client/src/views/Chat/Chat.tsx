@@ -89,9 +89,10 @@ function Chat(): JSX.Element {
             </div>
             <div className="messages">
                 {isLoaded ? (
-                    messages.map((message) => {
+                    messages.map((message, index) => {
                         return (
                             <Message
+                                key={index}
                                 userId={message.user._id}
                                 nickname={message.user.username}
                                 avatarUrl={message.user.avatarUrl}
