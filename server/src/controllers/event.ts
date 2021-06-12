@@ -100,16 +100,17 @@ export const updateEvent = async (req: Request, res: Response): Promise<any> => 
             const coupon = await Coupon.findById(usersEvents[i].coupon);
 
             if (coupon.state === EventsStates.PENDING) {
-                const allEventsInCoupon = await UsersEvent.find({ coupon: usersEvents[i].coupon });
-
-                let couponState = EventsStates.WINNING;
-                for (let j = 0; j < allEventsInCoupon.length; j++) {
-                    if (allEventsInCoupon[j].state === EventsStates.LOST) {
-                        couponState = EventsStates.LOST;
-                        break;
-                    } else if (allEventsInCoupon[j].state !== EventsStates.WINNING) {
-                        couponState = EventsStates.PENDING;
-                        break;
+                let couponState = EventsStates.PENDING;
+                if (result === 'lost') {
+                    couponState = EventsStates.LOST;
+                } else {
+                    const allEventsInCoupon = await UsersEvent.find({ coupon: usersEvents[i].coupon });
+                    const allWonEventsInCoupon = await UsersEvent.find({
+                        coupon: usersEvents[i].coupon,
+                        state: EventsStates.WINNING
+                    });
+                    if (allEventsInCoupon.length === allWonEventsInCoupon.length) {
+                        couponState = EventsStates.WINNING;
                     }
                 }
 
