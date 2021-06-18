@@ -29,9 +29,9 @@ export const StyledUserPage = styled.div`
             }
 
             flex-grow: 1;
-
-            background-color: ${({ theme }) => theme.colors.background.medium};
-            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             position: relative;
         }
 
@@ -41,9 +41,11 @@ export const StyledUserPage = styled.div`
             .avatar-box {
                 margin-bottom: 0px;
             }
+
             .badges {
                 min-height: 100%;
-                margin-left: 15px;
+                margin-left: 25px;
+                justify-content: flex-start;
             }
         }
     }

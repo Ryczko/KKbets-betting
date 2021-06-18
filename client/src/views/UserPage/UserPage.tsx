@@ -10,6 +10,8 @@ import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
 import AuthRequired from 'shared/AuthRequired/AuthRequired';
+import Badge from 'components/User/Badge';
+import sampleBadge from 'assets/images/sample-badge.png';
 
 function UserPage(props: WithAlertProps): JSX.Element {
     const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } = useContext(AuthContext);
@@ -66,11 +68,30 @@ function UserPage(props: WithAlertProps): JSX.Element {
                                 <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} width="90px" />
                             </div>
                             <div className="badges">
-                                <h2 className="title">
-                                    user badges
-                                    <br />
-                                    <small>(cooming soon)</small>
-                                </h2>
+                                <Badge
+                                    src={sampleBadge}
+                                    name="Sample badge"
+                                    description="It's description of sample badge"
+                                    style={{ margin: '0 7px' }}
+                                />
+                                <Badge
+                                    src={sampleBadge}
+                                    name="Sample badge"
+                                    description="It's description of sample badge"
+                                    style={{ margin: '0 7px' }}
+                                />
+                                <Badge
+                                    src={sampleBadge}
+                                    name="Sample badge"
+                                    description="It's description of sample badge"
+                                    style={{ margin: '0 7px' }}
+                                />
+                                <Badge
+                                    src={sampleBadge}
+                                    name="Sample badge"
+                                    description="It's description of sample badge"
+                                    style={{ margin: '0 7px' }}
+                                />
                             </div>
                         </div>
 
