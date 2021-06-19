@@ -23,6 +23,7 @@ export const StyledUserPage = styled.div`
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                width: 100%;
                 color: ${({ theme }) => theme.colors.font.dark};
                 opacity: 0.7;
                 font-size: 1.2rem;
@@ -33,6 +34,7 @@ export const StyledUserPage = styled.div`
             flex-wrap: wrap;
             justify-content: center;
             position: relative;
+            min-height: 50px;
         }
 
         @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -46,6 +48,7 @@ export const StyledUserPage = styled.div`
                 min-height: 100%;
                 margin-left: 25px;
                 justify-content: flex-start;
+                min-height: auto;
             }
         }
     }
