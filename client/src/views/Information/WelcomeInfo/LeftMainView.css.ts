@@ -17,6 +17,17 @@ export const StyledLeftMainView = styled.div`
         width: 160px;
     }
 
+    .badges {
+        h3 {
+            margin-bottom: 22px;
+        }
+
+        .badges-box {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
     .description {
         margin-top: 35px;
         font-weight: 600;

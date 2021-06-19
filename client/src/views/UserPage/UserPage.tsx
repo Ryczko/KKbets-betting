@@ -68,30 +68,7 @@ function UserPage(props: WithAlertProps): JSX.Element {
                                 <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} width="90px" />
                             </div>
                             <div className="badges">
-                                <Badge
-                                    src={sampleBadge}
-                                    name="Sample badge"
-                                    description="It's description of sample badge"
-                                    style={{ margin: '0 7px' }}
-                                />
-                                <Badge
-                                    src={sampleBadge}
-                                    name="Sample badge"
-                                    description="It's description of sample badge"
-                                    style={{ margin: '0 7px' }}
-                                />
-                                <Badge
-                                    src={sampleBadge}
-                                    name="Sample badge"
-                                    description="It's description of sample badge"
-                                    style={{ margin: '0 7px' }}
-                                />
-                                <Badge
-                                    src={sampleBadge}
-                                    name="Sample badge"
-                                    description="It's description of sample badge"
-                                    style={{ margin: '0 7px' }}
-                                />
+                                <h3 className="title">user currently has no badge</h3>
                             </div>
                         </div>
 

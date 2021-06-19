@@ -7,4 +7,8 @@ export const StyledBadge = styled.div`
     .badge {
         width: 60px;
     }
+
+    &:hover {
+        transform: scale(1.1);
+    }
 `;
