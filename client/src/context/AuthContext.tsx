@@ -1,4 +1,5 @@
 import React from 'react';
+import { IBadge } from 'types/Badge.model';
 
 export interface IUser {
     points?: number;
@@ -9,6 +10,7 @@ export interface IUser {
     admin?: boolean;
     bonusDate?: Date;
     _id?: string;
+    badges?: IBadge[];
 }
 
 interface IAuthContextProps {

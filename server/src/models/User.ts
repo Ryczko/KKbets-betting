@@ -13,6 +13,7 @@ export interface IUser extends Document {
     showAvatar: boolean;
     createdDate: Date;
     bonusDate: Date;
+    badges: mongoose.Schema.Types.ObjectId[];
     generateAuthToken: () => string;
 }
 
@@ -53,6 +54,14 @@ const userSchema = new mongoose.Schema({
     showAvatar: {
         type: Boolean,
         default: true
+    },
+    badges: {
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Badge'
+            }
+        ]
     }
 });
 

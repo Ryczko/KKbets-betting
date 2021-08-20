@@ -10,6 +10,7 @@ import withAlert, { WithAlertProps } from 'Hoc/withAlert';
 import Loader from 'shared/Spinner/Loader';
 import axiosConfig from 'utilities/axiosConfig';
 import AuthRequired from 'shared/AuthRequired/AuthRequired';
+import Badge from 'components/User/Badge';
 
 function UserPage(props: WithAlertProps): JSX.Element {
     const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } = useContext(AuthContext);
@@ -21,6 +22,7 @@ function UserPage(props: WithAlertProps): JSX.Element {
     useEffect(() => {
         setNewUsername(userData.username || '');
         setDisplayAvatar(userData.showAvatar || false);
+        console.log(userData);
     }, [userData.username, userData.showAvatar]);
 
     const logoutHandler = (e: FormEvent<EventTarget>) => {
@@ -46,7 +48,11 @@ function UserPage(props: WithAlertProps): JSX.Element {
                 username: newUsername,
                 showAvatar: displayAvatar
             });
-            setUserData({ ...userData, showAvatar: res.data.showAvatar, username: res.data.username });
+            setUserData({
+                ...userData,
+                showAvatar: res.data.showAvatar,
+                username: res.data.username
+            });
             props.setIsSuccessOpened(true);
         } catch (err) {
             props.setError(err.response.data);
@@ -66,7 +72,18 @@ function UserPage(props: WithAlertProps): JSX.Element {
                                 <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} width="90px" />
                             </div>
                             <div className="badges">
-                                <h3 className="title">User currently has no badge</h3>
+                                {userData.badges && userData.badges?.length > 0 ? (
+                                    userData.badges?.map((badge) => (
+                                        <Badge
+                                            key={badge.name}
+                                            name={badge.name}
+                                            description={badge.description}
+                                            src={badge.image}
+                                        />
+                                    ))
+                                ) : (
+                                    <h3 className="title">User currently has no badge</h3>
+                                )}
                             </div>
                         </div>
 

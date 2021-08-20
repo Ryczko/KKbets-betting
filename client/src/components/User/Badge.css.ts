@@ -6,6 +6,7 @@ export const StyledBadge = styled.div`
 
     .badge {
         width: 60px;
+        margin: 10px;
     }
 
     &:hover {
