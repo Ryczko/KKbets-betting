@@ -1,0 +1,81 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/kkbets/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/kkbets",
+        "index": "apps/kkbets/src/index.html",
+        "baseHref": "/",
+        "main": "apps/kkbets/src/main.tsx",
+        "polyfills": "apps/kkbets/src/polyfills.ts",
+        "tsConfig": "apps/kkbets/tsconfig.app.json",
+        "assets": ["apps/kkbets/src/favicon.ico", "apps/kkbets/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/kkbets/src/environments/environment.ts",
+              "with": "apps/kkbets/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "kkbets:build",
+        "hmr": true,
+        "proxyConfig": "apps/kkbets/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "kkbets:build:development"
+        },
+        "production": {
+          "buildTarget": "kkbets:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/kkbets/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/kkbets"],
+      "options": {
+        "jestConfig": "apps/kkbets/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

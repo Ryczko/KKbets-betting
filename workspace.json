@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "kkbets": "apps/kkbets",
+    "kkbets-e2e": "apps/kkbets-e2e"
+  }
+}
