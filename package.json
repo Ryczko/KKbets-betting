@@ -4,9 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build",
     "heroku-start": "node dist/apps/api/main.ts",
-    "heroku-build": "yarn nx run-many --target=build --projects=kkbets,api --parallel=true",
+    "build": "yarn nx run-many --target=build --projects=kkbets,api --parallel=true",
     "test": "nx test"
   },
   "private": true,
