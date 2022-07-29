@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "heroku-start": "node dist/apps/api/main.ts",
+    "heroku-start": "node dist/apps/api/main.js",
     "build": "nx run-many --target=build --projects=kkbets,api --parallel=true",
     "test": "nx test"
   },
