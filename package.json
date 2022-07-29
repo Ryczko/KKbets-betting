@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "heroku-start": "node dist/apps/api/main.ts",
-    "build": "yarn nx run-many --target=build --projects=kkbets,api --parallel=true",
+    "build": "nx run-many --target=build --projects=kkbets,api --parallel=true",
     "test": "nx test"
   },
   "private": true,
