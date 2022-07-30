@@ -1,11 +1,5 @@
-import React, {
-  FormEvent,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import { io, Socket } from 'socket.io-client';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
 import Message from '../../components/chat/Message';
 import { AuthContext } from '../../context/AuthContext';
 import Button from '../../shared/Button/Button';
@@ -28,22 +22,22 @@ function Chat(): JSX.Element {
   const { userData, isLogged } = useContext(AuthContext);
   const [chatMessage, setChatMessage] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
-  const socketRef = useRef<Socket>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [coolDown, setCoolDown] = useState<boolean>(false);
 
   useEffect(() => {
     loadMessages();
-    if (!socketRef.current) {
-      socketRef.current = io(
-        `${process.env.NX_APP_API_URL || 'http://localhost:3333'}`
-      );
+    const socket = io(
+      `${process.env.NX_APP_API_URL || 'http://localhost:3333'}`
+    );
+    socket.on('Output Chat Message', (message: Message) => {
+      receivedMessage(message);
+    });
 
-      socketRef.current.on('Output Chat Message', (message: Message) => {
-        receivedMessage(message);
-      });
-    }
-  }, [coolDown]);
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const loadMessages = async () => {
     try {
@@ -63,7 +57,7 @@ function Chat(): JSX.Element {
     setMessages((oldMsgs) => [message, ...oldMsgs]);
   }
 
-  const submitChatMessage = (e: FormEvent<EventTarget>) => {
+  const submitChatMessage = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
     if (coolDown) return;
 
@@ -71,10 +65,11 @@ function Chat(): JSX.Element {
 
     const userId = userData._id;
 
-    socketRef.current?.emit('newChatMessage', {
+    await axiosConfig.post('/messages', {
       chatMessage,
       user: userId,
     });
+
     setChatMessage('');
 
     setTimeout(() => {
