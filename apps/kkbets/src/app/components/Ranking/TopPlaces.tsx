@@ -12,7 +12,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
     height: '55px',
     width: '55px',
     border: `2px solid ${theme.colors.font.dark}`,
-    boxShadow: `0px 0px 16px -8px ${theme.colors.font.dark}`,
+    boxShadow: `0px 0px 16px -8px ${theme.colors.font.dark}`
   };
 
   return (
@@ -20,12 +20,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
       {props.data[1] && (
         <div className="field" style={{ left: '0px', bottom: '0' }}>
           <div className="place">2</div>
-          <Avatar
-            width="55px"
-            blockLink
-            style={commonStyles}
-            src={props.data[1].avatarUrl}
-          />
+          <Avatar width="55px" blockLink style={commonStyles} src={props.data[1].avatarUrl} />
           <div className="points">{props.data[1].points}</div>
           <div className="name">{props.data[1].username}</div>
         </div>
@@ -37,7 +32,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
             top: '0',
             left: '50%',
             transform: 'translateX(-50%)',
-            zIndex: 1,
+            zIndex: 1
           }}
         >
           <Crown
@@ -47,7 +42,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
               width: '50px',
               height: '50%',
               left: '50%',
-              transform: 'translateX(-50%)',
+              transform: 'translateX(-50%)'
             }}
           />
           <Avatar
@@ -56,7 +51,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
             style={{
               ...commonStyles,
               height: '70px',
-              width: '70px',
+              width: '70px'
             }}
             src={props.data[0].avatarUrl}
           />
@@ -68,12 +63,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
       {props.data[2] && (
         <div className="field" style={{ right: '0px', bottom: '0px' }}>
           <div className="place">3</div>
-          <Avatar
-            width="55px"
-            blockLink
-            style={commonStyles}
-            src={props.data[2].avatarUrl}
-          />
+          <Avatar width="55px" blockLink style={commonStyles} src={props.data[2].avatarUrl} />
           <div className="points">{props.data[2].points}</div>
           <div className="name">{props.data[2].username}</div>
         </div>

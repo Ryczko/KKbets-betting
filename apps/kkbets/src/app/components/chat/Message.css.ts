@@ -26,8 +26,7 @@ export const StyledMessage = styled.div<MessageStyleProps>`
 
   .message {
     .nickname {
-      color: ${({ theme, admin }) =>
-        admin ? theme.colors.accent.light : theme.colors.font.light};
+      color: ${({ theme, admin }) => (admin ? theme.colors.accent.light : theme.colors.font.light)};
       font-weight: ${({ admin }) => (admin ? 700 : 500)};
       font-size: 0.9rem;
       margin-bottom: 7px;

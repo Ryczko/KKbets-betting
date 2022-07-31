@@ -13,12 +13,7 @@ function Badge(props: BadgeProps): JSX.Element {
   return (
     <StyledBadge>
       <Tooltip title={props.description} arrow>
-        <img
-          src={props.src}
-          alt={props.name}
-          className="badge"
-          style={props.style}
-        />
+        <img src={props.src} alt={props.name} className="badge" style={props.style} />
       </Tooltip>
     </StyledBadge>
   );

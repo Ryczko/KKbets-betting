@@ -97,7 +97,7 @@ export const StyledCoupon = styled.div`
         border-radius: 5px;
       }
       .slider {
-        width: 60%;        
+        width: 60%;
       }
     }
 

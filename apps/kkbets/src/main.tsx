@@ -8,13 +8,10 @@ import { Provider } from 'react-redux';
 
 import App from './app/app';
 import { theme } from './app/utilities/theme';
-import {
-  createTheme,
-  ThemeProvider as MuiThemeProvider,
-} from '@mui/material/styles';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 
 const rootReducer = {
-  coupon: couponReducer,
+  coupon: couponReducer
 };
 
 const store = createStore(combineReducers(rootReducer), composeWithDevTools());
@@ -22,14 +19,12 @@ const store = createStore(combineReducers(rootReducer), composeWithDevTools());
 const UItheme = createTheme({
   palette: {
     primary: {
-      main: theme.colors.accent.light,
-    },
-  },
+      main: theme.colors.accent.light
+    }
+  }
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <StrictMode>
     <Provider store={store}>

@@ -39,28 +39,13 @@ function ImportantMatch(props: MatchProps & WithAddEvent): JSX.Element {
         <div className="hint">2</div>
       </div>
       <div className="buttons">
-        <button
-          className="course"
-          data-bet="home"
-          data-course={props.courseHomeWin}
-          onClick={props.addEventHandler}
-        >
+        <button className="course" data-bet="home" data-course={props.courseHomeWin} onClick={props.addEventHandler}>
           {props.courseHomeWin}
         </button>
-        <button
-          className="course"
-          data-bet="draw"
-          data-course={props.courseDraw}
-          onClick={props.addEventHandler}
-        >
+        <button className="course" data-bet="draw" data-course={props.courseDraw} onClick={props.addEventHandler}>
           {props.courseDraw}
         </button>
-        <button
-          className="course"
-          data-bet="away"
-          data-course={props.courseAwayWin}
-          onClick={props.addEventHandler}
-        >
+        <button className="course" data-bet="away" data-course={props.courseAwayWin} onClick={props.addEventHandler}>
           {props.courseAwayWin}
         </button>
       </div>

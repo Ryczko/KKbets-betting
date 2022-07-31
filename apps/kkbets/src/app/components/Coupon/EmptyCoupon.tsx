@@ -27,18 +27,8 @@ function EmptyCoupon(): JSX.Element {
         transform="translate(-276.18187 -133.91309)"
         fill={theme.colors.font.dark}
       />
-      <circle
-        cx="190.15351"
-        cy="24.95465"
-        r="20"
-        fill={theme.colors.font.dark}
-      />
-      <circle
-        cx="190.15351"
-        cy="24.95465"
-        r="12.66462"
-        fill={theme.colors.font.dark}
-      />
+      <circle cx="190.15351" cy="24.95465" r="20" fill={theme.colors.font.dark} />
+      <circle cx="190.15351" cy="24.95465" r="12.66462" fill={theme.colors.font.dark} />
       <path
         d="M878.81836,716.08691h-338a8.50981,8.50981,0,0,1-8.5-8.5v-405a8.50951,8.50951,0,0,1,8.5-8.5h338a8.50982,8.50982,0,0,1,8.5,8.5v405A8.51013,8.51013,0,0,1,878.81836,716.08691Z"
         transform="translate(-276.18187 -133.91309)"
@@ -54,18 +44,8 @@ function EmptyCoupon(): JSX.Element {
         transform="translate(-276.18187 -133.91309)"
         fill={theme.colors.font.dark}
       />
-      <circle
-        cx="433.63626"
-        cy="105.17383"
-        r="20"
-        fill={theme.colors.font.dark}
-      />
-      <circle
-        cx="433.63626"
-        cy="105.17383"
-        r="12.18187"
-        fill={theme.colors.font.dark}
-      />
+      <circle cx="433.63626" cy="105.17383" r="20" fill={theme.colors.font.dark} />
+      <circle cx="433.63626" cy="105.17383" r="12.18187" fill={theme.colors.font.dark} />
     </svg>
   );
 }

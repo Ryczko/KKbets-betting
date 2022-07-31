@@ -7,55 +7,52 @@ const userSchema = new mongoose.Schema<IUserBackend>({
   email: {
     type: String,
     unique: true,
-    required: true,
+    required: true
   },
   username: {
     type: String,
     minLength: 2,
     maxLength: 25,
     unique: true,
-    required: true,
+    required: true
   },
   points: {
     type: Number,
-    default: 500,
+    default: 500
   },
   googleId: {
-    type: String,
+    type: String
   },
   admin: {
-    type: Boolean,
+    type: Boolean
   },
   avatarUrl: {
-    type: String,
+    type: String
   },
   createdDate: {
     type: Date,
-    default: new Date(),
+    default: new Date()
   },
   bonusDate: {
     type: Date,
-    default: new Date(Date.now() - 864e5),
+    default: new Date(Date.now() - 864e5)
   },
   showAvatar: {
     type: Boolean,
-    default: true,
+    default: true
   },
   badges: {
     type: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Badge',
-      },
-    ],
-  },
+        ref: 'Badge'
+      }
+    ]
+  }
 });
 
 userSchema.methods.generateAuthToken = function () {
-  return jwt.sign(
-    { _id: this._id },
-    process.env.JWT_PRIVATE_KEY || 'privateKey'
-  );
+  return jwt.sign({ _id: this._id }, process.env.JWT_PRIVATE_KEY || 'privateKey');
 };
 
 const User = mongoose.model<IUserBackend>('User', userSchema);
@@ -66,7 +63,7 @@ function validateUser(user: typeof User): Joi.ValidationResult {
     googleId: Joi.string(),
     username: Joi.string().min(2).max(25).required(),
     points: Joi.number(),
-    showAvatar: Joi.boolean(),
+    showAvatar: Joi.boolean()
   }).unknown(true);
 
   return schema.validate(user);

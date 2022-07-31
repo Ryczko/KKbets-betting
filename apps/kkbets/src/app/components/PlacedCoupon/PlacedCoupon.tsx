@@ -1,13 +1,13 @@
-import { EventsStates, ICouponFrontend } from "@kkbets/api-interfaces";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Loader from "../../shared/Spinner/Loader";
-import Status from "../../shared/Status/Status";
+import { EventsStates, ICouponFrontend } from '@kkbets/api-interfaces';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Loader from '../../shared/Spinner/Loader';
+import Status from '../../shared/Status/Status';
 
-import axiosConfig from "../../utilities/axiosConfig";
+import axiosConfig from '../../utilities/axiosConfig';
 
-import { StyledPlacedCoupon } from "./PlacedCoupon.css";
-import PlacedCouponEvent from "./PlacedCouponEvent";
+import { StyledPlacedCoupon } from './PlacedCoupon.css';
+import PlacedCouponEvent from './PlacedCouponEvent';
 
 function PlacedCoupon(): JSX.Element {
   const { id } = useParams<{ id: string }>();
@@ -52,17 +52,15 @@ function PlacedCoupon(): JSX.Element {
               </h4>
 
               <h4>
-                Total course:{" "}
-                <span className="value"> {couponData?.totalCourse}</span>
+                Total course: <span className="value"> {couponData?.totalCourse}</span>
               </h4>
               <h4>
-                Possible win:{" "}
-                <span className="value">{couponData?.possiblyWin} $</span>
+                Possible win: <span className="value">{couponData?.possiblyWin} $</span>
               </h4>
             </div>
             <div className="right">
               <Status
-                style={{ width: "28px", height: "28px", fontSize: "18px" }}
+                style={{ width: '28px', height: '28px', fontSize: '18px' }}
                 status={couponData?.state || EventsStates.PENDING}
               ></Status>
               <h4>{couponData?.state || EventsStates.PENDING}</h4>

@@ -32,7 +32,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
       setLoading(true);
       await axiosConfig.patch('/events/' + id, {
         teamHomeScore: eventData.homeScore,
-        teamAwayScore: eventData.awayScore,
+        teamAwayScore: eventData.awayScore
       });
       props.setIsSuccessOpened(true);
       await loadEvents();
@@ -49,11 +49,7 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     setEvents(res.data);
   };
 
-  const updateScoreHandler = (
-    id: string,
-    value: number,
-    target: 'homeScore' | 'awayScore'
-  ) => {
+  const updateScoreHandler = (id: string, value: number, target: 'homeScore' | 'awayScore') => {
     const eventIndex = events?.findIndex((event) => event._id === id);
     const newEvents = [...events];
     newEvents[eventIndex][target] = value;
@@ -76,53 +72,45 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
                 label="Home score"
                 type="number"
                 variant="outlined"
-                onChange={(e) =>
-                  updateScoreHandler(event._id, +e.target.value, 'homeScore')
-                }
+                onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'homeScore')}
                 style={{
                   background: '#28282E',
                   borderRadius: '5px',
-                  color: 'white',
+                  color: 'white'
                 }}
                 InputProps={{
                   style: { color: 'white' },
                   inputProps: {
                     min: 0,
-                    step: '1',
-                  },
+                    step: '1'
+                  }
                 }}
                 InputLabelProps={{
-                  style: { color: '#fff' },
+                  style: { color: '#fff' }
                 }}
               />
               <TextField
                 label="Away score"
                 type="number"
                 variant="outlined"
-                onChange={(e) =>
-                  updateScoreHandler(event._id, +e.target.value, 'awayScore')
-                }
+                onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'awayScore')}
                 style={{
                   background: '#28282E',
                   borderRadius: '5px',
-                  color: 'white',
+                  color: 'white'
                 }}
                 InputProps={{
                   style: { color: 'white' },
                   inputProps: {
                     min: 0,
-                    step: '1',
-                  },
+                    step: '1'
+                  }
                 }}
                 InputLabelProps={{
-                  style: { color: '#fff' },
+                  style: { color: '#fff' }
                 }}
               />
-              <Button
-                click={() => updateEventHandler(event._id)}
-                fill
-                style={{ padding: '12px' }}
-              >
+              <Button click={() => updateEventHandler(event._id)} fill style={{ padding: '12px' }}>
                 Update
               </Button>
             </AdminRow>

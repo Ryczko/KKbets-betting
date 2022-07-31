@@ -16,8 +16,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 import { IUserFrontend } from '@kkbets/api-interfaces';
 
 function UserPage(props: WithAlertProps): JSX.Element {
-  const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } =
-    useContext(AuthContext);
+  const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [newUsername, setNewUsername] = useState('');
@@ -49,12 +48,12 @@ function UserPage(props: WithAlertProps): JSX.Element {
     try {
       const res = await axiosConfig.patch('/users', {
         username: newUsername,
-        showAvatar: displayAvatar,
+        showAvatar: displayAvatar
       });
       setUserData({
         ...userData,
         showAvatar: res.data.showAvatar,
-        username: res.data.username,
+        username: res.data.username
       });
       props.setIsSuccessOpened(true);
     } catch (err) {
@@ -70,20 +69,12 @@ function UserPage(props: WithAlertProps): JSX.Element {
       <StyledUserPage>
         <div className="user-profile">
           <div className="avatar-box">
-            <Avatar
-              src={userData.showAvatar ? userData.avatarUrl : ''}
-              width="90px"
-            />
+            <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} width="90px" />
           </div>
           <div className="badges">
             {userData.badges && userData.badges?.length > 0 ? (
               userData.badges?.map((badge) => (
-                <Badge
-                  key={badge.name}
-                  name={badge.name}
-                  description={badge.description}
-                  src={badge.image}
-                />
+                <Badge key={badge.name} name={badge.name} description={badge.description} src={badge.image} />
               ))
             ) : (
               <h3 className="title">User currently has no badge</h3>
@@ -92,11 +83,7 @@ function UserPage(props: WithAlertProps): JSX.Element {
         </div>
 
         <form>
-          <Input
-            placeholder="name"
-            onChange={handleusernameChange}
-            value={newUsername}
-          />
+          <Input placeholder="name" onChange={handleusernameChange} value={newUsername} />
           <FormControlLabel
             control={
               <Switch
@@ -108,18 +95,11 @@ function UserPage(props: WithAlertProps): JSX.Element {
             label="Display Google avatar"
           />
           <br />
-          <Button
-            click={(e) => saveHandler(e)}
-            fill
-            style={{ marginTop: '20px', width: '90px' }}
-          >
+          <Button click={(e) => saveHandler(e)} fill style={{ marginTop: '20px', width: '90px' }}>
             Save
           </Button>
 
-          <Button
-            click={(e) => logoutHandler(e)}
-            style={{ marginTop: '10px', width: '90px' }}
-          >
+          <Button click={(e) => logoutHandler(e)} style={{ marginTop: '10px', width: '90px' }}>
             Logout
           </Button>
         </form>

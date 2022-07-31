@@ -5,52 +5,52 @@ import * as mongoose from 'mongoose';
 const eventSchema = new mongoose.Schema<IEventBackend>({
   date: {
     type: Date,
-    required: true,
+    required: true
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
-    required: true,
+    required: true
   },
   ended: {
     type: Boolean,
-    default: false,
+    default: false
   },
   important: {
     type: Boolean,
-    default: false,
+    default: false
   },
   teamHome: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Team',
-    require: true,
+    require: true
   },
   teamAway: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Team',
-    require: true,
+    require: true
   },
   teamHomeScore: {
-    type: Number,
+    type: Number
   },
   teamAwayScore: {
-    type: Number,
+    type: Number
   },
   courseHomeWin: {
     type: Number,
-    require: true,
+    require: true
   },
   courseAwayWin: {
     type: Number,
-    require: true,
+    require: true
   },
   courseDraw: {
     type: Number,
-    require: true,
+    require: true
   },
   otherCourses: {
-    type: Object,
-  },
+    type: Object
+  }
 });
 
 const Event = mongoose.model<IEventBackend>('Event', eventSchema);
@@ -68,7 +68,7 @@ function validateEvent(event: typeof Event): Joi.ValidationResult {
     courseHomeWin: Joi.number().required(),
     courseAwayWin: Joi.number().required(),
     courseDraw: Joi.number().required(),
-    otherCourses: Joi.object(),
+    otherCourses: Joi.object()
   });
 
   return schema.validate(event);

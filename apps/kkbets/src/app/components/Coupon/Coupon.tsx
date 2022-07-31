@@ -18,19 +18,12 @@ function Coupon(props: WithAlertProps): JSX.Element {
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const { userData, setUserData, isLogged } = useContext(AuthContext);
-  const possibleWinning = useSelector<
-    AppState,
-    AppState['coupon']['possibleWinnings']
-  >((state) => state.coupon.possibleWinnings);
-  const events = useSelector<AppState, AppState['coupon']['events']>(
-    (state) => state.coupon.events
+  const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
+    (state) => state.coupon.possibleWinnings
   );
-  const amount = useSelector<AppState, AppState['coupon']['amount']>(
-    (state) => state.coupon.amount
-  );
-  const totalRate = useSelector<AppState, AppState['coupon']['totalRate']>(
-    (state) => state.coupon.totalRate
-  );
+  const events = useSelector<AppState, AppState['coupon']['events']>((state) => state.coupon.events);
+  const amount = useSelector<AppState, AppState['coupon']['amount']>((state) => state.coupon.amount);
+  const totalRate = useSelector<AppState, AppState['coupon']['totalRate']>((state) => state.coupon.totalRate);
   const dispatch = useDispatch();
   const refSlider = useRef<HTMLInputElement>(null);
   const refError = useRef<HTMLDivElement>(null);
@@ -52,17 +45,14 @@ function Coupon(props: WithAlertProps): JSX.Element {
   const betCouponHandler = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
     if (!isLogged) {
-      window.open(
-        `${process.env.NX_APP_API_URL || 'http://localhost:3333'}/api/google`,
-        '_self'
-      );
+      window.open(`${process.env.NX_APP_API_URL || 'http://localhost:3333'}/api/google`, '_self');
       return;
     }
     setIsLoaded(false);
 
     const data = {
       betData: events,
-      amount,
+      amount
     };
 
     try {
@@ -85,11 +75,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
   return (
     <StyledCoupon>
       <div className="top">
-        Your coupon{' '}
-        <i
-          className="icon-trash-empty"
-          onClick={() => dispatch(removeAllEvents())}
-        />
+        Your coupon <i className="icon-trash-empty" onClick={() => dispatch(removeAllEvents())} />
       </div>
       <div ref={refError} className="error">
         {error}
@@ -131,11 +117,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
                   ref={refSlider}
                   size="small"
                 />
-                <input
-                  className="value-field"
-                  value={amount}
-                  onChange={(e) => typeAmountHandler(e.target.value)}
-                />
+                <input className="value-field" value={amount} onChange={(e) => typeAmountHandler(e.target.value)} />
               </div>
 
               <div className="info">

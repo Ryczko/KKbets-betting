@@ -15,18 +15,10 @@ function Avatar(props: AvatarProps): JSX.Element {
   return (
     <StyledAvatar className={props.className} width={props.width || '50px'}>
       {props.blockLink ? (
-        <img
-          style={props.style}
-          src={props.src && props.src !== '' ? props.src : avatarPhoto}
-          alt="avatar"
-        />
+        <img style={props.style} src={props.src && props.src !== '' ? props.src : avatarPhoto} alt="avatar" />
       ) : (
         <Link to="/account">
-          <img
-            style={props.style}
-            src={props.src && props.src !== '' ? props.src : avatarPhoto}
-            alt="avatar"
-          />
+          <img style={props.style} src={props.src && props.src !== '' ? props.src : avatarPhoto} alt="avatar" />
         </Link>
       )}
     </StyledAvatar>

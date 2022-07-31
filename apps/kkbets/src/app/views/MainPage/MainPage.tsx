@@ -17,9 +17,7 @@ import MatchMin from '../../components/Events/MatchMin';
 import { IEventFrontend } from '@kkbets/api-interfaces';
 
 function MainPage(): JSX.Element {
-  const [importantMatches, setImportantMatches] = useState<IEventFrontend[]>(
-    []
-  );
+  const [importantMatches, setImportantMatches] = useState<IEventFrontend[]>([]);
   const [matches, setMatches] = useState<IEventFrontend[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -30,9 +28,7 @@ function MainPage(): JSX.Element {
 
   const loadData = async () => {
     try {
-      const res = await axiosConfig.get<IEventFrontend[]>(
-        '/events?ended=false&started=false'
-      );
+      const res = await axiosConfig.get<IEventFrontend[]>('/events?ended=false&started=false');
       const matches = res.data.filter((match) => !match.important);
       const ImportantMatches = res.data.filter((match) => match.important);
 
@@ -54,22 +50,11 @@ function MainPage(): JSX.Element {
       <Banner image={euroBanner} />
       {!isLoaded && <Loader />}
       {isLoaded && importantMatches.length === 0 && matches.length === 0 && (
-        <h3 style={{ marginTop: '50px' }}>
-          There are no active events at the moment
-        </h3>
+        <h3 style={{ marginTop: '50px' }}>There are no active events at the moment</h3>
       )}
       <div className="matches-container">
         {importantMatches.map(
-          ({
-            _id,
-            date,
-            teamAway,
-            teamHome,
-            category,
-            courseAwayWin,
-            courseDraw,
-            courseHomeWin,
-          }) => (
+          ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
             <ImportantMatch
               key={_id}
               eventId={_id}
@@ -86,30 +71,19 @@ function MainPage(): JSX.Element {
       </div>
 
       <div style={{ marginTop: '30px' }}>
-        {matches.map(
-          ({
-            _id,
-            date,
-            teamAway,
-            teamHome,
-            category,
-            courseAwayWin,
-            courseDraw,
-            courseHomeWin,
-          }) => (
-            <MatchMin
-              key={_id}
-              eventId={_id}
-              league={category?.name}
-              date={transformDate(date.toString())}
-              teamAway={teamAway}
-              teamHome={teamHome}
-              courseAwayWin={courseAwayWin}
-              courseDraw={courseDraw}
-              courseHomeWin={courseHomeWin}
-            />
-          )
-        )}
+        {matches.map(({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
+          <MatchMin
+            key={_id}
+            eventId={_id}
+            league={category?.name}
+            date={transformDate(date.toString())}
+            teamAway={teamAway}
+            teamHome={teamHome}
+            courseAwayWin={courseAwayWin}
+            courseDraw={courseDraw}
+            courseHomeWin={courseHomeWin}
+          />
+        ))}
       </div>
     </StyledMainPage>
   );

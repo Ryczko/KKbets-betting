@@ -6,16 +6,16 @@ const messageSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   date: {
     type: Date,
-    required: true,
+    required: true
   },
   message: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const Message = mongoose.model<IMessageBackend>('Message', messageSchema);
@@ -24,7 +24,7 @@ function validateMessage(message: typeof Message): Joi.ValidationResult {
   const schema = Joi.object({
     message: Joi.string().required(),
     user: Joi.string().required(),
-    date: Joi.date().required(),
+    date: Joi.date().required()
   });
 
   return schema.validate(message);

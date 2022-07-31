@@ -21,11 +21,11 @@ function AdminInputPicker(props: AdminInputPickerProps): JSX.Element {
           style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
           {...params}
           InputLabelProps={{
-            style: { color: '#fff' },
+            style: { color: '#fff' }
           }}
           InputProps={{
             ...params.InputProps,
-            style: { color: 'white' },
+            style: { color: 'white' }
           }}
           label={props.label}
           variant="outlined"

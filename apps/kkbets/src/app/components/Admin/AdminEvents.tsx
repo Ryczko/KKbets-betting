@@ -10,9 +10,7 @@ import { ITeamFrontend } from '@kkbets/api-interfaces';
 
 function AdminEvents(props: WithAlertProps): JSX.Element {
   const [teamsList, setTeamsList] = useState<ITeamFrontend[]>([]);
-  const [categoriesList, setCategoriesList] = useState<
-    { _id: string; name: string }[]
-  >([]);
+  const [categoriesList, setCategoriesList] = useState<{ _id: string; name: string }[]>([]);
 
   const [teamHome, setTeamHome] = useState('');
   const [teamAway, setTeamAway] = useState('');
@@ -52,7 +50,7 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
         courseAwayWin,
         date: new Date(day + ' ' + time),
         category,
-        important: highlight,
+        important: highlight
       });
       props.setIsSuccessOpened(true);
     } catch (err) {
@@ -64,62 +62,22 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
   return (
     <>
       <AdminRow>
-        <AdminInputPicker
-          options={teamsList}
-          update={setTeamHome}
-          label="Team home"
-        />
+        <AdminInputPicker options={teamsList} update={setTeamHome} label="Team home" />
         <div>VS</div>
-        <AdminInputPicker
-          options={teamsList}
-          update={setTeamAway}
-          label="Team away"
-        />
+        <AdminInputPicker options={teamsList} update={setTeamAway} label="Team away" />
       </AdminRow>
       <AdminRow>
-        <AdminInput
-          label="Home win course"
-          type="number"
-          update={setCourseHomeWin}
-          min={1}
-          step={0.1}
-        />
-        <AdminInput
-          label="Draw course"
-          type="number"
-          update={setCourseDraw}
-          min={1}
-          step={0.1}
-        />
-        <AdminInput
-          label="Away win course"
-          type="number"
-          update={setCourseAwayWin}
-          min={1}
-          step={0.1}
-        />
+        <AdminInput label="Home win course" type="number" update={setCourseHomeWin} min={1} step={0.1} />
+        <AdminInput label="Draw course" type="number" update={setCourseDraw} min={1} step={0.1} />
+        <AdminInput label="Away win course" type="number" update={setCourseAwayWin} min={1} step={0.1} />
       </AdminRow>
       <AdminRow>
         <AdminInput label="Event day" type="date" update={setDay} value={day} />
-        <input
-          type="time"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-        />
-        <AdminInputPicker
-          options={categoriesList}
-          update={setCategory}
-          label="Category"
-        />
+        <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+        <AdminInputPicker options={categoriesList} update={setCategory} label="Category" />
 
         <FormControlLabel
-          control={
-            <Switch
-              checked={highlight}
-              onChange={(e) => setHighlight(e.target.checked)}
-              color="primary"
-            />
-          }
+          control={<Switch checked={highlight} onChange={(e) => setHighlight(e.target.checked)} color="primary" />}
           label="Highlight"
         />
       </AdminRow>

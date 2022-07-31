@@ -11,18 +11,14 @@ interface LeftNavigationProps {
 function LeftNavigation(props: LeftNavigationProps): JSX.Element {
   const [activeLeftContent, setActiveLeftContent] = useState('football');
 
-  const changeCategory = (
-    name: string,
-    e: React.MouseEvent<HTMLElement>
-  ): void => {
+  const changeCategory = (name: string, e: React.MouseEvent<HTMLElement>): void => {
     setActiveLeftContent(name);
     const activeElement = document.querySelector('.left-nav-icon.active');
 
     if (activeElement) activeElement.classList.remove('active');
 
     const target = e.target as Element;
-    if (target && target.parentElement)
-      target.parentElement.classList.add('active');
+    if (target && target.parentElement) target.parentElement.classList.add('active');
     props.open();
   };
 
@@ -30,38 +26,22 @@ function LeftNavigation(props: LeftNavigationProps): JSX.Element {
     <div className="display-above-md">
       <StyledLeftNavigation>
         <div className="left-nav-icon active">
-          <i
-            className="icon-soccer-ball "
-            onClick={(e) => changeCategory('football', e)}
-          />
+          <i className="icon-soccer-ball " onClick={(e) => changeCategory('football', e)} />
         </div>
         <div className="left-nav-icon">
-          <i
-            className="icon-clipboard"
-            onClick={(e) => changeCategory('coupons', e)}
-          />
+          <i className="icon-clipboard" onClick={(e) => changeCategory('coupons', e)} />
         </div>
         <div className="left-nav-icon">
-          <i
-            className="icon-award"
-            onClick={(e) => changeCategory('ranking', e)}
-          />
+          <i className="icon-award" onClick={(e) => changeCategory('ranking', e)} />
         </div>
         <div className="left-nav-icon">
           <i className="icon-chat" onClick={(e) => changeCategory('chat', e)} />
         </div>
         <div className="left-nav-icon">
-          <i
-            className="icon-info-circled"
-            onClick={(e) => changeCategory('info', e)}
-          />
+          <i className="icon-info-circled" onClick={(e) => changeCategory('info', e)} />
         </div>
       </StyledLeftNavigation>
-      <LeftNavigationView
-        activeContent={activeLeftContent}
-        close={props.close}
-        active={props.active}
-      />
+      <LeftNavigationView activeContent={activeLeftContent} close={props.close} active={props.active} />
     </div>
   );
 }

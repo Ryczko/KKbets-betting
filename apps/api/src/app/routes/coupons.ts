@@ -1,4 +1,4 @@
-import * as express from 'express'
+import * as express from 'express';
 
 import { getCoupon, getUsersCoupons, postCoupon } from '../controllers/coupon';
 import { isAuthenticated } from '../middleware/isAuthenticated';

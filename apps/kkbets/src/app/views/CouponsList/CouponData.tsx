@@ -21,10 +21,7 @@ function CouponData(props: CouponDataProps): JSX.Element {
         <div className="amount">{props.amount} $</div>
         <div className="win">{props.possiblyWin} $</div>
 
-        <Status
-          style={{ width: '28px', height: '28px', fontSize: '16px' }}
-          status={props.state}
-        ></Status>
+        <Status style={{ width: '28px', height: '28px', fontSize: '16px' }} status={props.state}></Status>
       </StyledCouponData>
     </Link>
   );
