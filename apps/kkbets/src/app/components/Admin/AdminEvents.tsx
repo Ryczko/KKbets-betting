@@ -4,12 +4,12 @@ import { AdminRow } from './AdminStyles.css';
 import AdminInput from './AdminInput/AdminInput';
 import axiosConfig from '../../utilities/axiosConfig';
 import Button from '../../shared/Button/Button';
-import { ITeam } from '../../types/Team.model';
 import withAlert, { WithAlertProps } from '../../Hoc/withAlert';
 import { FormControlLabel, Switch } from '@mui/material';
+import { ITeamFrontend } from '@kkbets/api-interfaces';
 
 function AdminEvents(props: WithAlertProps): JSX.Element {
-  const [teamsList, setTeamsList] = useState<ITeam[]>([]);
+  const [teamsList, setTeamsList] = useState<ITeamFrontend[]>([]);
   const [categoriesList, setCategoriesList] = useState<
     { _id: string; name: string }[]
   >([]);

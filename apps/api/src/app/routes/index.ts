@@ -1,21 +1,20 @@
 import * as express from 'express';
-import  { static as serveStatic } from 'express';
 import categories from './categories';
 import teams from './teams';
 import events from './events';
 import google from './google';
 import coupons from './coupons';
-import { IUser } from '../models/User';
 import me from './me';
 import users from './users';
 import bonus from './bonus';
-import * as path from 'path';
+import { IUserBackend } from '@kkbets/api-interfaces';
 import messages from './messages';
+import * as mongoose from 'mongoose';
 
 declare module 'express' {
-    export interface Request {
-        user: IUser;
-    }
+  export interface Request {
+    user: IUserBackend & mongoose.Document;
+  }
 }
 
 const router = express.Router();
@@ -29,6 +28,5 @@ router.use('/api/me', me);
 router.use('/api/users', users);
 router.use('/api/bonus', bonus);
 router.use('/api/messages', messages);
-
 
 export default router;

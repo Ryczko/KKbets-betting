@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { StyledMainPage } from './MainPage.css';
 
 import euroBanner from '../../../assets/images/euro-banner.png';
-import { IMatch } from '../../types/Match.model';
 import Banner from '../../components/Banner/Banner';
 import ImportantMatch from '../../components/Events/ImportantMatch';
 import { getCouponFromStorage } from '../../store/actions';
@@ -15,9 +14,13 @@ import EventCounterMobile from '../../components/Coupon/EventCounterMobile';
 import DailyBonus from '../../components/User/DailyBonus';
 import MatchMin from '../../components/Events/MatchMin';
 
+import { IEventFrontend } from '@kkbets/api-interfaces';
+
 function MainPage(): JSX.Element {
-  const [importantMatches, setImportantMatches] = useState<IMatch[]>([]);
-  const [matches, setMatches] = useState<IMatch[]>([]);
+  const [importantMatches, setImportantMatches] = useState<IEventFrontend[]>(
+    []
+  );
+  const [matches, setMatches] = useState<IEventFrontend[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const dispatch = useDispatch();
 
@@ -27,13 +30,11 @@ function MainPage(): JSX.Element {
 
   const loadData = async () => {
     try {
-      const res = await axiosConfig.get('/events?ended=false&started=false');
-      const matches: IMatch[] = res.data.filter(
-        (match: IMatch) => !match.important
+      const res = await axiosConfig.get<IEventFrontend[]>(
+        '/events?ended=false&started=false'
       );
-      const ImportantMatches: IMatch[] = res.data.filter(
-        (match: IMatch) => match.important
-      );
+      const matches = res.data.filter((match) => !match.important);
+      const ImportantMatches = res.data.filter((match) => match.important);
 
       setImportantMatches(ImportantMatches);
       setMatches(matches);
@@ -73,7 +74,7 @@ function MainPage(): JSX.Element {
               key={_id}
               eventId={_id}
               league={category?.name}
-              date={transformDate(date)}
+              date={transformDate(date.toString())}
               teamAway={teamAway}
               teamHome={teamHome}
               courseAwayWin={courseAwayWin}
@@ -100,7 +101,7 @@ function MainPage(): JSX.Element {
               key={_id}
               eventId={_id}
               league={category?.name}
-              date={transformDate(date)}
+              date={transformDate(date.toString())}
               teamAway={teamAway}
               teamHome={teamHome}
               courseAwayWin={courseAwayWin}

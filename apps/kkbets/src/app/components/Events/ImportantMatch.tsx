@@ -1,12 +1,12 @@
+import { ITeamFrontend } from '@kkbets/api-interfaces';
 import withAddEvent, { WithAddEvent } from '../../Hoc/withAddEvent';
-import { ITeam } from '../../types/Team.model';
 import { StyledImportantMatch } from './ImportantMatch.css';
 
 export interface MatchProps {
   eventId: string;
   league: string;
-  teamHome: ITeam;
-  teamAway: ITeam;
+  teamHome: ITeamFrontend;
+  teamAway: ITeamFrontend;
   date: string;
   courseHomeWin: number;
   courseAwayWin: number;

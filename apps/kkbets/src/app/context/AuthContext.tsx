@@ -1,24 +1,56 @@
-import React from 'react';
-import { IBadge } from '../types/Badge.model';
+import { IUserFrontend } from '@kkbets/api-interfaces';
+import { createContext, useEffect, useState } from 'react';
+import axiosConfig from '../utilities/axiosConfig';
 
-export interface IUser {
-  points?: number;
-  username?: string;
-  email?: string;
-  avatarUrl?: string;
-  showAvatar?: boolean;
-  admin?: boolean;
-  bonusDate?: Date;
-  _id?: string;
-  badges?: IBadge[];
-}
-
-interface IAuthContextProps {
+interface IAuthContext {
   isLogged: boolean;
   setIsLogged: (atr: boolean) => void;
   isUserDataLoaded: boolean;
-  userData: IUser;
-  setUserData: (atr: IUser) => void;
+  userData: IUserFrontend;
+  setUserData: (atr: IUserFrontend) => void;
 }
 
-export const AuthContext = React.createContext({} as IAuthContextProps);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [isUserDataLoaded, setIsUserDataLoaded] = useState<boolean>(false);
+  const [userData, setUserData] = useState<IUserFrontend>({} as IUserFrontend);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    await axiosConfig
+      .get('/me', {
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setUserData(res.data);
+          setIsLogged(true);
+        } else {
+          setIsLogged(false);
+        }
+      })
+      .catch(() => {
+        setIsLogged(false);
+      });
+    setIsUserDataLoaded(true);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ isLogged, setIsLogged, userData, setUserData, isUserDataLoaded }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};

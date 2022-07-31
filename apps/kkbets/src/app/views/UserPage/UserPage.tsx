@@ -13,6 +13,7 @@ import Input from '../../shared/Input/Input';
 import Button from '../../shared/Button/Button';
 import Loader from '../../shared/Spinner/Loader';
 import { FormControlLabel, Switch } from '@mui/material';
+import { IUserFrontend } from '@kkbets/api-interfaces';
 
 function UserPage(props: WithAlertProps): JSX.Element {
   const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } =
@@ -34,7 +35,7 @@ function UserPage(props: WithAlertProps): JSX.Element {
     document.cookie = `jwt= ; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
     navigate('/');
     setIsLogged(false);
-    setUserData({});
+    setUserData({} as IUserFrontend);
   };
 
   const handleusernameChange = (val: string): void => {

@@ -1,5 +1,5 @@
+import { EventsStates } from '@kkbets/api-interfaces';
 import React, { CSSProperties } from 'react';
-import { EventsStates } from '../../types/EventState.model';
 import { StyledStatus } from './Status.css';
 
 export interface StatusProps {
