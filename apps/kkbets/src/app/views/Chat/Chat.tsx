@@ -27,9 +27,7 @@ function Chat(): JSX.Element {
 
   useEffect(() => {
     loadMessages();
-    const socket = io(
-      `${process.env.NX_APP_API_URL || 'http://localhost:3333'}`
-    );
+    const socket = io(`${process.env.NX_APP_API_URL || 'http://localhost:3333'}`);
     socket.on('Output Chat Message', (message: Message) => {
       receivedMessage(message);
     });
@@ -67,7 +65,7 @@ function Chat(): JSX.Element {
 
     await axiosConfig.post('/messages', {
       chatMessage,
-      user: userId,
+      user: userId
     });
 
     setChatMessage('');

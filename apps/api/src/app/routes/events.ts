@@ -1,4 +1,4 @@
-import * as express from 'express'
+import * as express from 'express';
 import { getEvents, postEvent, updateEvent } from '../controllers/event';
 import { checkAdminPermissions } from '../middleware/checkAdminPermissions';
 import { isAuthenticated } from '../middleware/isAuthenticated';

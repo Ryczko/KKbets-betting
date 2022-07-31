@@ -12,7 +12,6 @@ export const StyledMainView = styled.div<MainViewProps>`
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     box-sizing: content-box;
     max-width: 1100px;
-    padding: 60px calc(21% + 20px) 25px
-      ${({ tight }) => (tight ? '380px' : '80px')};
+    padding: 60px calc(21% + 20px) 25px ${({ tight }) => (tight ? '380px' : '80px')};
   }
 `;

@@ -13,7 +13,7 @@ function DailyBonus(): JSX.Element {
       setUserData({
         ...userData,
         points: userData.points! + 50,
-        bonusDate: new Date(),
+        bonusDate: new Date()
       });
     } catch (err) {
       console.log(err);
@@ -23,16 +23,12 @@ function DailyBonus(): JSX.Element {
   if (userData.bonusDate) {
     return (
       <StyledDailyBonus onClick={clickHandler}>
-        {new Date().getTime() - new Date(userData.bonusDate).getTime() >
-        864e5 ? (
+        {new Date().getTime() - new Date(userData.bonusDate).getTime() > 864e5 ? (
           <p>Click to claim daily 50$ </p>
         ) : (
           <p>
             Daily bonus will be available in{' '}
-            <Countdown
-              daysInHours={true}
-              date={new Date(userData.bonusDate).getTime() + 864e5}
-            />
+            <Countdown daysInHours={true} date={new Date(userData.bonusDate).getTime() + 864e5} />
           </p>
         )}
       </StyledDailyBonus>

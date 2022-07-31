@@ -9,31 +9,28 @@ Place your bets and fight for the best place in the ranking.
 
 ## 🧐 Features
 
--   Login/registration using Google
--   Sports betting
--   Collecting points
--   Overview of the bets placed
--   Editing a profile
--   User ranking
--   Live chat
--   Daily bonuses
--   Admin page
+- Login/registration using Google
+- Sports betting
+- Collecting points
+- Overview of the bets placed
+- Editing a profile
+- User ranking
+- Live chat
+- Daily bonuses
+- Admin page
 
 ## 🚀 Technologies
 
--   React
--   Typescript
--   Node
--   Express
--   Redux
--   Passport.js
--   Material UI
--   React-router
--   Styled-components
--   Socket.io
-
-
-
+- React
+- Typescript
+- Node
+- Express
+- Redux
+- Passport.js
+- Material UI
+- React-router
+- Styled-components
+- Socket.io
 
 This project was generated using [Nx](https://nx.dev).
 

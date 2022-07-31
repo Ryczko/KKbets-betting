@@ -12,11 +12,7 @@ interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
-export const AuthContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [isUserDataLoaded, setIsUserDataLoaded] = useState<boolean>(false);
   const [userData, setUserData] = useState<IUserFrontend>({} as IUserFrontend);
@@ -29,8 +25,8 @@ export const AuthContextProvider = ({
     await axiosConfig
       .get('/me', {
         headers: {
-          'Cache-Control': 'no-cache',
-        },
+          'Cache-Control': 'no-cache'
+        }
       })
       .then((res) => {
         if (res.status === 200) {
@@ -47,9 +43,7 @@ export const AuthContextProvider = ({
   };
 
   return (
-    <AuthContext.Provider
-      value={{ isLogged, setIsLogged, userData, setUserData, isUserDataLoaded }}
-    >
+    <AuthContext.Provider value={{ isLogged, setIsLogged, userData, setUserData, isUserDataLoaded }}>
       {children}
     </AuthContext.Provider>
   );

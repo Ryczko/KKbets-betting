@@ -8,19 +8,12 @@ export interface WithAddEvent {
 }
 
 const withAddEvent =
-  (
-    Component: React.ComponentType<MatchProps & WithAddEvent>
-  ): React.FC<MatchProps> =>
+  (Component: React.ComponentType<MatchProps & WithAddEvent>): React.FC<MatchProps> =>
   (props) => {
     const dispatch = useDispatch();
     const addEventHandler = (e: React.MouseEvent<HTMLElement>) => {
       const target = e.target as HTMLTextAreaElement;
-      if (
-        target &&
-        target.parentElement &&
-        target.dataset.bet &&
-        target.dataset.course
-      ) {
+      if (target && target.parentElement && target.dataset.bet && target.dataset.course) {
         const activeElement = target.parentElement.querySelector('.active');
         if (activeElement) {
           activeElement.classList.remove('active');

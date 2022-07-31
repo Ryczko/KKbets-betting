@@ -10,18 +10,10 @@ export const transformDate = (date: string): string => {
   let time = `${day}.${month}  ${hour}:${minutes}`;
 
   const actualDate = new Date();
-  if (
-    actualDate.getFullYear() === year &&
-    actualDate.getMonth() === month &&
-    actualDate.getDate() === day
-  ) {
+  if (actualDate.getFullYear() === year && actualDate.getMonth() === month && actualDate.getDate() === day) {
     time = `Today  ${hour}:${minutes}`;
   }
-  if (
-    actualDate.getFullYear() === year &&
-    actualDate.getMonth() === month &&
-    actualDate.getDate() === day - 1
-  ) {
+  if (actualDate.getFullYear() === year && actualDate.getMonth() === month && actualDate.getDate() === day - 1) {
     time = `Tomorrow  ${hour}:${minutes}`;
   }
 

@@ -5,9 +5,7 @@ import { useSelector } from 'react-redux';
 import { AppState } from '../../store/actions';
 
 function CouponMobile(): JSX.Element | null {
-  const events = useSelector<AppState, AppState['coupon']['events']>(
-    (state) => state.coupon.events
-  );
+  const events = useSelector<AppState, AppState['coupon']['events']>((state) => state.coupon.events);
 
   if (events.length > 0) {
     return ReactDom.createPortal(

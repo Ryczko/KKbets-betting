@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import RankingPlace, {
-  RankingPlaceProps,
-} from '../../components/Ranking/RankingPlace';
+import RankingPlace, { RankingPlaceProps } from '../../components/Ranking/RankingPlace';
 import TopPlaces from '../../components/Ranking/TopPlaces';
 import Loader from '../../shared/Spinner/Loader';
 import axiosConfig from '../../utilities/axiosConfig';

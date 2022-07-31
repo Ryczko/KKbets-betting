@@ -23,10 +23,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, Access-Control-Allow-Headers, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control'
   );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET,POST,PATCH,DELETE,OPTIONS'
-  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS');
   next();
 });
 
@@ -50,7 +47,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    useCreateIndex: true,
+    useCreateIndex: true
   })
   .then(() => {
     if (env === 'development') console.log('connected to db');

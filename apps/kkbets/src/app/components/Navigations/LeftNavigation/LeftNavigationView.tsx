@@ -13,11 +13,7 @@ export interface LeftNavigationViewProps {
   close: () => void;
 }
 
-function LeftNavigationView({
-  activeContent,
-  close,
-  active,
-}: LeftNavigationViewProps): JSX.Element {
+function LeftNavigationView({ activeContent, close, active }: LeftNavigationViewProps): JSX.Element {
   let content = null;
 
   content = 'Left Navigation space';

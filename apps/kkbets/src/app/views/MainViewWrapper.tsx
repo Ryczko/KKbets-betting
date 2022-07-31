@@ -24,11 +24,7 @@ function MainViewWrapper(): JSX.Element {
       <TopNavigation />
       <MobileNavigation />
       <main>
-        <LeftNavigation
-          open={openLeftMenu}
-          close={closeLeftMenu}
-          active={isLeftOpened}
-        />
+        <LeftNavigation open={openLeftMenu} close={closeLeftMenu} active={isLeftOpened} />
         <MainView tight={isLeftOpened} />
         <RightPanel />
       </main>

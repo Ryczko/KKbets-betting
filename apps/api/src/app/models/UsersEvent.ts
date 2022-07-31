@@ -1,9 +1,4 @@
-import {
-  BetTypes,
-  EventsStates,
-  IUsersEventBackend,
-  UserBets,
-} from '@kkbets/api-interfaces';
+import { BetTypes, EventsStates, IUsersEventBackend, UserBets } from '@kkbets/api-interfaces';
 import * as Joi from 'joi';
 import * as mongoose from 'mongoose';
 
@@ -11,39 +6,34 @@ const usersEventSchema = new mongoose.Schema<IUsersEventBackend>({
   coupon: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Coupon',
-    required: true,
+    required: true
   },
   state: {
     type: EventsStates,
-    default: EventsStates.PENDING,
+    default: EventsStates.PENDING
   },
   event: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Event',
-    required: true,
+    required: true
   },
   betType: {
     type: BetTypes,
-    require: true,
+    require: true
   },
   userBet: {
     type: UserBets,
-    require: true,
+    require: true
   },
   course: {
     type: Number,
-    require: true,
-  },
+    require: true
+  }
 });
 
-const UsersEvent = mongoose.model<IUsersEventBackend>(
-  'UsersEvent',
-  usersEventSchema
-);
+const UsersEvent = mongoose.model<IUsersEventBackend>('UsersEvent', usersEventSchema);
 
-function validateUsersEvent(
-  usersEvent: typeof UsersEvent
-): Joi.ValidationResult {
+function validateUsersEvent(usersEvent: typeof UsersEvent): Joi.ValidationResult {
   const schema = Joi.object({
     coupon: Joi.string().required(),
     state: Joi.string()
@@ -56,7 +46,7 @@ function validateUsersEvent(
     userBet: Joi.string()
       .valid(...Object.values(UserBets))
       .required(),
-    course: Joi.number().required(),
+    course: Joi.number().required()
   });
 
   return schema.validate(usersEvent);

@@ -31,7 +31,7 @@ export const addEvent = (
     course,
     eventId,
     eventName,
-    amount: 1,
+    amount: 1
   };
 };
 
@@ -41,7 +41,7 @@ export const removeAllEvents = (): { type: string } => {
     el.classList.remove('active');
   });
   return {
-    type: actionsTypes.COUPON_REMOVE_ALL,
+    type: actionsTypes.COUPON_REMOVE_ALL
   };
 };
 
@@ -53,21 +53,19 @@ export const removeEvent = (id: string): RemoveAction => {
 
   return {
     type: actionsTypes.COUPON_REMOVE_EVENT,
-    eventId: id,
+    eventId: id
   };
 };
 
 export const getCouponFromStorage = (): { type: string } => {
   return {
-    type: actionsTypes.COUPON_FROM_STORAGE,
+    type: actionsTypes.COUPON_FROM_STORAGE
   };
 };
 
-export const updateAmount = (
-  amount: number
-): { type: string; amount: number } => {
+export const updateAmount = (amount: number): { type: string; amount: number } => {
   return {
     type: actionsTypes.COUPON_UPDATE_AMOUNT,
-    amount,
+    amount
   };
 };

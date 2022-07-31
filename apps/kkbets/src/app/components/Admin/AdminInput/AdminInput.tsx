@@ -25,11 +25,11 @@ function AdminInput(props: AdminInputProps): JSX.Element {
         inputProps: {
           min: props.min,
           step: props.step,
-          max: props.max,
-        },
+          max: props.max
+        }
       }}
       InputLabelProps={{
-        style: { color: '#fff' },
+        style: { color: '#fff' }
       }}
     />
   );

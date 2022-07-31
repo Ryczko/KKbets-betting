@@ -10,7 +10,7 @@ function MatchMin({
   courseAwayWin,
   courseDraw,
   courseHomeWin,
-  addEventHandler,
+  addEventHandler
 }: MatchProps & WithAddEvent): JSX.Element {
   return (
     <StyledMatchMin data-eventid={eventId}>
@@ -30,28 +30,13 @@ function MatchMin({
           <div className="hint">2</div>
         </div>
         <div className="buttons">
-          <button
-            className="course"
-            data-bet="home"
-            data-course={courseHomeWin}
-            onClick={addEventHandler}
-          >
+          <button className="course" data-bet="home" data-course={courseHomeWin} onClick={addEventHandler}>
             {courseHomeWin}
           </button>
-          <button
-            className="course"
-            data-bet="draw"
-            data-course={courseDraw}
-            onClick={addEventHandler}
-          >
+          <button className="course" data-bet="draw" data-course={courseDraw} onClick={addEventHandler}>
             {courseDraw}
           </button>
-          <button
-            className="course"
-            data-bet="away"
-            data-course={courseAwayWin}
-            onClick={addEventHandler}
-          >
+          <button className="course" data-bet="away" data-course={courseAwayWin} onClick={addEventHandler}>
             {courseAwayWin}
           </button>
         </div>

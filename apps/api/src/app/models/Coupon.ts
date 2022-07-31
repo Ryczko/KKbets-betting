@@ -6,28 +6,28 @@ const couponSchema = new mongoose.Schema<ICouponBackend>({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   amount: {
     type: Number,
-    required: true,
+    required: true
   },
   totalCourse: {
     type: Number,
-    required: true,
+    required: true
   },
   state: {
     type: EventsStates,
-    default: EventsStates.PENDING,
+    default: EventsStates.PENDING
   },
   possiblyWin: {
     type: Number,
-    required: true,
+    required: true
   },
   date: {
     type: Date,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const Coupon = mongoose.model<ICouponBackend>('Coupon', couponSchema);
@@ -41,7 +41,7 @@ function validateCoupon(coupon: typeof Coupon): Joi.ValidationResult {
       .valid(...Object.values(EventsStates))
       .required(),
     possiblyWin: Joi.number().required(),
-    date: Joi.date().required(),
+    date: Joi.date().required()
   });
 
   return schema.validate(coupon);

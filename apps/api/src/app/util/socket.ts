@@ -7,8 +7,8 @@ export default {
   init: (httpServer) => {
     io = new Server(httpServer, {
       cors: {
-        origin: '*',
-      },
+        origin: '*'
+      }
     });
     return io;
   },
@@ -17,5 +17,5 @@ export default {
       throw new Error('Socket is not initialized!');
     }
     return io;
-  },
+  }
 };

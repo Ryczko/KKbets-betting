@@ -1,4 +1,4 @@
-import * as express from 'express'
+import * as express from 'express';
 import { getBonus } from '../controllers/bonus';
 
 import { isAuthenticated } from '../middleware/isAuthenticated';

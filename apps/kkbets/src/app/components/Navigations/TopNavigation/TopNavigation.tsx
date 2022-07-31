@@ -15,11 +15,7 @@ function TopNavigation(): JSX.Element {
       {isLogged ? (
         <div className="user-data">
           <Wallet />
-          <Avatar
-            src={userData.showAvatar ? userData.avatarUrl : ''}
-            className="display-above-sm"
-            width="45px"
-          />
+          <Avatar src={userData.showAvatar ? userData.avatarUrl : ''} className="display-above-sm" width="45px" />
         </div>
       ) : (
         <Auth />

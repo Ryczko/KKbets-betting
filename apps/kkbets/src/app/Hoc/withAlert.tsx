@@ -16,10 +16,7 @@ const StyledAlert = styled.div`
 `;
 
 const withAlert =
-  (
-    Component: React.ComponentType<WithAlertProps>,
-    successMessage?: string
-  ): React.FC =>
+  (Component: React.ComponentType<WithAlertProps>, successMessage?: string): React.FC =>
   (props: any) => {
     const [isSuccessOpened, setIsSuccessOpened] = useState(false);
     const [isErrorOpened, setIsErrorOpened] = useState(false);

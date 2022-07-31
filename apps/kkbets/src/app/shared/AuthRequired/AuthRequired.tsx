@@ -6,9 +6,7 @@ function AuthRequired(): JSX.Element {
   return (
     <>
       <Lock />
-      <h2 style={{ margin: '20px auto 25px' }}>
-        You must be logged in to view this page
-      </h2>
+      <h2 style={{ margin: '20px auto 25px' }}>You must be logged in to view this page</h2>
       {/* <Auth /> */}
     </>
   );

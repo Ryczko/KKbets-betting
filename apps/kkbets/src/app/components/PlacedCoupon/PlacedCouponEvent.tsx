@@ -11,19 +11,11 @@ export interface PlacedCouponEventProps {
   event: IEventFrontend;
 }
 
-function PlacedCouponEvent({
-  betType,
-  course,
-  state,
-  userBet,
-  event,
-}: PlacedCouponEventProps): JSX.Element {
+function PlacedCouponEvent({ betType, course, state, userBet, event }: PlacedCouponEventProps): JSX.Element {
   return (
     <StyledPlacedCouponEvent>
       <div className="event-info">
-        <div className="date">
-          {event && event.date ? transformDate(event.date.toString()) : '???'}
-        </div>
+        <div className="date">{event && event.date ? transformDate(event.date.toString()) : '???'}</div>
         <div className="bet-type">
           {betType}: <span className="value">{userBet}</span>
         </div>
@@ -47,10 +39,7 @@ function PlacedCouponEvent({
         <div className="score">
           {event?.teamHomeScore ?? '_'} : {event?.teamAwayScore ?? '_'}
         </div>
-        <Status
-          style={{ width: '28px', height: '28px', fontSize: '18px' }}
-          status={state}
-        ></Status>
+        <Status style={{ width: '28px', height: '28px', fontSize: '18px' }} status={state}></Status>
       </div>
     </StyledPlacedCouponEvent>
   );

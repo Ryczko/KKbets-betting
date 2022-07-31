@@ -21,11 +21,11 @@ export const getEvents = async (req: Request, res: Response): Promise<any> => {
     if (started !== undefined) {
       if (started === 'false') {
         query.date = {
-          $gt: new Date(),
+          $gt: new Date()
         };
       } else {
         query.date = {
-          $lt: new Date(),
+          $lt: new Date()
         };
       }
     }
@@ -34,15 +34,15 @@ export const getEvents = async (req: Request, res: Response): Promise<any> => {
       .sort({ date: 1 })
       .populate({
         path: 'teamHome',
-        model: Team,
+        model: Team
       })
       .populate({
         path: 'teamAway',
-        model: Team,
+        model: Team
       })
       .populate({
         path: 'category',
-        model: Category,
+        model: Category
       });
 
     res.send(eventsMainData);
@@ -53,16 +53,7 @@ export const getEvents = async (req: Request, res: Response): Promise<any> => {
 
 export const postEvent = async (req: Request, res: Response): Promise<any> => {
   try {
-    const {
-      date,
-      category,
-      teamHome,
-      teamAway,
-      courseHomeWin,
-      courseAwayWin,
-      courseDraw,
-      important,
-    } = req.body;
+    const { date, category, teamHome, teamAway, courseHomeWin, courseAwayWin, courseDraw, important } = req.body;
     const event = new Event({
       date,
       category,
@@ -71,7 +62,7 @@ export const postEvent = async (req: Request, res: Response): Promise<any> => {
       courseHomeWin,
       courseAwayWin,
       courseDraw,
-      important,
+      important
     });
     const { error } = validateEvent(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -82,10 +73,7 @@ export const postEvent = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-export const updateEvent = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+export const updateEvent = async (req: Request, res: Response): Promise<any> => {
   try {
     const { teamHomeScore, teamAwayScore } = req.body;
     const eventId = req.params.id;
@@ -96,17 +84,12 @@ export const updateEvent = async (
       return res.status(404).send('Incorrect data.');
     }
     await event.updateOne({
-      $set: { teamHomeScore, teamAwayScore, ended: true },
+      $set: { teamHomeScore, teamAwayScore, ended: true }
     });
 
     const usersEvents = await UsersEvent.find({ event: event._id });
     for (let i = 0; i < usersEvents.length; i++) {
-      const result = resolveUserEvent(
-        usersEvents[i].betType,
-        usersEvents[i].userBet,
-        teamHomeScore,
-        teamAwayScore
-      );
+      const result = resolveUserEvent(usersEvents[i].betType, usersEvents[i].userBet, teamHomeScore, teamAwayScore);
       await usersEvents[i].updateOne({ $set: { state: result } });
 
       const coupon = await Coupon.findById(usersEvents[i].coupon);
@@ -117,11 +100,11 @@ export const updateEvent = async (
           couponState = EventsStates.LOST;
         } else {
           const allEventsInCoupon = await UsersEvent.find({
-            coupon: usersEvents[i].coupon,
+            coupon: usersEvents[i].coupon
           });
           const allWonEventsInCoupon = await UsersEvent.find({
             coupon: usersEvents[i].coupon,
-            state: EventsStates.WINNING,
+            state: EventsStates.WINNING
           });
           if (allEventsInCoupon.length === allWonEventsInCoupon.length) {
             couponState = EventsStates.WINNING;
