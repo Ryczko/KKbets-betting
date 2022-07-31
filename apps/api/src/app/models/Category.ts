@@ -1,25 +1,22 @@
-import * as Joi from 'joi'
+import * as Joi from 'joi';
 import * as mongoose from 'mongoose';
+import { ICategoryBackend } from '@kkbets/api-interfaces';
 
-interface ICategory extends mongoose.Document {
-    name: string;
-}
-
-const categorySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    }
+const categorySchema = new mongoose.Schema<ICategoryBackend>({
+  name: {
+    type: String,
+    required: true,
+  },
 });
 
-const Category = mongoose.model<ICategory>('Category', categorySchema);
+const Category = mongoose.model<ICategoryBackend>('Category', categorySchema);
 
 function validateCategory(category: typeof Category): Joi.ValidationResult {
-    const schema = Joi.object({
-        name: Joi.string().required()
-    });
+  const schema = Joi.object({
+    name: Joi.string().required(),
+  });
 
-    return schema.validate(category);
+  return schema.validate(category);
 }
 
 export { Category, validateCategory };

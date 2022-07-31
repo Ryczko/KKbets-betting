@@ -1,9 +1,9 @@
+import { ITeamFrontend } from '@kkbets/api-interfaces';
 import { TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import withAlert, { WithAlertProps } from '../../Hoc/withAlert';
 import Button from '../../shared/Button/Button';
 import Loader from '../../shared/Spinner/Loader';
-import { ITeam } from '../../types/Team.model';
 import axiosConfig from '../../utilities/axiosConfig';
 
 import { AdminRow } from './AdminStyles.css';
@@ -12,8 +12,8 @@ interface IEventToUpdate {
   _id: string;
   homeScore: number;
   awayScore: number;
-  teamHome: ITeam;
-  teamAway: ITeam;
+  teamHome: ITeamFrontend;
+  teamAway: ITeamFrontend;
 }
 
 function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
