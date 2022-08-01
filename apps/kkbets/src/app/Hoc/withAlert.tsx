@@ -1,3 +1,4 @@
+import { Alert, Snackbar } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -22,7 +23,7 @@ const withAlert =
     const [isErrorOpened, setIsErrorOpened] = useState(false);
     const [error, setError] = useState('');
 
-    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
       if (reason === 'clickaway') {
         return;
       }
@@ -38,16 +39,29 @@ const withAlert =
           setIsErrorOpened={setIsErrorOpened}
           setIsSuccessOpened={setIsSuccessOpened}
         />
-        {/* <Snackbar className="alert" open={isSuccessOpened} autoHideDuration={4000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="success">
-                    {successMessage || 'Success'}
-                </Alert>
-            </Snackbar>
-            <Snackbar className="alert" open={isErrorOpened} autoHideDuration={4000} onClose={handleClose}>
-                <Alert variant="filled" onClose={handleClose} severity="error">
-                    {error}
-                </Alert>
-            </Snackbar> */}
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          className="alert"
+          open={isSuccessOpened}
+          autoHideDuration={4000}
+          onClose={handleClose}
+        >
+          <Alert variant="filled" onClose={handleClose} severity="success">
+            {successMessage || 'Success'}
+          </Alert>
+        </Snackbar>
+
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          className="alert"
+          open={isErrorOpened}
+          autoHideDuration={4000}
+          onClose={handleClose}
+        >
+          <Alert variant="filled" onClose={handleClose} severity="error">
+            {error}
+          </Alert>
+        </Snackbar>
       </StyledAlert>
     );
   };
