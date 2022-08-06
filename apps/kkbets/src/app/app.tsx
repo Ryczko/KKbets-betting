@@ -2,17 +2,15 @@ import GlobalStyles from '../index.css';
 import './fontello/css/fontello.css';
 import { BrowserRouter } from 'react-router-dom';
 
-import React, { useEffect, useState } from 'react';
-
-import MainViewWrapper from './views/MainViewWrapper';
 import { AuthContextProvider } from './context/AuthContext';
+import PageContainer from './layouts/PageContainer/PageContainer';
 
 export const App = () => {
   return (
     <AuthContextProvider>
       <BrowserRouter>
         <GlobalStyles />
-        <MainViewWrapper />
+        <PageContainer />
       </BrowserRouter>
     </AuthContextProvider>
   );
