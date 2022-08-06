@@ -1,4 +1,4 @@
-import Button from '../../shared/Button/Button';
+import Button from '../Button/Button';
 import { AuthStyle } from './Auth.css';
 
 function Auth(): JSX.Element {
