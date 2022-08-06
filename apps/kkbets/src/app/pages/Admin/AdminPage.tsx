@@ -11,52 +11,46 @@ import { StyledAdminPage } from './AdminPage.css';
 import AdminTeams from '../../features/admin/sections/AdminTeams';
 import AdminEvents from '../../features/admin/sections/AdminEvents';
 import AdminUpdateEvents from '../../features/admin/sections/AdminUpdateEvents';
+import withAdminProtectedRoute from '../../Hoc/withAdminProtectedRoute';
 
 function AdminPage(): JSX.Element {
-  const { userData, isUserDataLoaded } = useContext(AuthContext);
-
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event: React.ChangeEvent<unknown>, newValue: string) => {
     setValue(newValue);
   };
 
-  if (isUserDataLoaded)
-    return !userData.admin ? (
-      <Navigate to="/" />
-    ) : (
-      <StyledAdminPage>
-        <TabContext value={value}>
-          <Tabs
-            className="tabs"
-            centered
-            variant="fullWidth"
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-          >
-            <Tab className="tab" label="Add category" value="1" />
-            <Tab className="tab" label="Add team" value="2" />
-            <Tab className="tab" label="Add event" value="3" />
-            <Tab className="tab" label="update event" value="4" />
-          </Tabs>
-          <TabPanel value="1">
-            <AdminCategories />
-          </TabPanel>
-          <TabPanel value="2">
-            <AdminTeams />
-          </TabPanel>
-          <TabPanel value="3">
-            <AdminEvents />
-          </TabPanel>
-          <TabPanel value="4">
-            <AdminUpdateEvents />
-          </TabPanel>
-        </TabContext>
-      </StyledAdminPage>
-    );
-
-  return <Loader />;
+  return (
+    <StyledAdminPage>
+      <TabContext value={value}>
+        <Tabs
+          className="tabs"
+          centered
+          variant="fullWidth"
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+        >
+          <Tab className="tab" label="Add category" value="1" />
+          <Tab className="tab" label="Add team" value="2" />
+          <Tab className="tab" label="Add event" value="3" />
+          <Tab className="tab" label="update event" value="4" />
+        </Tabs>
+        <TabPanel value="1">
+          <AdminCategories />
+        </TabPanel>
+        <TabPanel value="2">
+          <AdminTeams />
+        </TabPanel>
+        <TabPanel value="3">
+          <AdminEvents />
+        </TabPanel>
+        <TabPanel value="4">
+          <AdminUpdateEvents />
+        </TabPanel>
+      </TabContext>
+    </StyledAdminPage>
+  );
 }
 
-export default AdminPage;
+export default withAdminProtectedRoute(AdminPage);

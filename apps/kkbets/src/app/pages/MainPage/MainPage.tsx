@@ -15,6 +15,7 @@ import EventCounterMobile from '../../features/coupons/components/EventCounterMo
 import DailyBonus from '../../features/dailyBonus/components/DailyBonus';
 import ImportantMatch from '../../features/events/components/ImportantMatch';
 import MatchMin from '../../features/events/components/MatchMin';
+import LoaderWrapper from '../../wrappers/LoaderWrapper';
 
 function MainPage(): JSX.Element {
   const [importantMatches, setImportantMatches] = useState<IEventFrontend[]>([]);
@@ -48,43 +49,47 @@ function MainPage(): JSX.Element {
       <DailyBonus></DailyBonus>
 
       <Banner image={euroBanner} />
-      {!isLoaded && <Loader />}
-      {isLoaded && importantMatches.length === 0 && matches.length === 0 && (
-        <h3 style={{ marginTop: '50px' }}>There are no active events at the moment</h3>
-      )}
-      <div className="matches-container">
-        {importantMatches.map(
-          ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
-            <ImportantMatch
-              key={_id}
-              eventId={_id}
-              league={category?.name}
-              date={transformDate(date.toString())}
-              teamAway={teamAway}
-              teamHome={teamHome}
-              courseAwayWin={courseAwayWin}
-              courseDraw={courseDraw}
-              courseHomeWin={courseHomeWin}
-            />
-          )
-        )}
-      </div>
 
-      <div style={{ marginTop: '30px' }}>
-        {matches.map(({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
-          <MatchMin
-            key={_id}
-            eventId={_id}
-            league={category?.name}
-            date={transformDate(date.toString())}
-            teamAway={teamAway}
-            teamHome={teamHome}
-            courseAwayWin={courseAwayWin}
-            courseDraw={courseDraw}
-            courseHomeWin={courseHomeWin}
-          />
-        ))}
-      </div>
+      <LoaderWrapper isLoading={!isLoaded}>
+        <>
+          {importantMatches.length === 0 && matches.length === 0 && (
+            <h3 style={{ marginTop: '50px' }}>There are no active events at the moment</h3>
+          )}
+          <div className="matches-container">
+            {importantMatches.map(
+              ({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
+                <ImportantMatch
+                  key={_id}
+                  eventId={_id}
+                  league={category?.name}
+                  date={transformDate(date.toString())}
+                  teamAway={teamAway}
+                  teamHome={teamHome}
+                  courseAwayWin={courseAwayWin}
+                  courseDraw={courseDraw}
+                  courseHomeWin={courseHomeWin}
+                />
+              )
+            )}
+          </div>
+
+          <div style={{ marginTop: '30px' }}>
+            {matches.map(({ _id, date, teamAway, teamHome, category, courseAwayWin, courseDraw, courseHomeWin }) => (
+              <MatchMin
+                key={_id}
+                eventId={_id}
+                league={category?.name}
+                date={transformDate(date.toString())}
+                teamAway={teamAway}
+                teamHome={teamHome}
+                courseAwayWin={courseAwayWin}
+                courseDraw={courseDraw}
+                courseHomeWin={courseHomeWin}
+              />
+            ))}
+          </div>
+        </>
+      </LoaderWrapper>
     </StyledMainPage>
   );
 }

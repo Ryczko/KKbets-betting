@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { StyledMobileNavigation } from './MobileNavigation.css';
 import { NavLink } from 'react-router-dom';
+import AuthDisplayOnlyWrapper from '../../wrappers/AuthDisplayOnlyWrapper';
 
 function MobileNavigation(): JSX.Element {
   return ReactDom.createPortal(
@@ -13,12 +14,13 @@ function MobileNavigation(): JSX.Element {
               <i className="icon-home" />
             </NavLink>
           </li>
-
-          <li>
-            <NavLink to="/coupons">
-              <i className="icon-clipboard" />
-            </NavLink>
-          </li>
+          <AuthDisplayOnlyWrapper>
+            <li>
+              <NavLink to="/coupons">
+                <i className="icon-clipboard" />
+              </NavLink>
+            </li>
+          </AuthDisplayOnlyWrapper>
           <li>
             <NavLink to="/ranking">
               <i className="icon-award" />
@@ -29,11 +31,13 @@ function MobileNavigation(): JSX.Element {
               <i className="icon-chat" />
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/account">
-              <i className="icon-user" />
-            </NavLink>
-          </li>
+          <AuthDisplayOnlyWrapper>
+            <li>
+              <NavLink to="/account">
+                <i className="icon-user" />
+              </NavLink>
+            </li>
+          </AuthDisplayOnlyWrapper>
         </ul>
       </nav>
     </StyledMobileNavigation>,

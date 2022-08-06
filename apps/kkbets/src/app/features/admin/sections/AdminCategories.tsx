@@ -6,6 +6,7 @@ import Input from '../../../components/Input/Input';
 import Loader from '../../../components/Loader/Loader';
 import axiosConfig from '../../../utilities/axiosConfig';
 import { AdminRow } from '../AdminStyles.css';
+import LoaderWrapper from '../../../wrappers/LoaderWrapper';
 
 function AdminCategories(props: WithAlertProps): JSX.Element {
   const [value, setValue] = useState('');
@@ -34,18 +35,14 @@ function AdminCategories(props: WithAlertProps): JSX.Element {
   };
 
   return (
-    <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <AdminRow>
-          <Input placeholder="cateogry name" value={value} onChange={handleChange} />
-          <Button fill style={{ padding: '12px' }} click={addCategoryHandler}>
-            Add
-          </Button>
-        </AdminRow>
-      )}
-    </>
+    <LoaderWrapper isLoading={loading}>
+      <AdminRow>
+        <Input placeholder="cateogry name" value={value} onChange={handleChange} />
+        <Button fill style={{ padding: '12px' }} click={addCategoryHandler}>
+          Add
+        </Button>
+      </AdminRow>
+    </LoaderWrapper>
   );
 }
 

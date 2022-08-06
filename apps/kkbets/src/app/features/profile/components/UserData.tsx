@@ -12,6 +12,8 @@ import Input from '../../../components/Input/Input';
 import Loader from '../../../components/Loader/Loader';
 import axiosConfig from '../../../utilities/axiosConfig';
 import { StyledUserData } from './UserData.css';
+import withProtectedRoute from '../../../Hoc/withProtectedRoute';
+import LoaderWrapper from '../../../wrappers/LoaderWrapper';
 
 function UserData(props: WithAlertProps) {
   const { userData, setIsLogged, setUserData, isLogged, isUserDataLoaded } = useContext(AuthContext);
@@ -60,10 +62,8 @@ function UserData(props: WithAlertProps) {
     }
   };
 
-  if (isUserDataLoaded)
-    return !isLogged ? (
-      <AuthRequired />
-    ) : (
+  return (
+    <LoaderWrapper isLoading={!isUserDataLoaded}>
       <StyledUserData>
         <div className="user-profile">
           <div className="avatar-box">
@@ -102,8 +102,8 @@ function UserData(props: WithAlertProps) {
           </Button>
         </form>
       </StyledUserData>
-    );
-  return <Loader />;
+    </LoaderWrapper>
+  );
 }
 
-export default withAlert(UserData);
+export default withProtectedRoute(withAlert(UserData));
