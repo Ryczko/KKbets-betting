@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AuthDisplayOnlyWrapper from '../../wrappers/AuthDisplayOnlyWrapper';
 import { StyledLeftNavigation } from './LeftNavigation.css';
 import LeftNavigationView from './LeftNavigationView';
 
@@ -28,9 +29,11 @@ function LeftNavigation(props: LeftNavigationProps): JSX.Element {
         <div className="left-nav-icon active">
           <i className="icon-soccer-ball " onClick={(e) => changeCategory('football', e)} />
         </div>
-        <div className="left-nav-icon">
-          <i className="icon-clipboard" onClick={(e) => changeCategory('coupons', e)} />
-        </div>
+        <AuthDisplayOnlyWrapper>
+          <div className="left-nav-icon">
+            <i className="icon-clipboard" onClick={(e) => changeCategory('coupons', e)} />
+          </div>
+        </AuthDisplayOnlyWrapper>
         <div className="left-nav-icon">
           <i className="icon-award" onClick={(e) => changeCategory('ranking', e)} />
         </div>

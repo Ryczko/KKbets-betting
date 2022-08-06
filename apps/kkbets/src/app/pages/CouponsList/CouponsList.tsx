@@ -8,6 +8,8 @@ import { transformDate } from '../../utilities/transformDate';
 
 import CouponData, { CouponDataProps } from './CouponData';
 import { StyledCouponsList } from './CouponsList.css';
+import LoaderWrapper from '../../wrappers/LoaderWrapper';
+import withProtectedRoute from '../../Hoc/withProtectedRoute';
 
 function CouponsList(): JSX.Element {
   const [coupons, setCoupons] = useState<CouponDataProps[]>([]);
@@ -33,11 +35,9 @@ function CouponsList(): JSX.Element {
     }
   };
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <StyledCouponsList>
-      {isLogged ? (
+  return (
+    <LoaderWrapper isLoading={loading}>
+      <StyledCouponsList>
         <>
           {coupons.length > 0 ? (
             <div className="info">
@@ -66,11 +66,9 @@ function CouponsList(): JSX.Element {
             ))}
           </div>
         </>
-      ) : (
-        <AuthRequired />
-      )}
-    </StyledCouponsList>
+      </StyledCouponsList>
+    </LoaderWrapper>
   );
 }
 
-export default CouponsList;
+export default withProtectedRoute(CouponsList);

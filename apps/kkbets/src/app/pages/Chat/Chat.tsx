@@ -6,6 +6,7 @@ import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import axiosConfig from '../../utilities/axiosConfig';
 import { StyledChat } from './Chat.css';
+import LoaderWrapper from '../../wrappers/LoaderWrapper';
 
 interface Message {
   user: {
@@ -76,28 +77,28 @@ function Chat(): JSX.Element {
   };
 
   return (
-    <StyledChat>
-      <div className="top">
-        <form>
-          <input
-            placeholder={isLogged ? 'Your message' : 'Login to write'}
-            value={chatMessage}
-            disabled={!isLogged}
-            onChange={handleMessageChange}
-          />
-          <Button
-            blocked={coolDown || !isLogged}
-            click={submitChatMessage}
-            fill
-            style={{ fontSize: '0.9rem', margin: '0px' }}
-          >
-            Send
-          </Button>
-        </form>
-      </div>
-      <div className="messages">
-        {isLoaded ? (
-          messages.map((message, index) => {
+    <LoaderWrapper isLoading={!isLoaded}>
+      <StyledChat>
+        <div className="top">
+          <form>
+            <input
+              placeholder={isLogged ? 'Your message' : 'Login to write'}
+              value={chatMessage}
+              disabled={!isLogged}
+              onChange={handleMessageChange}
+            />
+            <Button
+              blocked={coolDown || !isLogged}
+              click={submitChatMessage}
+              fill
+              style={{ fontSize: '0.9rem', margin: '0px' }}
+            >
+              Send
+            </Button>
+          </form>
+        </div>
+        <div className="messages">
+          {messages.map((message, index) => {
             return (
               <Message
                 key={index}
@@ -109,12 +110,10 @@ function Chat(): JSX.Element {
                 date={message.date}
               />
             );
-          })
-        ) : (
-          <Loader absolute />
-        )}
-      </div>
-    </StyledChat>
+          })}
+        </div>
+      </StyledChat>
+    </LoaderWrapper>
   );
 }
 

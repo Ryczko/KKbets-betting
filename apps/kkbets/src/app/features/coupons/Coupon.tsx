@@ -13,6 +13,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Slider } from '@mui/material';
 import CouponEvent from './components/CouponEvent';
 import EmptyCoupon from './components/EmptyCoupon';
+import LoaderWrapper from '../../wrappers/LoaderWrapper';
 
 function Coupon(props: WithAlertProps): JSX.Element {
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
@@ -73,15 +74,15 @@ function Coupon(props: WithAlertProps): JSX.Element {
   };
 
   return (
-    <StyledCoupon>
-      <div className="top">
-        Your coupon <i className="icon-trash-empty" onClick={() => dispatch(removeAllEvents())} />
-      </div>
-      <div ref={refError} className="error">
-        {error}
-      </div>
-      {!isLoaded && <Loader />}
-      {isLoaded && (
+    <LoaderWrapper isLoading={!isLoaded}>
+      <StyledCoupon>
+        <div className="top">
+          Your coupon <i className="icon-trash-empty" onClick={() => dispatch(removeAllEvents())} />
+        </div>
+        <div ref={refError} className="error">
+          {error}
+        </div>
+
         <>
           <div className="events">
             <TransitionGroup exit={false}>
@@ -139,8 +140,8 @@ function Coupon(props: WithAlertProps): JSX.Element {
             </div>
           )}
         </>
-      )}
-    </StyledCoupon>
+      </StyledCoupon>
+    </LoaderWrapper>
   );
 }
 
