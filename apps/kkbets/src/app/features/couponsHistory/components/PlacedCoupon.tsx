@@ -1,6 +1,7 @@
 import { EventsStates, ICouponFrontend } from '@kkbets/api-interfaces';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Currency from '../../../components/Currency/Currency';
 import Loader from '../../../components/Loader/Loader';
 import Status from '../../../components/Status/Status';
 import axiosConfig from '../../../utilities/axiosConfig';
@@ -44,23 +45,23 @@ function PlacedCoupon(): JSX.Element {
         </div>
         <div className="coupon-info">
           <div className="left">
-            <h4>
-              Amount: <span className="value">{couponData?.amount} $</span>
-            </h4>
+            <div className="info-line">
+              Amount: <Currency value={couponData?.amount || '?'} size={16} />
+            </div>
 
-            <h4>
-              Total course: <span className="value"> {couponData?.totalCourse}</span>
-            </h4>
-            <h4>
-              Possible win: <span className="value">{couponData?.possiblyWin} $</span>
-            </h4>
+            <div className="info-line">
+              Total course: <Currency value={couponData?.totalCourse || '?'} size={16} />
+            </div>
+            <div className="info-line">
+              Possible win: <Currency value={couponData?.possiblyWin || '?'} size={16} />
+            </div>
           </div>
           <div className="right">
             <Status
               style={{ width: '28px', height: '28px', fontSize: '18px' }}
               status={couponData?.state || EventsStates.PENDING}
             ></Status>
-            <h4>{couponData?.state || EventsStates.PENDING}</h4>
+            <div className="info-line">{couponData?.state || EventsStates.PENDING}</div>
           </div>
         </div>
       </StyledPlacedCoupon>

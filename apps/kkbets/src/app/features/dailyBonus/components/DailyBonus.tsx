@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import Countdown from 'react-countdown';
 import axiosConfig from '../../../utilities/axiosConfig';
 import { AuthContext } from '../../../context/AuthContext';
+import Currency from '../../../components/Currency/Currency';
 
 function DailyBonus(): JSX.Element {
   const { userData, setUserData } = useContext(AuthContext);
@@ -24,7 +25,9 @@ function DailyBonus(): JSX.Element {
     return (
       <StyledDailyBonus onClick={clickHandler}>
         {new Date().getTime() - new Date(userData.bonusDate).getTime() > 864e5 ? (
-          <p>Click to claim daily 50$ </p>
+          <div className="value">
+            Click to claim daily bonus <Currency value={50} size={17} leftSpacing={2} />
+          </div>
         ) : (
           <p>
             Daily bonus will be available in{' '}
