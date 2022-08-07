@@ -4,13 +4,17 @@ import img from '../../../../assets/images/coupon-clip.svg';
 export const StyledPlacedCoupon = styled.div`
   min-height: 300px;
 
-  h4 {
-    margin-bottom: 15px;
+  .info-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
     font-size: 0.9rem;
-  }
+    gap: 8px;
+    font-weight: 600;
 
-  .value {
-    color: ${({ theme }) => theme.colors.font.light};
+    .currency-wrapper {
+      font-weight: 500;
+    }
   }
 
   .events {
@@ -46,9 +50,10 @@ export const StyledPlacedCoupon = styled.div`
     justify-content: space-between;
     text-align: left;
   }
+
   .right {
-    h4 {
-      margin-top: 5px;
+    .info-line {
+      margin-top: 6px;
     }
   }
 `;
