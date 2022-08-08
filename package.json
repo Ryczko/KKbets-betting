@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "heroku-start": "node dist/apps/api/main.js",
+    "heroku-start": "node /app/dist/apps/api/main.js",
     "build": "nx run-many --target=build --projects=kkbets,api --parallel=true",
     "test": "nx test"
   },
@@ -39,7 +39,8 @@
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
     "styled-components": "5.3.5",
-    "styled-normalize": "^8.0.7"
+    "styled-normalize": "^8.0.7",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@nrwl/cli": "14.4.3",
@@ -80,7 +81,6 @@
     "react-test-renderer": "18.2.0",
     "ts-jest": "27.1.4",
     "ts-node": "~10.8.0",
-    "tslib": "^2.4.0",
     "typescript": "~4.7.2"
   }
 }
