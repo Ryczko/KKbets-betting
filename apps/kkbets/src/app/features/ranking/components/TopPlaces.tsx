@@ -20,7 +20,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
       {props.data[1] && (
         <div className="field" style={{ left: '0px', bottom: '0' }}>
           <div className="place">2</div>
-          <Avatar width="55px" blockLink style={commonStyles} src={props.data[1].avatarUrl} />
+          <Avatar username={props.data[1].username} width="55px" style={commonStyles} src={props.data[1].avatarUrl} />
           <div className="points">{props.data[1].points}</div>
           <div className="name">{props.data[1].username}</div>
         </div>
@@ -47,7 +47,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
           />
           <Avatar
             width="70px"
-            blockLink
+            username={props.data[0].username}
             style={{
               ...commonStyles,
               height: '70px',
@@ -63,7 +63,7 @@ function TopPlaces(props: { data: RankingPlaceProps[] }): JSX.Element {
       {props.data[2] && (
         <div className="field" style={{ right: '0px', bottom: '0px' }}>
           <div className="place">3</div>
-          <Avatar width="55px" blockLink style={commonStyles} src={props.data[2].avatarUrl} />
+          <Avatar username={props.data[2].username} width="55px" style={commonStyles} src={props.data[2].avatarUrl} />
           <div className="points">{props.data[2].points}</div>
           <div className="name">{props.data[2].username}</div>
         </div>

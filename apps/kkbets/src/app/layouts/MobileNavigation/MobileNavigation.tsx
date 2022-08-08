@@ -33,7 +33,7 @@ function MobileNavigation(): JSX.Element {
           </li>
           <AuthDisplayOnlyWrapper>
             <li>
-              <NavLink to="/account">
+              <NavLink to="/users">
                 <i className="icon-user" />
               </NavLink>
             </li>

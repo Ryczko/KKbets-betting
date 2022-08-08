@@ -10,6 +10,7 @@ interface IUserShared {
   avatarUrl: string;
   showAvatar: boolean;
   bonusDate: Date;
+  createdDate: Date;
 }
 
 export interface IUserFrontend extends IUserShared {
@@ -20,5 +21,4 @@ export interface IUserFrontend extends IUserShared {
 export interface IUserBackend extends IUserShared {
   badges: mongoose.Schema.Types.ObjectId[];
   generateAuthToken: () => string;
-  createdDate: Date;
 }

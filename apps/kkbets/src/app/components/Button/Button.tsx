@@ -9,6 +9,7 @@ export interface ButtonProps {
   blocked?: boolean;
   style?: React.CSSProperties;
   children?: JSX.Element | string;
+  className?: string;
 }
 
 function Button(props: ButtonProps): JSX.Element {
@@ -20,6 +21,7 @@ function Button(props: ButtonProps): JSX.Element {
       onClick={props.click}
       blocked={props.blocked}
       style={props.style}
+      className={props.className}
     >
       {props.children}
     </StyledButton>

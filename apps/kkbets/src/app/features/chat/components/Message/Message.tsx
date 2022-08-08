@@ -14,7 +14,7 @@ interface MessageProps {
 function Message(props: MessageProps): JSX.Element {
   return (
     <StyledMessage admin={props.admin}>
-      <Avatar width="40px" blockLink src={props.avatarUrl} />
+      <Avatar width="40px" src={props.avatarUrl} username={props.nickname} />
       <div className="message">
         <div className="head">
           <p className="nickname">{props.nickname}</p>

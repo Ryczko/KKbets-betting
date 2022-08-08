@@ -4,5 +4,7 @@ interface IBadgeShared {
   image: string;
 }
 
-export type IBadgeFrontend = IBadgeShared;
+export interface IBadgeFrontend extends IBadgeShared {
+  _id: string;
+}
 export type IBadgeBackend = IBadgeShared;
