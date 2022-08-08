@@ -12,6 +12,7 @@ export const StyledDailyBonus = styled.div`
   cursor: pointer;
   transition: 0.3s;
   font-weight: 600;
+  min-height: 54px;
 
   .value {
     display: flex;

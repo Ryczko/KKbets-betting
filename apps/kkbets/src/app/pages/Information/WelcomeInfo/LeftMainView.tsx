@@ -1,7 +1,7 @@
 import { StyledLeftMainView } from './LeftMainView.css';
 import euroLogo from '../../../../assets/images/euro-logo.png';
-import EuroBadge from '../../../../assets/images/badge-euro-2020.svg';
-import EuroBadgeBest from '../../../../assets/images/badge-euro-2020-best.svg';
+import EuroBadge from '../../../../assets/badges/badge-euro-2020.svg';
+import EuroBadgeBest from '../../../../assets/badges/badge-euro-2020-best.svg';
 import Badge from '../../../components/Badge/Badge';
 
 function LeftMainView(): JSX.Element {
@@ -21,13 +21,15 @@ function LeftMainView(): JSX.Element {
             src={EuroBadge}
             name="Euro badge"
             description="For participation in Euro 2020"
-            style={{ margin: '0 7px', width: '70px' }}
+            style={{ margin: '0 7px' }}
+            width={70}
           />
           <Badge
             src={EuroBadgeBest}
             name="Euro best badge"
             description="For the best and most active players during Euro 2020"
-            style={{ margin: '0 7px', width: '70px' }}
+            style={{ margin: '0 7px' }}
+            width={70}
           />
         </div>
       </div>

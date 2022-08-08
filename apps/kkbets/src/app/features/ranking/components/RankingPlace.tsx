@@ -13,7 +13,7 @@ function RankingPlace(props: RankingPlaceProps): JSX.Element {
     <StyledRankingPlace>
       <p className="place">{props.place}</p>
       <div className="user-data">
-        <Avatar width="40px" blockLink src={props.avatarUrl} />
+        <Avatar username={props.username} width="40px" src={props.avatarUrl} />
         <div className="name">{props.username}</div>
         <div className="points">{props.points}</div>
       </div>

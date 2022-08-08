@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { AvatarProps } from './Avatar';
 
-export const StyledAvatar = styled.div<AvatarProps>`
+interface StyledAvatarProps {
+  width: string;
+}
+
+export const StyledAvatar = styled.div<StyledAvatarProps>`
   width: ${(props) => props.width};
   border-radius: 4px;
 

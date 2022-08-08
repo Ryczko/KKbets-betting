@@ -9,6 +9,7 @@ import { StyledMainView } from './MainView.css';
 import Ranking from '../../pages/Ranking/Ranking';
 import UserPage from '../../pages/UserPage/UserPage';
 import PlacedCoupon from '../../features/couponsHistory/components/PlacedCoupon';
+import EditProfile from '../../pages/EditProfile/EditProfile';
 
 export interface MainViewProps {
   tight: boolean;
@@ -20,7 +21,9 @@ function MainView({ tight }: MainViewProps): JSX.Element {
       <Routes>
         <Route path="/" element={<MainPage />} />
 
-        <Route path="/account" element={<UserPage />} />
+        <Route path="/users/:username" element={<UserPage />} />
+        <Route path="/users" element={<UserPage />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
 
         <Route path="/coupon" element={<Coupon />} />
 

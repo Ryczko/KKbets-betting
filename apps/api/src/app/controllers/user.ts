@@ -45,3 +45,21 @@ export const editUser = async (req: Request, res: Response): Promise<any> => {
     res.status(500).send('Something went wrong.');
   }
 };
+
+export const getUser = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const user = await User.findOne({ username: req.params.username }).populate('badges');
+
+    if (!user) return res.status(404).send('User not found');
+
+    res.send({
+      username: user.username,
+      points: user.points,
+      avatarUrl: user.showAvatar ? user.avatarUrl : undefined,
+      badges: user.badges,
+      createdDate: user.createdDate
+    });
+  } catch (error) {
+    res.status(500).send('Something went wrong.');
+  }
+};

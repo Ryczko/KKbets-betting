@@ -16,5 +16,5 @@ export const StyledButton = styled.button<ButtonProps>`
   transition: 0.4s;
 
   box-shadow: ${({ fill, theme, blocked }) =>
-    fill && !blocked ? '0px 0px 15px -5px ' + theme.colors.accent.light : 'none'};
+    fill && !blocked ? '0px 0px 10px -5px ' + theme.colors.accent.light : 'none'};
 `;
