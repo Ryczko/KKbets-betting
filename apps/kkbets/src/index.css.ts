@@ -40,6 +40,10 @@ a {
   text-decoration: none;
 }
 
+.MuiAutocomplete-root, .MuiFormControl-root, .MuiTextField-root {
+  margin: 0;
+}
+
 main {
   min-height: 100%;
   padding-bottom: 50px;

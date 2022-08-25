@@ -7,4 +7,8 @@ export const StyledUserSettings = styled.div`
   h2 {
     margin-bottom: 15px;
   }
+
+  input {
+    margin: 8px 0;
+  }
 `;

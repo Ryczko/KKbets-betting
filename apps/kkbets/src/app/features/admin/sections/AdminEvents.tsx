@@ -7,11 +7,13 @@ import axiosConfig from '../../../utilities/axiosConfig';
 import { AdminRow } from '../AdminStyles.css';
 import AdminInput from '../components/AdminInput/AdminInput';
 import AdminInputPicker from '../components/AdminInputPicker/AdminInputPicker';
-import Button from '../../../components/Button/Button';
+import AdminConfirmButton from '../components/AdminConfirmButton';
+import BackdropLoaderWrapper from '../../../wrappers/BackdropLoaderWrapper';
 
 function AdminEvents(props: WithAlertProps): JSX.Element {
   const [teamsList, setTeamsList] = useState<ITeamFrontend[]>([]);
   const [categoriesList, setCategoriesList] = useState<{ _id: string; name: string }[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const [teamHome, setTeamHome] = useState('');
   const [teamAway, setTeamAway] = useState('');
@@ -41,8 +43,9 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
     setCategoriesList(res.data);
   };
 
-  const addCategoryHandler = async () => {
+  const addEventHandler = async () => {
     try {
+      setLoading(true);
       await axiosConfig.post('/events', {
         teamHome,
         teamAway,
@@ -58,35 +61,54 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
       props.setError(err.response.data);
       props.setIsErrorOpened(true);
     }
+    setLoading(false);
   };
 
   return (
-    <>
-      <AdminRow>
-        <AdminInputPicker options={teamsList} update={setTeamHome} label="Team home" />
-        <div>VS</div>
-        <AdminInputPicker options={teamsList} update={setTeamAway} label="Team away" />
-      </AdminRow>
-      <AdminRow>
-        <AdminInput label="Home win course" type="number" update={setCourseHomeWin} min={1} step={0.1} />
-        <AdminInput label="Draw course" type="number" update={setCourseDraw} min={1} step={0.1} />
-        <AdminInput label="Away win course" type="number" update={setCourseAwayWin} min={1} step={0.1} />
-      </AdminRow>
-      <AdminRow>
-        <AdminInput label="Event day" type="date" update={setDay} value={day} />
-        <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
-        <AdminInputPicker options={categoriesList} update={setCategory} label="Category" />
+    <BackdropLoaderWrapper isLoading={loading}>
+      <>
+        <AdminRow>
+          <AdminInputPicker options={teamsList} update={setTeamHome} label="Team home" />
+          <div>VS</div>
+          <AdminInputPicker options={teamsList} update={setTeamAway} label="Team away" />
+        </AdminRow>
+        <AdminRow>
+          <AdminInput
+            label="Home win course"
+            type="number"
+            update={(e) => setCourseHomeWin(e.target.value)}
+            min={1}
+            step={0.1}
+          />
+          <AdminInput
+            label="Draw course"
+            type="number"
+            update={(e) => setCourseDraw(e.target.value)}
+            min={1}
+            step={0.1}
+          />
+          <AdminInput
+            label="Away win course"
+            type="number"
+            update={(e) => setCourseAwayWin(e.target.value)}
+            min={1}
+            step={0.1}
+          />
+        </AdminRow>
+        <AdminRow>
+          <AdminInput label="Event day" type="date" update={(e) => setDay(e.target.value)} value={day} />
+          <AdminInput label="Time" type="time" update={(e) => setTime(e.target.value)} value={time} />
+          <AdminInputPicker options={categoriesList} update={setCategory} label="Category" />
 
-        <FormControlLabel
-          control={<Switch checked={highlight} onChange={(e) => setHighlight(e.target.checked)} color="primary" />}
-          label="Highlight"
-        />
-      </AdminRow>
+          <FormControlLabel
+            control={<Switch checked={highlight} onChange={(e) => setHighlight(e.target.checked)} color="primary" />}
+            label="Highlight"
+          />
+        </AdminRow>
 
-      <Button fill style={{ padding: '10px 14px' }} click={addCategoryHandler}>
-        Add
-      </Button>
-    </>
+        <AdminConfirmButton content="Add Event" onConfirm={addEventHandler} />
+      </>
+    </BackdropLoaderWrapper>
   );
 }
 
