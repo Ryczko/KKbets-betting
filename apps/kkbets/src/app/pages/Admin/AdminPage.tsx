@@ -1,17 +1,12 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-import Loader from '../../components/Loader/Loader';
-
-import AdminCategories from '../../features/admin/sections/AdminCategories';
+import React from 'react';
 
 import { Tab, Tabs } from '@mui/material';
 import { TabContext, TabPanel } from '@mui/lab';
 import { StyledAdminPage } from './AdminPage.css';
-import AdminTeams from '../../features/admin/sections/AdminTeams';
-import AdminEvents from '../../features/admin/sections/AdminEvents';
-import AdminUpdateEvents from '../../features/admin/sections/AdminUpdateEvents';
 import withAdminProtectedRoute from '../../Hoc/withAdminProtectedRoute';
+import EventSection from '../../features/admin/EventSection';
+import UserSection from '../../features/admin/UserSection';
+import InterfaceSection from '../../features/admin/InterfaceSection';
 
 function AdminPage(): JSX.Element {
   const [value, setValue] = React.useState('1');
@@ -31,22 +26,18 @@ function AdminPage(): JSX.Element {
           onChange={handleChange}
           indicatorColor="primary"
         >
-          <Tab className="tab" label="Add category" value="1" />
-          <Tab className="tab" label="Add team" value="2" />
-          <Tab className="tab" label="Add event" value="3" />
-          <Tab className="tab" label="update event" value="4" />
+          <Tab className="tab" label="Events" value="1" />
+          <Tab className="tab" label="Users" value="2" />
+          <Tab className="tab" label="Interface" value="3" />
         </Tabs>
         <TabPanel value="1">
-          <AdminCategories />
+          <EventSection />
         </TabPanel>
         <TabPanel value="2">
-          <AdminTeams />
+          <UserSection />
         </TabPanel>
         <TabPanel value="3">
-          <AdminEvents />
-        </TabPanel>
-        <TabPanel value="4">
-          <AdminUpdateEvents />
+          <InterfaceSection />
         </TabPanel>
       </TabContext>
     </StyledAdminPage>

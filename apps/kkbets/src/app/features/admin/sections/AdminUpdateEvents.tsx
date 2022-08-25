@@ -1,12 +1,12 @@
 import { ITeamFrontend } from '@kkbets/api-interfaces';
-import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import withAlert, { WithAlertProps } from '../../../Hoc/withAlert';
 import Button from '../../../components/Button/Button';
-import Loader from '../../../components/Loader/Loader';
 import axiosConfig from '../../../utilities/axiosConfig';
 import { AdminRow } from '../AdminStyles.css';
-import LoaderWrapper from '../../../wrappers/LoaderWrapper';
+import BackdropLoaderWrapper from '../../../wrappers/BackdropLoaderWrapper';
+import AdminInput from '../components/AdminInput/AdminInput';
+import Loader from '../../../components/Loader/Loader';
 
 interface IEventToUpdate {
   _id: string;
@@ -18,8 +18,8 @@ interface IEventToUpdate {
 
 function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
   const [loading, setLoading] = useState(false);
-
   const [events, setEvents] = useState<IEventToUpdate[]>([]);
+  const [eventsLoading, setEventsLoading] = useState(true);
 
   useEffect(() => {
     loadEvents();
@@ -45,8 +45,10 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
   };
 
   const loadEvents = async () => {
+    setEventsLoading(true);
     const res = await axiosConfig.get('/events?ended=false&started=true');
     setEvents(res.data);
+    setEventsLoading(false);
   };
 
   const updateScoreHandler = (id: string, value: number, target: 'homeScore' | 'awayScore') => {
@@ -56,64 +58,53 @@ function AdminUpdateEvents(props: WithAlertProps): JSX.Element {
     setEvents(newEvents);
   };
 
+  if (eventsLoading) {
+    return <Loader />;
+  } else if (!eventsLoading && events.length === 0) {
+    return (
+      <div style={{ minHeight: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        No events to update
+      </div>
+    );
+  }
+
   return (
-    <LoaderWrapper isLoading={loading}>
+    <BackdropLoaderWrapper isLoading={loading}>
       <>
         {events.map((event) => (
           <AdminRow key={event._id}>
-            <p>
-              {event.teamHome.shortName} vs {event.teamAway.shortName}
-            </p>
+            <div className="event-details">
+              <img src={event.teamHome.image} alt="" width={20} />
+              <div className="name">
+                {event.teamHome.shortName} vs {event.teamAway.shortName}
+              </div>
+              <img src={event.teamAway.image} alt="" width={20} />
+            </div>
 
-            <TextField
+            <AdminInput
               label="Home score"
               type="number"
-              variant="outlined"
-              onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'homeScore')}
-              style={{
-                background: '#28282E',
-                borderRadius: '5px',
-                color: 'white'
-              }}
-              InputProps={{
-                style: { color: 'white' },
-                inputProps: {
-                  min: 0,
-                  step: '1'
-                }
-              }}
-              InputLabelProps={{
-                style: { color: '#fff' }
-              }}
+              update={(e) => updateScoreHandler(event._id, +e.target.value, 'homeScore')}
+              min={1}
+              step={0.1}
+              fullWidth={false}
             />
-            <TextField
+            <AdminInput
               label="Away score"
               type="number"
-              variant="outlined"
-              onChange={(e) => updateScoreHandler(event._id, +e.target.value, 'awayScore')}
-              style={{
-                background: '#28282E',
-                borderRadius: '5px',
-                color: 'white'
-              }}
-              InputProps={{
-                style: { color: 'white' },
-                inputProps: {
-                  min: 0,
-                  step: '1'
-                }
-              }}
-              InputLabelProps={{
-                style: { color: '#fff' }
-              }}
+              update={(e) => updateScoreHandler(event._id, +e.target.value, 'awayScore')}
+              min={1}
+              fullWidth={false}
+              step={0.1}
             />
+
             <Button click={() => updateEventHandler(event._id)} fill style={{ padding: '12px' }}>
               Update
             </Button>
           </AdminRow>
         ))}
       </>
-    </LoaderWrapper>
+    </BackdropLoaderWrapper>
   );
 }
 

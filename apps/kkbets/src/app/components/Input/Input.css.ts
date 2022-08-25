@@ -6,7 +6,6 @@ export const StyledInput = styled.div`
     background-color: ${({ theme }) => theme.colors.background.light};
     padding: 14px;
     letter-spacing: 1px;
-    margin: 0.5rem auto;
     font-size: 1rem;
     border: none;
     color: ${({ theme }) => theme.colors.font.light};

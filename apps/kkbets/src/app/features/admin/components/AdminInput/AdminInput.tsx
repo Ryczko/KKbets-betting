@@ -1,27 +1,30 @@
 import { TextField } from '@mui/material';
+import { useTheme } from 'styled-components';
 
 export interface AdminInputProps {
   label: string;
-  update: (val: string) => void;
+  update: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   type: string;
   min?: number;
   max?: number;
   step?: number;
   value?: unknown;
+  fullWidth?: boolean;
 }
 
 function AdminInput(props: AdminInputProps): JSX.Element {
+  const theme = useTheme();
   return (
     <TextField
       id="standard-number"
-      label={props.label}
+      placeholder={props.label}
       type={props.type}
       value={props.value}
-      variant="outlined"
-      onChange={(e) => props.update(e.target.value)}
+      fullWidth={props.fullWidth ?? true}
+      onChange={(e) => props.update(e)}
       style={{ background: '#28282E', borderRadius: '5px', color: 'white' }}
       InputProps={{
-        style: { color: 'white' },
+        style: { color: theme.colors.font.light },
         inputProps: {
           min: props.min,
           step: props.step,
@@ -29,7 +32,7 @@ function AdminInput(props: AdminInputProps): JSX.Element {
         }
       }}
       InputLabelProps={{
-        style: { color: '#fff' }
+        style: { color: theme.colors.font.dark }
       }}
     />
   );

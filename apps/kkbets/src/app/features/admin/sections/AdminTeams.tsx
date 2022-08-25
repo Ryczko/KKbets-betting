@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import withAlert, { WithAlertProps } from '../../../Hoc/withAlert';
-import Button from '../../../components/Button/Button';
-import Input from '../../../components/Input/Input';
-import Loader from '../../../components/Loader/Loader';
+
 import axiosConfig from '../../../utilities/axiosConfig';
-import LoaderWrapper from '../../../wrappers/LoaderWrapper';
+import BackdropLoaderWrapper from '../../../wrappers/BackdropLoaderWrapper';
+import AdminConfirmButton from '../components/AdminConfirmButton';
+import { AdminRow } from '../AdminStyles.css';
+import AdminInput from '../components/AdminInput/AdminInput';
 
 function AdminTeams(props: WithAlertProps): JSX.Element {
   const [teamName, setTeamName] = useState('');
@@ -23,7 +24,7 @@ function AdminTeams(props: WithAlertProps): JSX.Element {
     setImageUrl(val);
   };
 
-  const addCategoryHandler = async () => {
+  const addTeamHandler = async () => {
     try {
       setLoading(true);
       await axiosConfig.post('/teams', {
@@ -44,17 +45,27 @@ function AdminTeams(props: WithAlertProps): JSX.Element {
   };
 
   return (
-    <LoaderWrapper isLoading={loading}>
+    <BackdropLoaderWrapper isLoading={loading}>
       <>
-        <Input placeholder="Team name" value={teamName} onChange={teamNameChangeHandler} />
-        <Input placeholder="Short team name" value={teamShortname} onChange={shortTeamNameChangeHandler} />
-        <Input placeholder="Image URL" value={imageUrl} onChange={imageChangeHandler} />
+        <AdminRow>
+          <AdminInput
+            label="Team name"
+            type="text"
+            update={(e) => teamNameChangeHandler(e.target.value)}
+            value={teamName}
+          />
+          <AdminInput
+            label="Short team name"
+            type="text"
+            update={(e) => shortTeamNameChangeHandler(e.target.value)}
+            value={teamShortname}
+          />
+        </AdminRow>
+        <AdminInput label="Image URL" type="text" update={(e) => imageChangeHandler(e.target.value)} value={imageUrl} />
 
-        <Button fill style={{ padding: '10px 14px' }} click={addCategoryHandler}>
-          Add
-        </Button>
+        <AdminConfirmButton content="Add Team" onConfirm={addTeamHandler} />
       </>
-    </LoaderWrapper>
+    </BackdropLoaderWrapper>
   );
 }
 
