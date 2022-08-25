@@ -5,5 +5,16 @@ export const AdminRow = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 0;
+  gap: 8px;
+  margin-bottom: 8px;
+
+  .event-details {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+
+    .name {
+      margin: 0 10px;
+    }
+  }
 `;

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
 import withAlert, { WithAlertProps } from '../../../Hoc/withAlert';
-import Button from '../../../components/Button/Button';
 import Input from '../../../components/Input/Input';
-import Loader from '../../../components/Loader/Loader';
 import axiosConfig from '../../../utilities/axiosConfig';
-import { AdminRow } from '../AdminStyles.css';
-import LoaderWrapper from '../../../wrappers/LoaderWrapper';
+import BackdropLoaderWrapper from '../../../wrappers/BackdropLoaderWrapper';
+import AdminConfirmButton from '../components/AdminConfirmButton';
+import AdminInput from '../components/AdminInput/AdminInput';
 
 function AdminCategories(props: WithAlertProps): JSX.Element {
   const [value, setValue] = useState('');
@@ -35,14 +34,12 @@ function AdminCategories(props: WithAlertProps): JSX.Element {
   };
 
   return (
-    <LoaderWrapper isLoading={loading}>
-      <AdminRow>
-        <Input placeholder="cateogry name" value={value} onChange={handleChange} />
-        <Button fill style={{ padding: '12px' }} click={addCategoryHandler}>
-          Add
-        </Button>
-      </AdminRow>
-    </LoaderWrapper>
+    <BackdropLoaderWrapper isLoading={loading}>
+      <>
+        <AdminInput label="cateogry name" type="text" update={(e) => handleChange(e.target.value)} value={value} />
+        <AdminConfirmButton content="Add Category" onConfirm={addCategoryHandler} />
+      </>
+    </BackdropLoaderWrapper>
   );
 }
 
