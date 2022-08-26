@@ -5,7 +5,7 @@ import couponReducer from './app/store/reducers/coupon';
 import { createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-
+import './app/libs/i18n/i18n';
 import App from './app/app';
 import { theme } from './app/utilities/theme';
 import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';

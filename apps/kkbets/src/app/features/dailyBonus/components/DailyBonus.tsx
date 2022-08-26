@@ -4,8 +4,10 @@ import Countdown from 'react-countdown';
 import axiosConfig from '../../../utilities/axiosConfig';
 import { AuthContext } from '../../../context/AuthContext';
 import Currency from '../../../components/Currency/Currency';
+import { useTranslation } from 'react-i18next';
 
 function DailyBonus(): JSX.Element {
+  const { t } = useTranslation();
   const { userData, setUserData } = useContext(AuthContext);
 
   const clickHandler = async () => {
@@ -26,11 +28,11 @@ function DailyBonus(): JSX.Element {
       <StyledDailyBonus onClick={clickHandler}>
         {new Date().getTime() - new Date(userData.bonusDate).getTime() > 864e5 ? (
           <div className="value">
-            Click to claim daily bonus <Currency value={50} size={17} leftSpacing={2} />
+            {t('DAILY_BONUS.ACTIVE')} <Currency value={50} size={17} leftSpacing={2} />
           </div>
         ) : (
           <p>
-            Daily bonus will be available in{' '}
+            {t('DAILY_BONUS.INACTIVE')}{' '}
             <Countdown daysInHours={true} date={new Date(userData.bonusDate).getTime() + 864e5} />
           </p>
         )}

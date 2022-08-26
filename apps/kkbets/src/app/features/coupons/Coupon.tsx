@@ -1,12 +1,11 @@
 import { StyledCoupon } from './Coupon.css';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { FormEvent, useContext, useRef, useState } from 'react';
+import { FormEvent, useContext, useRef, useState } from 'react';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppState, updateAmount } from '../../store/actions';
 import axiosConfig from '../../utilities/axiosConfig';
 import { removeAllEvents } from '../../store/actions/coupon';
-import Loader from '../../components/Loader/Loader';
 import Button from '../../components/Button/Button';
 import withAlert, { WithAlertProps } from '../../Hoc/withAlert';
 import { AuthContext } from '../../context/AuthContext';
@@ -14,9 +13,11 @@ import { Slider } from '@mui/material';
 import CouponEvent from './components/CouponEvent';
 import EmptyCoupon from './components/EmptyCoupon';
 import LoaderWrapper from '../../wrappers/LoaderWrapper';
+import { useTranslation } from 'react-i18next';
 
 function Coupon(props: WithAlertProps): JSX.Element {
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
+  const { t } = useTranslation();
   const [error, setError] = useState<string>('');
   const { userData, setUserData, isLogged } = useContext(AuthContext);
   const possibleWinning = useSelector<AppState, AppState['coupon']['possibleWinnings']>(
@@ -77,7 +78,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
     <LoaderWrapper isLoading={!isLoaded}>
       <StyledCoupon>
         <div className="top">
-          Your coupon <i className="icon-trash-empty" onClick={() => dispatch(removeAllEvents())} />
+          {t('COUPON.YOUR_COUPON')} <i className="icon-trash-empty" onClick={() => dispatch(removeAllEvents())} />
         </div>
         <div ref={refError} className="error">
           {error}
@@ -103,7 +104,7 @@ function Coupon(props: WithAlertProps): JSX.Element {
           {events.length === 0 && (
             <>
               <EmptyCoupon />
-              <p style={{ margin: '20px 0' }}>Your coupon is empty</p>
+              <p style={{ margin: '20px 0' }}>{t('COUPON.EMPTY_COUPON')}</p>
             </>
           )}
           {events.length !== 0 && (
@@ -123,18 +124,18 @@ function Coupon(props: WithAlertProps): JSX.Element {
 
               <div className="info">
                 <div>
-                  <span>Total rate</span>
+                  <span>{t('COUPON.TOTAL_RATE')}</span>
                   <span>{totalRate}</span>
                 </div>
                 <div>
-                  <span>Possible winnings</span>
+                  <span>{t('COUPON.POSSIBLE_WINNING')}</span>
                   <span>{possibleWinning}</span>
                 </div>
               </div>
 
               <form onSubmit={(e) => betCouponHandler(e)}>
                 <Button style={{ width: '80%', padding: '10px 0' }} fill>
-                  {isLogged ? 'Place a bet' : 'Login to bet'}
+                  {isLogged ? t('COUPON.PLACE_BET') : t('COUPON.LOGIN_TO_BET')}
                 </Button>
               </form>
             </div>

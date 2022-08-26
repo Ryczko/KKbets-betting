@@ -10,6 +10,14 @@ export const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.colors.background.dark};
   border-bottom: 1px solid ${({ theme }) => theme.colors.background.dark};
 
+  .left {
+    display: flex;
+    align-items: center;
+    button {
+      margin-left: 16px;
+    }
+  }
+
   .user-data {
     display: flex;
     align-items: center;
