@@ -30,11 +30,15 @@ function UserData({ username, isOwner }: UserDataProps) {
   }, [username]);
 
   const loadUserData = async () => {
-    setLoading(true);
-    setUserData({} as IUserFrontend);
-    const res = await axiosConfig.get(/users/ + username);
-    setUserData(res.data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      setUserData({} as IUserFrontend);
+      const res = await axiosConfig.get(/users/ + username);
+      setUserData(res.data);
+      setLoading(false);
+    } catch (err) {
+      navigate('/');
+    }
   };
 
   const goToEditProfile = () => {

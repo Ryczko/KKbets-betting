@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Coupon from '../../features/coupons/Coupon';
 import AdminPage from '../../pages/Admin/AdminPage';
 
@@ -22,7 +22,6 @@ function MainView({ tight }: MainViewProps): JSX.Element {
         <Route path="/" element={<MainPage />} />
 
         <Route path="/users/:username" element={<UserPage />} />
-        <Route path="/users" element={<UserPage />} />
         <Route path="/edit-profile" element={<EditProfile />} />
 
         <Route path="/coupon" element={<Coupon />} />
@@ -37,7 +36,7 @@ function MainView({ tight }: MainViewProps): JSX.Element {
 
         <Route path="/admin" element={<AdminPage />} />
 
-        <Route element={<MainPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </StyledMainView>
   );
