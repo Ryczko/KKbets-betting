@@ -1,8 +1,7 @@
 import { EventsStates, ICouponFrontend } from '@kkbets/api-interfaces';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Currency from '../../../components/Currency/Currency';
-import Loader from '../../../components/Loader/Loader';
 import Status from '../../../components/Status/Status';
 import axiosConfig from '../../../utilities/axiosConfig';
 import LoaderWrapper from '../../../wrappers/LoaderWrapper';
@@ -15,17 +14,22 @@ function PlacedCoupon(): JSX.Element {
   const [couponData, setCouponData] = useState<ICouponFrontend>();
   const [loading, setLoading] = useState<boolean>(true);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     loadData();
   }, [id]);
 
   const loadData = async () => {
-    setLoading(true);
-    setCouponData(undefined);
-    const res = await axiosConfig.get(`/coupons/${id}`);
-    setCouponData(res.data);
-    console.log(res.data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      setCouponData(undefined);
+      const res = await axiosConfig.get(`/coupons/${id}`);
+      setCouponData(res.data);
+      setLoading(false);
+    } catch (err) {
+      navigate('/');
+    }
   };
 
   return (
