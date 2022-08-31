@@ -53,9 +53,7 @@ function PlacedCoupon(): JSX.Element {
               Amount: <Currency value={couponData?.amount || '?'} size={16} />
             </div>
 
-            <div className="info-line">
-              Total course: <Currency value={couponData?.totalCourse || '?'} size={16} />
-            </div>
+            <div className="info-line">Total course: x{couponData?.totalCourse}</div>
             <div className="info-line">
               Possible win: <Currency value={couponData?.possiblyWin || '?'} size={16} />
             </div>

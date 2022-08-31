@@ -13,7 +13,7 @@ export const StyledCouponsList = styled.div`
     margin-bottom: 5px;
     justify-content: space-between;
     padding: 0px 5px 0px 5px;
-    text-align: center;
+    text-align: left;
     font-size: 0.9rem;
 
     .date {
