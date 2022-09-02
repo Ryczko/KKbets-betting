@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 
 export const StyledLogo = styled.div`
-  margin-top: 2px;
   width: 135px;
+
+  svg {
+    height: 32px;
+    margin-left: 4px;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+      height: 36px;
+    }
+  }
 
   a {
     display: flex;
@@ -10,7 +18,7 @@ export const StyledLogo = styled.div`
     font-size: 44px;
     line-height: 30px;
     font-weight: 800;
-    padding: 5px 0 7px;
+    padding: 5px 0;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
       font-size: 52px;
