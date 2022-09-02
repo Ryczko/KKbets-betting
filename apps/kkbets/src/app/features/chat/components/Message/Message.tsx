@@ -1,5 +1,5 @@
 import Avatar from '../../../../components/Avatar/Avatar';
-import { transformDate } from '../../../../utilities/transformDate';
+import { formatDate, getTimeDistance } from '../../../../utilities/dateUtils';
 import { StyledMessage } from './Message.css';
 
 interface MessageProps {
@@ -18,7 +18,7 @@ function Message(props: MessageProps): JSX.Element {
       <div className="message">
         <div className="head">
           <p className="nickname">{props.nickname}</p>
-          <p className="date">{transformDate(props.date)}</p>
+          <p className="date">{getTimeDistance(props.date)}</p>
         </div>
 
         <p>{props.message}</p>

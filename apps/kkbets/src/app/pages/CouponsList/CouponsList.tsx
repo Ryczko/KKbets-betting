@@ -1,10 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { useEffect, useState } from 'react';
 import EmptyCoupon from '../../features/coupons/components/EmptyCoupon';
-import AuthRequired from '../../components/AuthRequired/AuthRequired';
-import Loader from '../../components/Loader/Loader';
 import axiosConfig from '../../utilities/axiosConfig';
-import { transformDate } from '../../utilities/transformDate';
+import { formatDate } from '../../utilities/dateUtils';
 
 import CouponData, { CouponDataProps } from './CouponData';
 import { StyledCouponsList } from './CouponsList.css';
@@ -14,8 +11,6 @@ import withProtectedRoute from '../../Hoc/withProtectedRoute';
 function CouponsList(): JSX.Element {
   const [coupons, setCoupons] = useState<CouponDataProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const { isLogged } = useContext(AuthContext);
 
   useEffect(() => {
     loadList();
@@ -61,7 +56,7 @@ function CouponsList(): JSX.Element {
                 amount={coupon.amount}
                 possiblyWin={coupon.possiblyWin}
                 state={coupon.state}
-                date={transformDate(coupon.date)}
+                date={formatDate(coupon.date, 'dd/MM/yy')}
               />
             ))}
           </div>
