@@ -9,6 +9,7 @@ export const StyledHeader = styled.header`
   z-index: 100;
   background-color: ${({ theme }) => theme.colors.background.dark};
   border-bottom: 1px solid ${({ theme }) => theme.colors.background.dark};
+  height: 55px;
 
   .user-data {
     display: flex;
