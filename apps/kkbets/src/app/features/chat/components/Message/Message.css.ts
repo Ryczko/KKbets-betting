@@ -20,7 +20,9 @@ export const StyledMessage = styled.div<MessageStyleProps>`
 
     .date {
       font-size: 0.7rem;
-      min-width: 55px;
+      min-width: 80px;
+      margin-left: 15px;
+      text-align: right;
     }
   }
 
@@ -28,7 +30,7 @@ export const StyledMessage = styled.div<MessageStyleProps>`
     .nickname {
       color: ${({ theme, admin }) => (admin ? theme.colors.accent.light : theme.colors.font.light)};
       font-weight: ${({ admin }) => (admin ? 700 : 500)};
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       margin-bottom: 7px;
     }
 

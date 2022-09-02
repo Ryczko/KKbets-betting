@@ -1,6 +1,6 @@
 import { EventsStates, IEventFrontend } from '@kkbets/api-interfaces';
 import Status from '../../../components/Status/Status';
-import { transformDate } from '../../../utilities/transformDate';
+import { formatDate } from '../../../utilities/dateUtils';
 import { StyledPlacedCouponEvent } from './PlacedCouponEvent.css';
 
 export interface PlacedCouponEventProps {
@@ -15,7 +15,7 @@ function PlacedCouponEvent({ betType, course, state, userBet, event }: PlacedCou
   return (
     <StyledPlacedCouponEvent>
       <div className="event-info">
-        <div className="date">{event && event.date ? transformDate(event.date.toString()) : '???'}</div>
+        <div className="date">{event && event.date ? formatDate(event.date.toString()) : '???'}</div>
         <div className="bet-type">
           {betType}: <span className="value">{userBet}</span>
         </div>

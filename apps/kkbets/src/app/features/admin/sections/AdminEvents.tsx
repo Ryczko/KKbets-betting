@@ -22,8 +22,12 @@ function AdminEvents(props: WithAlertProps): JSX.Element {
   const [courseDraw, setCourseDraw] = useState('');
   const [courseAwayWin, setCourseAwayWin] = useState('');
 
-  const [day, setDay] = useState('2022-08-01');
-  const [time, setTime] = useState('12:00');
+  const [day, setDay] = useState(new Date().toISOString().split('T')[0]);
+
+  const getCurrentTime = () =>
+    new Date().toISOString().split('T')[1].split(':')[0] + ':' + new Date().toISOString().split('T')[1].split(':')[1];
+
+  const [time, setTime] = useState(getCurrentTime());
 
   const [category, setCategory] = useState('');
   const [highlight, setHighlight] = useState(true);

@@ -6,8 +6,6 @@ import { StyledMainPage } from './MainPage.css';
 import euroBanner from '../../../assets/images/euro-banner.png';
 import Banner from '../../components/Banner/Banner';
 import { getCouponFromStorage } from '../../store/actions';
-import Loader from '../../components/Loader/Loader';
-import { transformDate } from '../../utilities/transformDate';
 import axiosConfig from '../../utilities/axiosConfig';
 
 import { IEventFrontend } from '@kkbets/api-interfaces';
@@ -16,6 +14,7 @@ import DailyBonus from '../../features/dailyBonus/components/DailyBonus';
 import ImportantMatch from '../../features/events/components/ImportantMatch';
 import MatchMin from '../../features/events/components/MatchMin';
 import LoaderWrapper from '../../wrappers/LoaderWrapper';
+import { formatEventDate } from '../../utilities/dateUtils';
 
 function MainPage(): JSX.Element {
   const [importantMatches, setImportantMatches] = useState<IEventFrontend[]>([]);
@@ -62,7 +61,7 @@ function MainPage(): JSX.Element {
                   key={_id}
                   eventId={_id}
                   league={category?.name}
-                  date={transformDate(date.toString())}
+                  date={formatEventDate(date.toString())}
                   teamAway={teamAway}
                   teamHome={teamHome}
                   courseAwayWin={courseAwayWin}
@@ -79,7 +78,7 @@ function MainPage(): JSX.Element {
                 key={_id}
                 eventId={_id}
                 league={category?.name}
-                date={transformDate(date.toString())}
+                date={formatEventDate(date.toString())}
                 teamAway={teamAway}
                 teamHome={teamHome}
                 courseAwayWin={courseAwayWin}
