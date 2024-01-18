@@ -1,6 +1,6 @@
 # KKbets Betting Site
 
-<img width="768" src="https://user-images.githubusercontent.com/51440879/216816828-fc42ef83-198a-4df1-9ca3-c743d54265ed.png">
+<img width="768" src="https://github.com/Ryczko/KKbets-betting/assets/51440879/bcba8fed-67ab-48ea-aa4b-81cd015aff00">
 
 KKbets is a website that allows you to bet on sports events using virtual currency.
 Place your bets and fight for the best place in the ranking.
